@@ -1,14 +1,14 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Routes as NavigationRoutes } from "./modules/core/routes";
 import { Suspense } from "react";
-
-// Ini provider taro sini aja
+import MainLayout from "@modules/core/layouts/main-layout";
+import Loader from "@components/loader/loader";
 
 function App() {
   return (
-    <>
+    <MainLayout>
       <Router>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             {NavigationRoutes.map((route, index) => (
               <Route
@@ -20,7 +20,7 @@ function App() {
           </Routes>
         </Suspense>
       </Router>
-    </>
+    </MainLayout>
   );
 }
 

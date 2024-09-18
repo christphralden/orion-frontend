@@ -19,10 +19,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
     "baseUrl": ".",
     "paths": {
-      "@*": ["./src/*"],
       "@pages/*": ["src/pages/*"],
       "@components/*": ["src/modules/core/components/*"],
       "@utils/*": ["src/modules/core/utils/*"],

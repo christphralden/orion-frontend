@@ -25,7 +25,8 @@
       "@components/*": ["src/modules/core/components/*"],
       "@utils/*": ["src/modules/core/utils/*"],
       "@hooks/*": ["src/modules/core/hooks/*"],
-      "@core/*": ["src/modules/core/"]
+      "@core/*": ["src/modules/core/*"],
+      "@layouts/*": ["src/modules/core/layouts/*"]
     }
   },
   "include": ["src"]

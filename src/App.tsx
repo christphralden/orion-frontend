@@ -1,27 +1,8 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Routes as NavigationRoutes } from "./modules/core/routes";
-import { Suspense } from "react";
-import MainLayout from "@modules/core/layouts/main-layout";
-import Loader from "@components/loader/loader";
+import { RouterProvider } from "react-router-dom";
+import { router } from "@core/routes";
 
 function App() {
-  return (
-    <MainLayout>
-      <Router>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            {NavigationRoutes.map((route, index) => (
-              <Route
-                key={index}
-                path={route.path}
-                element={<route.element />}
-              />
-            ))}
-          </Routes>
-        </Suspense>
-      </Router>
-    </MainLayout>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

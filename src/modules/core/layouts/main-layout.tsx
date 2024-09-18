@@ -1,7 +1,11 @@
-import { ReactNode } from "react";
+import { Outlet } from "react-router-dom";
 
-const MainLayout = ({ children }: { children: ReactNode }) => {
-  return <div className="w-screen min-h-screen">{children}</div>;
+const MainLayout = () => {
+  return (
+    <div className="w-screen min-h-screen">
+      <Outlet />
+    </div>
+  );
 };
 
 export default MainLayout;

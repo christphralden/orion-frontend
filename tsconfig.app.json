@@ -21,13 +21,19 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@pages/*": ["src/pages/*"],
+      /* Core */
       "@components/*": ["src/modules/core/components/*"],
       "@utils/*": ["src/modules/core/utils/*"],
       "@hooks/*": ["src/modules/core/hooks/*"],
-      "@core/*": ["src/modules/core/*"],
       "@layouts/*": ["src/modules/core/layouts/*"],
-      "@models/*": ["src/modules/core/models/*"]
+      "@models/*": ["src/modules/core/models/*"],
+
+      /*Modules*/
+      "@authentication/*": ["src/modules/authentication/*"],
+
+      /* Ini last fallback*/
+      "@core/*": ["src/modules/core/*"],
+      "@pages/*": ["src/pages/*"]
     }
   },
   "include": ["src"]

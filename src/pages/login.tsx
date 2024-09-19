@@ -3,7 +3,7 @@ import SLCLogo from "/assets/binus/binus-slc.svg";
 import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@components/ui/card";
 import { Input } from "@components/ui/input";
-import GradientBackground from "@components/backgrounds/gradient";
+import GradientBackground from "@components/backgrounds/gradient-background";
 
 const COPYRIGHT = "Copyright © 2024 - Orion, LCAS - Binus University";
 

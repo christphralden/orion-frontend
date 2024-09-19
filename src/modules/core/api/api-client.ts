@@ -1,4 +1,4 @@
-import HTTPError from "@core/models/errors/http-error";
+import HTTPError from "@models/errors/http-error";
 
 /*
   Class Description:

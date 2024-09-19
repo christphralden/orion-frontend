@@ -12,6 +12,10 @@ html {
   box-sizing: border-box;
 }
 
+img {
+  user-select: none;
+}
+
 @layer base {
   :root {
     --background: 0 0% 98%;

@@ -26,7 +26,8 @@
       "@utils/*": ["src/modules/core/utils/*"],
       "@hooks/*": ["src/modules/core/hooks/*"],
       "@core/*": ["src/modules/core/*"],
-      "@layouts/*": ["src/modules/core/layouts/*"]
+      "@layouts/*": ["src/modules/core/layouts/*"],
+      "@models/*": ["src/modules/core/models/*"]
     }
   },
   "include": ["src"]

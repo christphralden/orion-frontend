@@ -6,7 +6,7 @@ import {
   postMessierLogin,
 } from "@authentication/apis/messier-login.api";
 import HTTPError from "@models/errors/http-error";
-import { ToastError } from "@components/toast/toast";
+import { ToastError, ToastSuccess } from "@components/toast/toast";
 import { useCallback } from "react";
 
 export const useMessierLogin = () => {
@@ -16,6 +16,11 @@ export const useMessierLogin = () => {
       onError: (error: any) => {
         ToastError({
           message: error.message,
+        });
+      },
+      onSuccess: () => {
+        ToastSuccess({
+          message: "Login successful",
         });
       },
     },

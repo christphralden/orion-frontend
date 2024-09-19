@@ -22,7 +22,7 @@ interface IResponse<T> {
 
 async function postMessierLogin({ username, password }: AuthRequest) {
   const res = await apiClient.post<AuthRequest, IResponse<AuthResponse>>({
-    url: "auth/login-messier",
+    url: "auth/login",
     data: {
       username: username,
       password: password,

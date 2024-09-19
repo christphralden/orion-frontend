@@ -14,7 +14,7 @@ const Landing = () => {
 
       <section className="w-full h-screen flex justify-center items-center z-10">
         <Card className="w-[350px]">
-          <CardHeader className="py-0 mt-[-1px] px-2 pb-12 flex flex-row">
+          <CardHeader className="py-0 mt-[-1px] px-2 pb-8 flex flex-row">
             <div className="w-fit">
               <img src={BinusRibbon} className="object-cover w-full h-full" />
             </div>
@@ -29,7 +29,12 @@ const Landing = () => {
                   <Input id="name" placeholder="Username" />
                 </div>
                 <div className="flex flex-col space-y-1.5">
-                  <Input id="name" placeholder="Password" />
+                  <Input
+                    id="password"
+                    placeholder="Password"
+                    type="password"
+                    autoComplete="on"
+                  />
                 </div>
               </div>
             </form>
@@ -40,8 +45,8 @@ const Landing = () => {
         </Card>
       </section>
 
-      <section className="absolute bottom-0 w-full flex justify-center items-center p-4">
-        <p className="text-white">{COPYRIGHT}</p>
+      <section className="absolute bottom-0 w-full flex justify-center items-center p-4 px-12">
+        <p className="text-white text-center">{COPYRIGHT}</p>
       </section>
     </div>
   );

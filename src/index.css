@@ -1,6 +1,12 @@
+@import url("/styles/typography.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  font-family: "Restart", sans-serif;
+}
 
 * {
   box-sizing: border-box;
@@ -34,6 +40,7 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
     --blue: 195, 100%, 44%;
+    --blue-darken: 195, 100%, 33%;
   }
   .dark {
     --background: 224 71.4% 4.1%;

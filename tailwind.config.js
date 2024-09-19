@@ -12,6 +12,7 @@ export default {
       colors: {
         blue: {
           DEFAULT: "hsl(var(--blue))",
+          darken: "hsl(var(--blue-darken))",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -58,6 +59,9 @@ export default {
       backgroundImage: {
         "binus-gradient":
           "linear-gradient(135deg, rgba(57,124,213,1) 0%, rgba(8,206,253,1) 100%)",
+      },
+      fontFamily: {
+        restart: ["Restart", "sans-serif"],
       },
     },
   },

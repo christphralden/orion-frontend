@@ -4,6 +4,7 @@ import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@components/ui/card";
 import { Input } from "@components/ui/input";
 import GradientBackground from "@components/backgrounds/gradient-background";
+import { messierLogin } from "@authentication/api/messier-login.api";
 
 const COPYRIGHT = "Copyright © 2024 - Orion, LCAS - Binus University";
 
@@ -40,7 +41,17 @@ const Landing = () => {
             </form>
           </CardContent>
           <CardFooter className="flex justify-between">
-            <Button className="w-full bg-blue">Login</Button>
+            <Button
+              className="w-full bg-blue"
+              onClick={() =>
+                messierLogin({
+                  username: import.meta.env.VITE_MESSIER_USERNAME as string,
+                  password: import.meta.env.VITE_MESSIER_PASSWORD as string,
+                })
+              }
+            >
+              Login
+            </Button>
           </CardFooter>
         </Card>
       </section>

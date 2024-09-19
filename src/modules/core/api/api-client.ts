@@ -13,14 +13,15 @@ class APIClient {
     this.#baseUrl = baseUrl;
   }
 
-  async request<T>({
+  async request<Response>({
     url,
     options,
   }: {
     url: string;
     options?: RequestInit;
-  }): Promise<T> {
+  }): Promise<Response> {
     const res = await fetch(`${this.#baseUrl}${url}`, options);
+    console.log(res);
 
     if (!res.ok) {
       const response = await res.json();
@@ -31,23 +32,33 @@ class APIClient {
     return await res.json();
   }
 
-  get<T>({ url }: { url: string }) {
-    return this.request<T>({
+  get<Response>({ url, options }: { url: string; options?: RequestInit }) {
+    return this.request<Response>({
       url,
       options: {
         method: "GET",
         headers: { "Content-Type": "application/json" },
+        ...options,
       },
     });
   }
 
-  post<T>({ url, data }: { url: string; data: T }) {
-    return this.request<T>({
+  post<Data, Response>({
+    url,
+    data,
+    options,
+  }: {
+    url: string;
+    data: Data;
+    options?: RequestInit;
+  }) {
+    return this.request<Response>({
       url: url,
       options: {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
+        ...options,
       },
     });
   }
@@ -55,4 +66,6 @@ class APIClient {
   // Add more methods if necessary
 }
 
-export default APIClient;
+const apiClient = new APIClient(import.meta.env.VITE_API_BLUEJACK_URL);
+
+export default apiClient;

@@ -5,7 +5,7 @@ import ErrorBoundary from "@core/layouts/error-boundary";
 function App() {
   return (
     <ErrorBoundary>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </ErrorBoundary>
   );
 }

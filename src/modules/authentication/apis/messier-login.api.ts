@@ -1,4 +1,4 @@
-import apiClient from "@core/api/api-client";
+import apiClient from "@core/apis/api-client";
 
 type AuthRequest = {
   username: string;
@@ -20,7 +20,8 @@ interface IResponse<T> {
   data: T;
 }
 
-async function messierLogin({ username, password }: AuthRequest) {
+async function postMessierLogin({ username, password }: AuthRequest) {
+  console.log("start runnning");
   const res = await apiClient.post<AuthRequest, IResponse<AuthResponse>>({
     url: "auth/login-messier",
     data: {
@@ -32,7 +33,8 @@ async function messierLogin({ username, password }: AuthRequest) {
     },
   });
 
-  console.log(res.data);
+  return res;
 }
 
-export { messierLogin };
+export { postMessierLogin };
+export type { AuthRequest, AuthResponse, IResponse };

@@ -1,8 +1,10 @@
 import { Outlet } from "react-router-dom";
+import { Toaster } from "@components/ui/sonner";
 
 const MainLayout = () => {
   return (
     <div className="w-screen min-h-screen">
+      <Toaster position="top-right" visibleToasts={3} />
       <Outlet />
     </div>
   );

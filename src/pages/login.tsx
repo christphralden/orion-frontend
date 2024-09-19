@@ -10,12 +10,10 @@ const COPYRIGHT = "Copyright © 2024 - Orion, LCAS - Binus University";
 
 const Landing = () => {
   const {
-    mutate: loginFn,
-    data: loginData,
+    handleLogin,
+    // data: loginData,
     isPending: loginLoading,
   } = useMessierLogin();
-
-  console.log(loginData);
 
   return (
     <div className="relative w-full h-screen">
@@ -46,7 +44,7 @@ const Landing = () => {
           <CardFooter className="flex justify-between flex-col gap-4">
             <Button
               onClick={() =>
-                loginFn({
+                handleLogin({
                   username: import.meta.env.VITE_MESSIER_USERNAME,
                   password: import.meta.env.VITE_MESSIER_PASSWORD,
                 })

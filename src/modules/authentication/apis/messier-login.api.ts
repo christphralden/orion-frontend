@@ -21,7 +21,6 @@ interface IResponse<T> {
 }
 
 async function postMessierLogin({ username, password }: AuthRequest) {
-  console.log("start runnning");
   const res = await apiClient.post<AuthRequest, IResponse<AuthResponse>>({
     url: "auth/login-messier",
     data: {

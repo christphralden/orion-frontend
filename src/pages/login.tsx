@@ -4,11 +4,17 @@ import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@components/ui/card";
 import { Input } from "@components/ui/input";
 import GradientBackground from "@components/backgrounds/gradient-background";
-import { messierLogin } from "@authentication/api/messier-login.api";
+import { useMessierLogin } from "@authentication/hooks/useMessierLogin";
 
 const COPYRIGHT = "Copyright © 2024 - Orion, LCAS - Binus University";
 
 const Landing = () => {
+  const {
+    handleLogin,
+    // data: loginData,
+    isPending: loginLoading,
+  } = useMessierLogin();
+
   return (
     <div className="relative w-full h-screen">
       <GradientBackground className="absolute -z-10" />
@@ -30,25 +36,21 @@ const Landing = () => {
                   <Input id="name" placeholder="Username" />
                 </div>
                 <div className="flex flex-col space-y-1.5">
-                  <Input
-                    id="password"
-                    placeholder="Password"
-                    type="password"
-                    autoComplete="on"
-                  />
+                  <Input id="password" placeholder="Password" type="password" />
                 </div>
               </div>
             </form>
           </CardContent>
-          <CardFooter className="flex justify-between">
+          <CardFooter className="flex justify-between flex-col gap-4">
             <Button
-              className="w-full bg-blue"
               onClick={() =>
-                messierLogin({
-                  username: import.meta.env.VITE_MESSIER_USERNAME as string,
-                  password: import.meta.env.VITE_MESSIER_PASSWORD as string,
+                handleLogin({
+                  username: import.meta.env.VITE_MESSIER_USERNAME,
+                  password: import.meta.env.VITE_MESSIER_PASSWORD,
                 })
               }
+              disabled={loginLoading}
+              className="w-full bg-blue"
             >
               Login
             </Button>

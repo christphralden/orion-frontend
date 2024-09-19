@@ -19,7 +19,8 @@
     "noFallthroughCasesInSwitch": true,
 
     "composite": true,
-    "noEmit": false
+    "noEmit": false,
+    "outDir": "./dist"
   },
   "include": ["vite.config.ts"]
 }

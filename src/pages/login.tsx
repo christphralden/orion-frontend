@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import BinusRibbon from "/assets/binus/binus-ribbon.png";
 import SLCLogo from "/assets/binus/binus-slc.svg";
 import { Button } from "@components/ui/button";
@@ -6,10 +7,14 @@ import { Input } from "@components/ui/input";
 import GradientBackground from "@components/backgrounds/gradient-background";
 import { useAuthLogin } from "@authentication/hooks/use-auth-login";
 import { useNavigate } from "react-router-dom";
+const ConstellationBackground = lazy(
+  () => import("@components/backgrounds/constellation-background"),
+);
 
 const COPYRIGHT = "Copyright © 2024 - Orion, LCAS - Binus University";
 
 const Landing = () => {
+  console.log("render");
   const navigate = useNavigate();
   const {
     handleLogin,
@@ -27,15 +32,19 @@ const Landing = () => {
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
 
-    console.log(username);
     handleLogin({ username, password });
   };
+
   return (
     <div className="relative w-full h-full">
       <GradientBackground className="absolute -z-10" />
 
+      <Suspense fallback={null}>
+        <ConstellationBackground />
+      </Suspense>
+
       <section className="w-full h-screen flex justify-center items-center z-10 ">
-        <Card className="w-[350px] ">
+        <Card className="w-[350px] z-[100] ">
           <CardHeader className="py-0 mt-[-1px] px-2 pb-8 flex flex-row ">
             <div className="w-fit">
               <img src={BinusRibbon} className="object-cover w-full h-full" />

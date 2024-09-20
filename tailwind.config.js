@@ -10,6 +10,10 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        blue: {
+          DEFAULT: "hsl(var(--blue))",
+          darken: "hsl(var(--blue-darken))",
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -50,6 +54,14 @@ export default {
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
         },
+      },
+      // CUSTOM STYLES
+      backgroundImage: {
+        "binus-gradient":
+          "linear-gradient(135deg, rgba(57,124,213,1) 0%, rgba(8,206,253,1) 100%)",
+      },
+      fontFamily: {
+        restart: ["Restart", "sans-serif"],
       },
     },
   },

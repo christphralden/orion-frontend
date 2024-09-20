@@ -1,13 +1,11 @@
-import { Separator } from "@radix-ui/react-separator";
+// import { Separator } from "@components/ui/separator";
 import {
     NavigationMenu,
     NavigationMenuContent,
-    NavigationMenuIndicator,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
-    NavigationMenuViewport,
 } from "../ui/navigation-menu"
 // import {
 //     DropdownMenu,
@@ -18,7 +16,7 @@ import {
 //     DropdownMenuTrigger,
 // } from "../ui/dropdown-menu"
 import { navigationMenuTriggerStyle } from "../ui/navigation-menu"
-import { Label } from "@radix-ui/react-dropdown-menu";
+// import { Label } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@components/ui/button";
 
 const NavBar = () => {

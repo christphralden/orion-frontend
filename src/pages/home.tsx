@@ -1,12 +1,10 @@
 import NavBar from "@components/navbar/navbar";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@components/ui/card";
 import { Separator } from "@components/ui/separator"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu"
 import { Button } from "@components/ui/button";

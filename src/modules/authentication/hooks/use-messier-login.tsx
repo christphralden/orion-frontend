@@ -1,4 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
+import { useCallback } from "react";
+import { MESSAGE } from "@constants/messages";
+
 import {
   AuthRequest,
   AuthResponse,
@@ -7,7 +10,6 @@ import {
 } from "@authentication/apis/messier-login.api";
 import HTTPError from "@models/errors/http-error";
 import { ToastError, ToastSuccess } from "@components/toast/toast";
-import { useCallback } from "react";
 
 export const useMessierLogin = () => {
   const mutation = useMutation<IResponse<AuthResponse>, HTTPError, AuthRequest>(
@@ -20,7 +22,7 @@ export const useMessierLogin = () => {
       },
       onSuccess: () => {
         ToastSuccess({
-          message: "Login successful",
+          message: MESSAGE.LOGIN_SUCCESS,
         });
       },
     },

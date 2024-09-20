@@ -11,9 +11,11 @@ const COPYRIGHT = "Copyright © 2024 - Orion, LCAS - Binus University";
 const Landing = () => {
   const {
     handleLogin,
-    // data: loginData,
+    data: loginData,
     isPending: loginLoading,
   } = useMessierLogin();
+
+  console.log(loginData);
 
   return (
     <div className="relative w-full h-full">

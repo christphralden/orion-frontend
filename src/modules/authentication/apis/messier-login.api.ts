@@ -1,3 +1,6 @@
+import type { IResponse } from "@core/types/api.types";
+import type { JWTToken } from "@authentication/types/cookie.types";
+
 import apiClient from "@core/apis/api-client";
 
 type AuthRequest = {
@@ -5,23 +8,8 @@ type AuthRequest = {
   password: string;
 };
 
-type AuthResponse = {
-  BinusianId: string;
-  Name: string;
-  Role: string;
-  UserId: string;
-  UserName: string;
-};
-
-interface IResponse<T> {
-  message: string;
-  status: boolean;
-  errors?: any;
-  data: T;
-}
-
 async function postMessierLogin({ username, password }: AuthRequest) {
-  const res = await apiClient.post<AuthRequest, IResponse<AuthResponse>>({
+  const res = await apiClient.post<AuthRequest, IResponse<JWTToken>>({
     url: "auth/login",
     data: {
       username: username,
@@ -36,4 +24,4 @@ async function postMessierLogin({ username, password }: AuthRequest) {
 }
 
 export { postMessierLogin };
-export type { AuthRequest, AuthResponse, IResponse };
+export type { AuthRequest };

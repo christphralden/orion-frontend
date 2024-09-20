@@ -5,7 +5,7 @@ const IUserSchema = z.object({
   binusianId: z.string(),
   username: z.string(),
   pictureId: z.string(),
-  role: z.string(),
+  roles: z.array(z.string()),
 });
 
 export { IUserSchema };

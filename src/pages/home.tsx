@@ -1,13 +1,19 @@
 
 import NavBar from "@components/navbar/navbar";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@components/ui/card";
-import { Separator } from "@components/ui/separator"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@components/ui/card";
+import { Separator } from "@components/ui/separator";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@components/ui/dropdown-menu"
+} from "@components/ui/dropdown-menu";
 import { Button } from "@components/ui/button";
 
 const Home = () => {
@@ -27,7 +33,7 @@ const Home = () => {
             <DropdownMenuItem>Even Semester 22/23</DropdownMenuItem>
             <DropdownMenuItem>Odd Semester 22/23</DropdownMenuItem>
           </DropdownMenuContent>
-      </DropdownMenu>
+        </DropdownMenu>
       </div>
 
       <NavBar />
@@ -37,7 +43,7 @@ const Home = () => {
           <CardTitle>Active Jobs</CardTitle>
           <CardDescription>Today's workload</CardDescription>
         </CardHeader>
-        <Separator className="mb-5"/>
+        <Separator className="mb-5" />
         <CardContent>
           <div className="grid w-full items-center gap-4">
             <Button variant="ghost" className="flex h-10 items-center w-[100%]">

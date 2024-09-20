@@ -3,7 +3,7 @@ interface IUser {
   binusianId: string;
   username: string;
   pictureId: string;
-  role: string;
+  roles: string[];
 }
 
 export type { IUser };

@@ -21,6 +21,15 @@ const Landing = () => {
     navigate("/");
   }
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const username = formData.get("username") as string;
+    const password = formData.get("password") as string;
+
+    console.log(username);
+    handleLogin({ username, password });
+  };
   return (
     <div className="relative w-full h-full">
       <GradientBackground className="absolute -z-10" />
@@ -35,32 +44,32 @@ const Landing = () => {
               <img src={SLCLogo} className="object-cover w-full h-full" />
             </div>
           </CardHeader>
-          <CardContent>
-            <form>
+          <form onSubmit={handleSubmit}>
+            <CardContent>
               <div className="grid w-full items-center gap-4">
                 <div className="flex flex-col space-y-1.5">
-                  <Input id="name" placeholder="Username" />
+                  <Input id="username" name="username" placeholder="Username" />
                 </div>
                 <div className="flex flex-col space-y-1.5">
-                  <Input id="password" placeholder="Password" type="password" />
+                  <Input
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    type="password"
+                  />
                 </div>
               </div>
-            </form>
-          </CardContent>
-          <CardFooter className="flex justify-between flex-col gap-4">
-            <Button
-              onClick={() =>
-                handleLogin({
-                  username: import.meta.env.VITE_MESSIER_USERNAME,
-                  password: import.meta.env.VITE_MESSIER_PASSWORD,
-                })
-              }
-              disabled={loginLoading}
-              className="w-full bg-blue"
-            >
-              Login
-            </Button>
-          </CardFooter>
+            </CardContent>
+            <CardFooter className="flex justify-between flex-col gap-4">
+              <Button
+                type="submit"
+                disabled={loginLoading}
+                className="w-full bg-blue"
+              >
+                Login
+              </Button>
+            </CardFooter>
+          </form>
         </Card>
       </section>
 

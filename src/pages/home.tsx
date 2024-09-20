@@ -14,11 +14,8 @@ import {
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu";
 import { Button } from "@components/ui/button";
-import { useAuthStore } from "@authentication/store/auth-store";
 
 const Home = () => {
-  const { isAuthenticated, user } = useAuthStore();
-
   return (
     <div className="w-full h-screen items-center flex flex-col mt-3">
       <div className="flex justify-between w-[1000px]">

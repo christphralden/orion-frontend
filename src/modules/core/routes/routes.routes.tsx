@@ -11,12 +11,12 @@ const Home = lazy(() => import("@pages/home"));
 
 const router = createBrowserRouter([
   {
-    path: "/login",
+    path: "/auth",
     element: <AuthLayout />,
     errorElement: <Error />,
     children: [
       {
-        path: "",
+        path: "/auth/login",
         element: (
           <Suspense fallback={<Loader />}>
             <Login />

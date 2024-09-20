@@ -43,13 +43,13 @@ class APIClient {
     });
   }
 
-  post<Data, Response>({
+  post<Response, Data>({
     url,
     data,
     options,
   }: {
     url: string;
-    data: Data;
+    data?: Data;
     options?: RequestInit;
   }) {
     return this.request<Response>({

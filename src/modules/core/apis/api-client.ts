@@ -21,7 +21,6 @@ class APIClient {
     options?: RequestInit;
   }): Promise<Response> {
     const res = await fetch(`${this.#baseUrl}${url}`, options);
-    console.log(res);
 
     if (!res.ok) {
       const response = await res.json();

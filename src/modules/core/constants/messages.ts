@@ -1,7 +1,25 @@
-type MessageKeys = "LOGIN_SUCCESS";
-
-const MESSAGE: Record<MessageKeys, string> = {
-  LOGIN_SUCCESS: "Login successful",
+type MessageKeys = {
+  AUTH: AuthMessages;
+  SCHEMA: SchemaMessages;
 };
 
-export { MESSAGE };
+type AuthMessages = {
+  SUCCESS: "Login successful";
+  ERROR: "User unauthorized";
+};
+
+type SchemaMessages = {
+  ERROR: "Invalid data schema";
+};
+
+const MESSAGES: MessageKeys = {
+  AUTH: {
+    SUCCESS: "Login successful",
+    ERROR: "User unauthorized",
+  },
+  SCHEMA: {
+    ERROR: "Invalid data schema",
+  },
+};
+
+export { MESSAGES };

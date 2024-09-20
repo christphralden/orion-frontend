@@ -59,7 +59,6 @@ const useAuthStore = create<AuthStore>()(
           isAuthenticated: false,
           user: undefined,
         });
-        // Add logout API call here if needed
       },
     }),
     {

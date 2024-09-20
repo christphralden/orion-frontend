@@ -56,10 +56,15 @@ export default {
         },
       },
       // CUSTOM STYLES
+      // backgroundImage: {
+      //   "binus-gradient":
+      //     "linear-gradient(135deg, rgba(57,124,213,1) 0%, rgba(8,206,253,1) 100%)",
+      // },
       backgroundImage: {
         "binus-gradient":
-          "linear-gradient(135deg, rgba(57,124,213,1) 0%, rgba(8,206,253,1) 100%)",
+          "linear-gradient(135deg, rgba(31, 31, 46, 1) 0%, rgba(61, 61, 77, 1) 100%)",
       },
+
       fontFamily: {
         restart: ["Restart", "sans-serif"],
       },

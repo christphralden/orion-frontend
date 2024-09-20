@@ -26,7 +26,6 @@ export const useAuthLogin = () => {
     mutationFn: async (authRequest: AuthRequest) => {
       const res = await postAuthLogin(authRequest);
 
-      console.log(res.data);
       if (res.status) {
         const user: IUser = IUserSchema.parse(res.data);
         setUser(user);

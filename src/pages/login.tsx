@@ -4,16 +4,22 @@ import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@components/ui/card";
 import { Input } from "@components/ui/input";
 import GradientBackground from "@components/backgrounds/gradient-background";
-import { useMessierLogin } from "@authentication/hooks/use-messier-login";
+import { useAuthLogin } from "@authentication/hooks/use-auth-login";
+import { useNavigate } from "react-router-dom";
 
 const COPYRIGHT = "Copyright © 2024 - Orion, LCAS - Binus University";
 
 const Landing = () => {
+  const navigate = useNavigate();
   const {
     handleLogin,
-    // data: loginData,
     isPending: loginLoading,
-  } = useMessierLogin();
+    isSuccess: loginSuccess,
+  } = useAuthLogin();
+
+  if (loginSuccess) {
+    navigate("/");
+  }
 
   return (
     <div className="relative w-full h-full">

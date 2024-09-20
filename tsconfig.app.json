@@ -27,6 +27,7 @@
       "@hooks/*": ["src/modules/core/hooks/*"],
       "@layouts/*": ["src/modules/core/layouts/*"],
       "@models/*": ["src/modules/core/models/*"],
+      "@constants/*": ["src/modules/core/constants/*"],
 
       /*Modules*/
       "@authentication/*": ["src/modules/authentication/*"],

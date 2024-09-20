@@ -1,3 +1,4 @@
+
 import NavBar from "@components/navbar/navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@components/ui/card";
 import { Separator } from "@components/ui/separator"
@@ -10,6 +11,8 @@ import {
 import { Button } from "@components/ui/button";
 
 const Home = () => {
+  const { isAuthenticated, user } = useAuthStore();
+
   return (
     <div className="w-full h-screen items-center flex flex-col mt-3">
       <div className="flex justify-between w-[1000px]">

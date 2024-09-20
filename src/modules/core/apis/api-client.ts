@@ -21,7 +21,6 @@ class APIClient {
     options?: RequestInit;
   }): Promise<Response> {
     const res = await fetch(`${this.#baseUrl}${url}`, options);
-    console.log(res);
 
     if (!res.ok) {
       const response = await res.json();
@@ -43,13 +42,13 @@ class APIClient {
     });
   }
 
-  post<Data, Response>({
+  post<Response, Data>({
     url,
     data,
     options,
   }: {
     url: string;
-    data: Data;
+    data?: Data;
     options?: RequestInit;
   }) {
     return this.request<Response>({

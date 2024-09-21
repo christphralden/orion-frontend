@@ -1,21 +1,74 @@
 import { useRef, useEffect, memo, MutableRefObject, useCallback } from "react";
 
-const starCoordinates = [
-  { x: 0.5, y: 0.2 },
-  { x: 0.6, y: 0.3 },
-  { x: 0.2, y: 0.4 },
-  { x: 0.7, y: 0.7 },
-  { x: 0.65, y: 0.4 },
-  { x: 0.5, y: 0.6 },
-  { x: 0.4, y: 0.7 },
-  { x: 0.6, y: 0.7 },
-];
+const starCoordinates = {
+  vectors: [
+    { x: 0.5, y: 0.2 },
+    { x: 0.6, y: 0.3 },
+    { x: 0.2, y: 0.4 },
+    { x: 0.7, y: 0.7 },
+    { x: 0.65, y: 0.4 },
+    { x: 0.5, y: 0.6 },
+    { x: 0.4, y: 0.7 },
+    { x: 0.6, y: 0.7 },
+  ],
+  connections: [
+    [0, 1],
+    [1, 4],
+    [4, 2],
+    [2, 6],
+    [6, 5],
+    [5, 3],
+    [3, 7],
+  ],
+};
+
+const starCoordinates2 = {
+  vectors: [
+    { x: 0.25, y: 0.65 },
+    { x: 0.3, y: 0.8 },
+    { x: 0.4, y: 0.8 },
+    { x: 0.45, y: 0.65 },
+
+    { x: 0.75, y: 0.65 },
+    { x: 0.7, y: 0.8 },
+    { x: 0.6, y: 0.8 },
+    { x: 0.55, y: 0.65 },
+
+    { x: 0.4, y: 0.55 },
+    { x: 0.4, y: 0.25 },
+    { x: 0.5, y: 0.13 },
+
+    { x: 0.6, y: 0.25 },
+
+    { x: 0.6, y: 0.55 },
+  ],
+  connections: [
+    [6, 5],
+    [0, 1],
+    [2, 3],
+    [8, 9],
+    [10, 11],
+    [11, 12],
+    [3, 8],
+    [5, 4],
+    [12, 7],
+    [1, 2],
+    [9, 10],
+    [7, 6],
+    [3, 7],
+    [4, 12],
+    [0, 8],
+  ],
+};
 
 function starryNight({
   canvasRef,
+  isOrion,
 }: {
   canvasRef: MutableRefObject<HTMLCanvasElement | null>;
+  isOrion: boolean;
 }) {
+  const coordinates = isOrion ? starCoordinates : starCoordinates2;
   if (canvasRef == null) return;
   let animationFrameId: number;
   const canvas = canvasRef.current;
@@ -33,20 +86,10 @@ function starryNight({
 
       setCanvasSize();
 
-      let stars = starCoordinates.map(({ x, y }) => ({
+      let stars = coordinates.vectors.map(({ x, y }) => ({
         x: x * canvasWidth,
         y: y * canvasHeight,
       }));
-
-      const constellationLines = [
-        [0, 1],
-        [1, 4],
-        [4, 2],
-        [2, 6],
-        [6, 5],
-        [5, 3],
-        [3, 7],
-      ];
 
       const numBackgroundStars = 100;
       let backgroundStars: { x: number; y: number; radius: number }[] = [];
@@ -63,7 +106,7 @@ function starryNight({
       generateBackgroundStars();
 
       const drawBackgroundStars = (opacity: number) => {
-        context.fillStyle = `rgba(255, 255, 255, ${opacity * 0.2})`;
+        context.fillStyle = `rgba(255, 255, 255, ${opacity * 0.4})`;
         context.shadowBlur = 10;
         backgroundStars.forEach((star) => {
           context.beginPath();
@@ -88,7 +131,7 @@ function starryNight({
 
       let currentLineIndex = 0;
 
-      const totalLines = constellationLines.length;
+      const totalLines = coordinates.connections.length;
       const opacityTransitionStartIndex = 0;
       const opacityTransitionEndIndex = 1;
       let backgroundStarsOpacity = 0;
@@ -99,7 +142,8 @@ function starryNight({
         let startTime: number | null = null;
         const duration = 1500;
 
-        const [startIndex, endIndex] = constellationLines[currentLineIndex];
+        const [startIndex, endIndex] =
+          coordinates.connections[currentLineIndex];
         const start = stars[startIndex];
         const end = stars[endIndex];
 
@@ -134,7 +178,7 @@ function starryNight({
 
           context.beginPath();
           for (let i = 0; i < currentLineIndex; i++) {
-            const [sIndex, eIndex] = constellationLines[i];
+            const [sIndex, eIndex] = coordinates.connections[i];
             context.moveTo(stars[sIndex].x, stars[sIndex].y);
             context.lineTo(stars[eIndex].x, stars[eIndex].y);
           }
@@ -167,7 +211,7 @@ function starryNight({
         cancelAnimationFrame(animationFrameId);
         setCanvasSize();
 
-        stars = starCoordinates.map(({ x, y }) => ({
+        stars = coordinates.vectors.map(({ x, y }) => ({
           x: x * canvasWidth,
           y: y * canvasHeight,
         }));
@@ -190,13 +234,15 @@ function starryNight({
   }
 }
 
-const ConstellationCanvas = memo(() => {
+const ConstellationCanvas = memo(({ mode }: { mode: string | null }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const memoStarryNight = useCallback(starryNight, [starryNight]);
 
+  const isOrion = mode == import.meta.env.ORION;
   useEffect(() => {
     memoStarryNight({
       canvasRef: canvasRef,
+      isOrion: isOrion,
     });
   }, []);
 

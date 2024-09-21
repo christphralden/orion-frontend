@@ -1,12 +1,13 @@
 import { lazy, Suspense } from "react";
 import BinusRibbon from "/assets/binus/binus-ribbon.png";
-import SLCLogo from "/assets/binus/binus-slc.svg";
+// import SLCLogo from "/assets/binus/binus-slc.svg";
+import SLCLogoDark from "/assets/binus/binus-logo-dark.png";
 import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@components/ui/card";
 import { Input } from "@components/ui/input";
 import GradientBackground from "@components/backgrounds/gradient-background";
 import { useAuthLogin } from "@authentication/hooks/use-auth-login";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 const ConstellationBackground = lazy(
   () => import("@components/backgrounds/constellation-background"),
 );
@@ -15,6 +16,9 @@ const COPYRIGHT = "Copyright © 2024 - Orion, LCAS - Binus University";
 
 const Landing = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const mode = searchParams.get("mode");
+
   const {
     handleLogin,
     isPending: loginLoading,
@@ -39,11 +43,11 @@ const Landing = () => {
       <GradientBackground className="fixed -z-10" />
 
       <Suspense fallback={null}>
-        <ConstellationBackground />
+        <ConstellationBackground mode={mode} />
       </Suspense>
 
       <section className="w-full h-screen flex justify-center items-center z-10 ">
-        <Card className="w-[350px] z-[100] ">
+        <Card className="w-[350px] z-[100] bg-[#0a0a0a90] glass border-[1px] border-gray-800 pb-4">
           <CardHeader className="py-0 mt-[-1px] px-2 pb-8 flex flex-row ">
             <div className="w-fit">
               <img
@@ -55,7 +59,7 @@ const Landing = () => {
             <div className="w-40 scale-[0.8]">
               <img
                 draggable={false}
-                src={SLCLogo}
+                src={SLCLogoDark}
                 className="object-cover w-full h-full"
               />
             </div>
@@ -69,6 +73,7 @@ const Landing = () => {
                     name="username"
                     placeholder="Username"
                     required
+                    className="bg-[#0a0a0a20] glass border-[1px] border-gray-800 placeholder-white text-white"
                   />
                 </div>
                 <div className="flex flex-col space-y-1.5">
@@ -78,6 +83,7 @@ const Landing = () => {
                     placeholder="Password"
                     type="password"
                     required
+                    className="bg-[#0a0a0a20] glass border-[1px] border-gray-800 placeholder-white text-white"
                   />
                 </div>
               </div>

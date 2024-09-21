@@ -1,8 +1,17 @@
 .glass {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.2);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
+
+/* .radial { */
+/*   background: radial-gradient( */
+/*     ellipse 150% 150% at center bottom, */
+/*     rgba(0, 1, 1, 1) 0%, */
+/*     rgba(32, 20, 50, 1) 75%, */
+/*     rgba(64, 78, 100, 1) 100% */
+/*   ); */
+/* } */
 
 .radial {
   background: radial-gradient(

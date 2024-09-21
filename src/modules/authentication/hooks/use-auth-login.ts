@@ -15,12 +15,12 @@ import {
 import { ToastError, ToastSuccess } from "@components/toast/toast";
 import { MESSAGES } from "@constants/messages";
 
-import { useAuthStore } from "@authentication/store/auth-store";
 import { IUserSchema } from "@core/schema/user.schema";
 import { ZodError } from "zod";
+import { getAuthActions } from "@authentication/store/auth-store";
 
-export const useAuthLogin = () => {
-  const { setUser } = useAuthStore();
+export function useAuthLogin() {
+  const { setUser } = getAuthActions();
 
   const mutation = useMutation<IResponse<IUser>, HTTPError, AuthRequest>({
     mutationFn: async (authRequest: AuthRequest) => {
@@ -62,4 +62,4 @@ export const useAuthLogin = () => {
     ...mutation,
     handleLogin,
   };
-};
+}

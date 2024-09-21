@@ -1,5 +1,4 @@
-// import { Separator } from "@components/ui/separator";
-import { useAuthStore } from "@authentication/store/auth-store";
+import { useUser } from "@authentication/store/auth-store";
 
 import {
   NavigationMenu,
@@ -18,11 +17,10 @@ import {
 //     DropdownMenuTrigger,
 // } from "../ui/dropdown-menu"
 import { navigationMenuTriggerStyle } from "../ui/navigation-menu";
-// import { Label } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@components/ui/button";
 
 const NavBar = () => {
-  const { user } = useAuthStore(); // TODO: middleware
+  const user = useUser(); // TODO: middleware
 
   return (
     <div className="cursor-pointer mb-6 flex items-center w-[1000px] justify-between">

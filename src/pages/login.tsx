@@ -14,7 +14,7 @@ const ConstellationBackground = lazy(
 
 const COPYRIGHT = "Copyright © 2024 - Orion, LCAS - Binus University";
 
-const Landing = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const mode = searchParams.get("mode");
@@ -108,4 +108,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default Login;

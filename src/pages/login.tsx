@@ -14,7 +14,6 @@ const ConstellationBackground = lazy(
 const COPYRIGHT = "Copyright © 2024 - Orion, LCAS - Binus University";
 
 const Landing = () => {
-  console.log("render");
   const navigate = useNavigate();
   const {
     handleLogin,
@@ -37,7 +36,7 @@ const Landing = () => {
 
   return (
     <div className="relative w-full h-full">
-      <GradientBackground className="absolute -z-10" />
+      <GradientBackground className="fixed -z-10" />
 
       <Suspense fallback={null}>
         <ConstellationBackground />
@@ -47,17 +46,30 @@ const Landing = () => {
         <Card className="w-[350px] z-[100] ">
           <CardHeader className="py-0 mt-[-1px] px-2 pb-8 flex flex-row ">
             <div className="w-fit">
-              <img src={BinusRibbon} className="object-cover w-full h-full" />
+              <img
+                draggable={false}
+                src={BinusRibbon}
+                className="object-cover w-full h-full"
+              />
             </div>
             <div className="w-40 scale-[0.8]">
-              <img src={SLCLogo} className="object-cover w-full h-full" />
+              <img
+                draggable={false}
+                src={SLCLogo}
+                className="object-cover w-full h-full"
+              />
             </div>
           </CardHeader>
           <form onSubmit={handleSubmit}>
             <CardContent>
               <div className="grid w-full items-center gap-4">
                 <div className="flex flex-col space-y-1.5">
-                  <Input id="username" name="username" placeholder="Username" />
+                  <Input
+                    id="username"
+                    name="username"
+                    placeholder="Username"
+                    required
+                  />
                 </div>
                 <div className="flex flex-col space-y-1.5">
                   <Input
@@ -65,6 +77,7 @@ const Landing = () => {
                     name="password"
                     placeholder="Password"
                     type="password"
+                    required
                   />
                 </div>
               </div>

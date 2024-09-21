@@ -40,7 +40,6 @@ export const useAuthLogin = () => {
         ToastError({
           message: MESSAGES.SCHEMA.ERROR,
         });
-        console.error(error.message);
       } else {
         ToastError({
           message: error.message ?? MESSAGES.AUTH.ERROR,

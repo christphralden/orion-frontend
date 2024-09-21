@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: "/auth/login",
+        path: "login",
         element: (
           <Suspense fallback={<Loader />}>
             <Login />
@@ -42,4 +42,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-export default router;
+export { router };

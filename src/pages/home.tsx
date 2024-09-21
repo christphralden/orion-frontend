@@ -17,7 +17,7 @@ import { Button } from "@components/ui/button";
 
 const Home = () => {
   return (
-    <div className="w-full h-screen items-center flex flex-col mt-3">
+    <div className="w-full h-full items-center flex flex-col mt-3">
       <div className="flex justify-between w-[1000px]">
         <div>Logo</div>
         <DropdownMenu>

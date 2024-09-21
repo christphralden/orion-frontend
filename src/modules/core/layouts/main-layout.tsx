@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
-import { Toaster } from "@components/ui/sonner";
+
+import GenericLayout from "./generic-layout";
 
 const MainLayout = () => {
   return (
-    <div className="w-screen min-h-[100lvh]">
-      <Toaster position="top-right" visibleToasts={3} />
+    <GenericLayout>
       <Outlet />
-    </div>
+    </GenericLayout>
   );
 };
 

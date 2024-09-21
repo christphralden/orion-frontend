@@ -1,7 +1,7 @@
 import type { IUser } from "@core/types/user.types";
 import UnauthorizedError from "@models/errors/unauthorized-error";
 
-import { postAuthVerifyLogin } from "@authentication/apis/auth-verify-login.api";
+import { getAuthVerifyLogin } from "@authentication/apis/auth-verify-login.api";
 import { create, useStore } from "zustand";
 import { devtools } from "zustand/middleware";
 import { IUserSchema } from "@core/schema/user.schema";
@@ -9,6 +9,7 @@ import { IUserSchema } from "@core/schema/user.schema";
 type AuthStore = {
   isAuthenticated: boolean;
   user?: IUser;
+  loading: boolean;
   actions: {
     setUser: (user: IUser) => void;
     init: () => void;
@@ -21,6 +22,7 @@ const authStore = create<AuthStore>()(
     (set) => ({
       isAuthenticated: false,
       user: undefined,
+      loading: false,
 
       actions: {
         setUser: (user: IUser) => {
@@ -31,14 +33,16 @@ const authStore = create<AuthStore>()(
         },
 
         init: async () => {
+          set({ loading: true });
           try {
-            const res = await postAuthVerifyLogin();
+            const res = await getAuthVerifyLogin();
 
             if (res.status) {
               const user: IUser = IUserSchema.parse(res.data);
               set({
                 user,
                 isAuthenticated: true,
+                loading: false,
               });
             } else {
               throw new UnauthorizedError();
@@ -47,6 +51,7 @@ const authStore = create<AuthStore>()(
             set({
               user: undefined,
               isAuthenticated: false,
+              loading: false,
             });
           }
         },
@@ -77,13 +82,16 @@ type Params<U> = Parameters<typeof useStore<typeof authStore, U>>;
 const isAuthenticatedSelector = (state: ExtractState<typeof authStore>) =>
   state.isAuthenticated;
 const userSelector = (state: ExtractState<typeof authStore>) => state.user;
+const authLoadingSelector = (state: ExtractState<typeof authStore>) =>
+  state.loading;
 const authActionSelector = (state: ExtractState<typeof authStore>) =>
   state.actions;
 
-// getters
+// Getters
 export const getIsAuthenticated = () =>
   isAuthenticatedSelector(authStore.getState());
 export const getUser = () => userSelector(authStore.getState());
+export const getAuthLoading = () => authLoadingSelector(authStore.getState());
 export const getAuthActions = () => authActionSelector(authStore.getState());
 
 function useAuthStore<U>(selector: Params<U>[1]) {
@@ -93,6 +101,7 @@ function useAuthStore<U>(selector: Params<U>[1]) {
 // Hooks
 export const useIsAuthenticated = () => useAuthStore(isAuthenticatedSelector);
 export const useUser = () => useAuthStore(userSelector);
+export const useAuthLoading = () => useAuthStore(authLoadingSelector);
 export const useAuthActions = () => useAuthStore(authActionSelector);
 
 export { useAuthStore };

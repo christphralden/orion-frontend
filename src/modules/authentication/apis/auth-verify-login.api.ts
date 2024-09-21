@@ -4,7 +4,7 @@ import apiClient from "@core/apis/api-client";
 import { API_ENDPOINTS } from "@constants/api-endpoints";
 import { IUser } from "@core/types/user.types";
 
-async function postAuthVerifyLogin() {
+async function getAuthVerifyLogin() {
   const res = await apiClient.get<IResponse<IUser>>({
     url: API_ENDPOINTS.AUTH.VERIFY,
     options: {
@@ -15,4 +15,4 @@ async function postAuthVerifyLogin() {
   return res;
 }
 
-export { postAuthVerifyLogin };
+export { getAuthVerifyLogin };

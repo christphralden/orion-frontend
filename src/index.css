@@ -17,6 +17,10 @@ img {
   user-select: none;
 }
 
+canvas {
+  user-select: none;
+}
+
 @layer base {
   :root {
     --background: 0 0% 98%;

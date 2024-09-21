@@ -64,7 +64,7 @@ function starryNight({
 
       const drawBackgroundStars = (opacity: number) => {
         context.fillStyle = `rgba(255, 255, 255, ${opacity * 0.2})`;
-        context.shadowBlur = 0;
+        context.shadowBlur = 10;
         backgroundStars.forEach((star) => {
           context.beginPath();
           context.arc(star.x, star.y, star.radius, 0, Math.PI * 2, false);
@@ -90,7 +90,7 @@ function starryNight({
 
       const totalLines = constellationLines.length;
       const opacityTransitionStartIndex = 0;
-      const opacityTransitionEndIndex = 2;
+      const opacityTransitionEndIndex = 1;
       let backgroundStarsOpacity = 0;
 
       const animateLines = () => {
@@ -139,7 +139,7 @@ function starryNight({
             context.lineTo(stars[eIndex].x, stars[eIndex].y);
           }
           context.strokeStyle = "#ffffff40";
-          context.lineWidth = 1;
+          context.lineWidth = 1.5;
           context.shadowColor = "#ffffff";
           context.shadowBlur = 5;
           context.stroke();
@@ -203,7 +203,7 @@ const ConstellationCanvas = memo(() => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute z-[10] w-full h-full top-0 left-0 bg-transparent"
+      className="fixed z-[10] w-full h-full top-0 left-0 bg-transparent block overflow-hidden"
     />
   );
 });

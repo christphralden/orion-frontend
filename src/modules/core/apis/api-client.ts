@@ -24,7 +24,7 @@ class APIClient {
 
     if (!res.ok) {
       const response = await res.json();
-      const error = new HTTPError(response.message, res.status);
+      const error = new HTTPError(response.errors, res.status);
       throw error;
     }
 

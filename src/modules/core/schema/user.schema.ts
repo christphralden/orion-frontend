@@ -1,11 +1,12 @@
 import { z } from "zod";
 
 const IUserSchema = z.object({
-  name: z.string(),
+  userId: z.string(),
   binusianId: z.string(),
   username: z.string(),
-  pictureId: z.string(),
+  name: z.string(),
   roles: z.array(z.string()),
+  binusianNumber: z.string(),
 });
 
 export { IUserSchema };

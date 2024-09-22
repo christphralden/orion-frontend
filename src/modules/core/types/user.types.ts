@@ -1,9 +1,10 @@
 interface IUser {
-  name: string;
+  userId: string;
   binusianId: string;
   username: string;
-  pictureId: string;
+  name: string;
   roles: string[];
+  binusianNumber: string;
 }
 
 export type { IUser };

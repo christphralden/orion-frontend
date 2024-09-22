@@ -5,6 +5,7 @@ import { getAuthVerifyLogin } from "@authentication/apis/auth-verify-login.api";
 import { create, useStore } from "zustand";
 import { devtools } from "zustand/middleware";
 import { IUserSchema } from "@core/schema/user.schema";
+import { getAuthLogout } from "@authentication/apis/auth-logout.api";
 
 type AuthStore = {
   isAuthenticated: boolean;
@@ -56,11 +57,14 @@ const authStore = create<AuthStore>()(
           }
         },
 
-        clearAuthState: () => {
+        clearAuthState: async () => {
           set({
             isAuthenticated: false,
             user: undefined,
           });
+
+          console.log("logout");
+          await getAuthLogout();
         },
       },
     }),

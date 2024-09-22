@@ -1,6 +1,7 @@
 type AuthEndpoints = {
   LOGIN: "auth/login";
   VERIFY: "auth/verify";
+  LOGOUT: "auth/logout";
 };
 
 type ApiEndpoints = {
@@ -11,6 +12,7 @@ const API_ENDPOINTS: ApiEndpoints = {
   AUTH: {
     LOGIN: "auth/login",
     VERIFY: "auth/verify",
+    LOGOUT: "auth/logout",
   },
 };
 

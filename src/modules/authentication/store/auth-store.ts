@@ -63,8 +63,9 @@ const authStore = create<AuthStore>()(
             user: undefined,
           });
 
-          console.log("logout");
-          await getAuthLogout();
+          try {
+            await getAuthLogout();
+          } catch (error) {}
         },
       },
     }),

@@ -1,5 +1,4 @@
-// import { Separator } from "@components/ui/separator";
-import { useAuthStore } from "@authentication/store/auth-store";
+import { useAuthActions, useUser } from "@authentication/store/auth-store";
 
 import {
   NavigationMenu,
@@ -18,11 +17,11 @@ import {
 //     DropdownMenuTrigger,
 // } from "../ui/dropdown-menu"
 import { navigationMenuTriggerStyle } from "../ui/navigation-menu";
-// import { Label } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@components/ui/button";
 
 const NavBar = () => {
-  const { user } = useAuthStore(); // TODO: middleware
+  const user = useUser();
+  const { clearAuthState } = useAuthActions();
 
   return (
     <div className="cursor-pointer mb-6 flex items-center w-[1000px] justify-between">
@@ -47,7 +46,11 @@ const NavBar = () => {
             <NavigationMenuTrigger>{user?.username}</NavigationMenuTrigger>
             <NavigationMenuContent>
               <div className="flex p-2">
-                <Button variant="ghost" className="">
+                <Button
+                  variant="ghost"
+                  className=""
+                  onClick={() => clearAuthState()}
+                >
                   Sign Out
                 </Button>
               </div>

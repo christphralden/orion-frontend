@@ -1,74 +1,112 @@
 import type { IUser } from "@core/types/user.types";
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import apiClient from "@core/apis/api-client";
-import { API_ENDPOINTS } from "@constants/api-endpoints";
+import UnauthorizedError from "@models/errors/unauthorized-error";
+
+import { getAuthVerifyLogin } from "@authentication/apis/auth-verify-login.api";
+import { create, useStore } from "zustand";
+import { devtools } from "zustand/middleware";
+import { IUserSchema } from "@core/schema/user.schema";
+import { getAuthLogout } from "@authentication/apis/auth-logout.api";
 
 type AuthStore = {
   isAuthenticated: boolean;
   user?: IUser;
-  setUser: (user: IUser) => void;
-  init: () => void;
-  clearAuthState: () => void;
+  loading: boolean;
+  actions: {
+    setUser: (user: IUser) => void;
+    init: () => void;
+    clearAuthState: () => void;
+  };
 };
 
-const useAuthStore = create<AuthStore>()(
-  persist(
+const authStore = create<AuthStore>()(
+  devtools(
     (set) => ({
       isAuthenticated: false,
       user: undefined,
+      loading: false,
 
-      setUser: (user: IUser) => {
-        set({
-          user,
-          isAuthenticated: !!user,
-        });
-      },
-
-      init: async () => {
-        try {
-          const response = await apiClient.get<any>({
-            url: API_ENDPOINTS.AUTH.VERIFY,
-            options: {
-              credentials: "include",
-            },
+      actions: {
+        setUser: (user: IUser) => {
+          set({
+            user,
+            isAuthenticated: !!user,
           });
+        },
 
-          if (response.ok) {
-            const user = await response.json();
-            set({
-              user,
-              isAuthenticated: true,
-            });
-          } else {
+        init: async () => {
+          set({ loading: true });
+          try {
+            const res = await getAuthVerifyLogin();
+
+            if (res.status) {
+              const user: IUser = IUserSchema.parse(res.data);
+              set({
+                user,
+                isAuthenticated: true,
+                loading: false,
+              });
+            } else {
+              throw new UnauthorizedError();
+            }
+          } catch (error) {
             set({
               user: undefined,
               isAuthenticated: false,
+              loading: false,
             });
           }
-        } catch (error) {
-          set({
-            user: undefined,
-            isAuthenticated: false,
-          });
-        }
-      },
+        },
 
-      clearAuthState: () => {
-        set({
-          isAuthenticated: false,
-          user: undefined,
-        });
+        clearAuthState: async () => {
+          set({
+            isAuthenticated: false,
+            user: undefined,
+          });
+
+          try {
+            await getAuthLogout();
+          } catch (error) {}
+        },
       },
     }),
     {
-      name: "authStore",
-      partialize: (state) => ({
-        user: state.user,
-        isAuthenticated: state.isAuthenticated,
-      }),
+      name: "auth-store",
+      enabled: !import.meta.env.PROD,
     },
   ),
 );
+
+export type ExtractState<S> = S extends {
+  getState: () => infer T;
+}
+  ? T
+  : never;
+
+type Params<U> = Parameters<typeof useStore<typeof authStore, U>>;
+
+const isAuthenticatedSelector = (state: ExtractState<typeof authStore>) =>
+  state.isAuthenticated;
+const userSelector = (state: ExtractState<typeof authStore>) => state.user;
+const authLoadingSelector = (state: ExtractState<typeof authStore>) =>
+  state.loading;
+const authActionSelector = (state: ExtractState<typeof authStore>) =>
+  state.actions;
+
+// Getters
+export const getIsAuthenticated = () =>
+  isAuthenticatedSelector(authStore.getState());
+export const getUser = () => userSelector(authStore.getState());
+export const getAuthLoading = () => authLoadingSelector(authStore.getState());
+export const getAuthActions = () => authActionSelector(authStore.getState());
+
+function useAuthStore<U>(selector: Params<U>[1]) {
+  return useStore(authStore, selector);
+}
+
+// Hooks
+export const useIsAuthenticated = () => useAuthStore(isAuthenticatedSelector);
+export const useUser = () => useAuthStore(userSelector);
+export const useAuthLoading = () => useAuthStore(authLoadingSelector);
+export const useAuthActions = () => useAuthStore(authActionSelector);
 
 export { useAuthStore };

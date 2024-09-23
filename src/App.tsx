@@ -3,8 +3,16 @@ import { router } from "@core/routes";
 import ErrorBoundary from "@core/layouts/error-boundary";
 import { queryClient } from "@core/configs/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useAuthActions } from "@authentication/store/auth-store";
 
 function App() {
+  const { init } = useAuthActions();
+
+  useEffect(() => {
+    init();
+  }, []);
+
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>

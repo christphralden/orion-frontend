@@ -19,12 +19,16 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     this.setState({ message: error.message });
+
     console.error("ErrorBoundary caught an error", error.message, info);
   }
 
   render() {
     if (this.state.hasError) {
       return this.props.fallback || <span>Error: {this.state.message}.</span>;
+      // return ToastError({
+      //   message: (this.state.message as string) || MESSAGES.GENERIC.UNHANDLED,
+      // });
     }
 
     return this.props.children;

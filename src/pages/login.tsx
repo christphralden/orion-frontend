@@ -6,16 +6,18 @@ import { Card, CardContent, CardFooter, CardHeader } from "@components/ui/card";
 import { Input } from "@components/ui/input";
 import GradientBackground from "@components/backgrounds/gradient-background";
 import { useAuthLogin } from "@authentication/hooks/use-auth-login";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 const ConstellationBackground = lazy(
   () => import("@components/backgrounds/constellation-background"),
 );
 
 const COPYRIGHT = "Copyright © 2024 - Orion, LCAS - Binus University";
 
-const Landing = () => {
-  console.log("render");
+const Login = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const mode = searchParams.get("mode");
+
   const {
     handleLogin,
     isPending: loginLoading,
@@ -40,15 +42,15 @@ const Landing = () => {
       <GradientBackground className="fixed -z-10" />
 
       <Suspense fallback={null}>
-        <ConstellationBackground />
+        <ConstellationBackground mode={mode} />
       </Suspense>
 
       <Suspense fallback={null}>
-        <ConstellationBackground />
+        <ConstellationBackground mode={mode} />
       </Suspense>
 
       <section className="w-full h-screen flex justify-center items-center z-10 ">
-        <Card className="w-[350px] z-[100] ">
+        <Card className="w-[350px] z-[100]   border-[1px] pb-4 bg-[#fafafa95] glass">
           <CardHeader className="py-0 mt-[-1px] px-2 pb-8 flex flex-row ">
             <div className="w-fit">
               <img
@@ -107,4 +109,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default Login;

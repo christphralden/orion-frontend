@@ -5,6 +5,15 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  margin: 0;
+  padding: 0;
+}
+root {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
 html {
   font-family: "Restart", sans-serif;
 }
@@ -19,6 +28,19 @@ img {
 
 canvas {
   user-select: none;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0a0a0a50;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
 }
 
 @layer base {

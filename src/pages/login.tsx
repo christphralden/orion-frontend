@@ -40,17 +40,11 @@ const Login = () => {
   return (
     <div className="relative w-full h-full">
       <GradientBackground className="fixed -z-10" />
-
       <Suspense fallback={null}>
         <ConstellationBackground mode={mode} />
       </Suspense>
-
-      <Suspense fallback={null}>
-        <ConstellationBackground mode={mode} />
-      </Suspense>
-
-      <section className="w-full h-screen flex justify-center items-center z-10 ">
-        <Card className="w-[350px] z-[100]   border-[1px] pb-4 bg-[#fafafa95] glass">
+      <section className="w-full h-full flex justify-center items-center z-10 ">
+        <Card className="w-[350px] z-[100] pb-4 bg-[#fafafa95] glass">
           <CardHeader className="py-0 mt-[-1px] px-2 pb-8 flex flex-row ">
             <div className="w-fit">
               <img
@@ -103,7 +97,6 @@ const Login = () => {
           </form>
         </Card>
       </section>
-
       <section className="absolute bottom-0 w-full flex justify-center items-center p-4 px-12">
         <p className="text-white text-center text-sm">{COPYRIGHT}</p>
       </section>

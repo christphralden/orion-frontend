@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <MainLayout />,
+    element: <MainLayout className="flex justify-center h-[100vh]" />,
     errorElement: <Error />,
     children: [
       {

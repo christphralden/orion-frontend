@@ -41,29 +41,57 @@ const fakeForumData = [
       time: "02:21",
     },
   },
+  {
+    type: "Casemaking",
+    name: "Computational Cooking",
+    subco: "WB23-1",
+    participantCount: 12,
+    lastMessage: {
+      sender: "AL23-2",
+      message: "Ko, boleh liat ini gimana cara nilai nya ga",
+      time: "23:22",
+    },
+  },
+  {
+    type: "Correction",
+    name: "Racism Neural Network",
+    subco: "WB23-1",
+    participantCount: 12,
+    lastMessage: {
+      sender: "AL23-2",
+      message: "Ko, boleh liat ini gimana cara nilai nya ga",
+      time: "23:22",
+    },
+  },
+  {
+    type: "Correction",
+    name: "Racism Neural Network",
+    subco: "WB23-1",
+    participantCount: 12,
+    lastMessage: {
+      sender: "AL23-2",
+      message: "Ko, boleh liat ini gimana cara nilai nya ga",
+      time: "23:22",
+    },
+  },
+  {
+    type: "Correction",
+    name: "Racism Neural Network",
+    subco: "WB23-1",
+    participantCount: 12,
+    lastMessage: {
+      sender: "AL23-2",
+      message: "Ko, boleh liat ini gimana cara nilai nya ga",
+      time: "23:22",
+    },
+  },
 ];
 
 const Home = () => {
   return (
-    <div className="w-[85%] h-full items-center flex flex-col mt-3">
-      <div className="flex justify-between w-full">
-        <div>Logo</div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline">Odd Semester 24/25</Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>Even Semester 23/24</DropdownMenuItem>
-            <DropdownMenuItem>Odd Semester 23/24</DropdownMenuItem>
-            <DropdownMenuItem>Even Semester 22/23</DropdownMenuItem>
-            <DropdownMenuItem>Odd Semester 22/23</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-
-      <NavBar />
-      <section className="flex w-full gap-8 h-screen">
-        <Card className="w-[65%] h-[85%]">
+    <div className="w-full h-full items-center flex flex-col mt-3">
+      <section className="flex w-full gap-8 h-full">
+        <Card className="w-[65%] h-[90%]">
           <CardHeader>
             <CardTitle>Active Jobs</CardTitle>
             <CardDescription>Today's workload</CardDescription>
@@ -89,7 +117,7 @@ const Home = () => {
               </Button>
               <Button
                 variant="ghost"
-                className="flex h-10 items-center w-[100%]"
+                className="flex h-10 items-center w-[100%] font-normal"
               >
                 <div className="w-[10%]">Teaching</div>
                 <Separator orientation="vertical" />
@@ -109,18 +137,24 @@ const Home = () => {
           </CardContent>
         </Card>
 
-        <Card className="max-w-[500px] flex-grow h-[50%]">
+        <Card className="min-w-[500px] flex-grow h-fit overflow-x-hidden">
           <CardHeader>
-            <CardTitle>Forums</CardTitle>
-            <CardDescription>Recently active forum</CardDescription>
+            <CardTitle>
+              <div className="flex justify-between">
+                <h1>Forums</h1>
+              </div>
+            </CardTitle>
+            <CardDescription>
+              {fakeForumData.length}&nbsp;currently active forums
+            </CardDescription>
           </CardHeader>
           <Separator />
-          <CardContent className="flex flex-col cursor-pointer p-0">
+          <CardContent className="flex flex-col cursor-pointer p-0 h-[50%] max-h-[500px] overflow-scroll">
             {fakeForumData.map((data, i) => {
               return (
                 <>
-                  <MiniForumTab key={i} {...data} />
-                  <Separator />
+                  <MiniForumTab key={data.name} {...data} />
+                  <Separator key={i} />
                 </>
               );
             })}

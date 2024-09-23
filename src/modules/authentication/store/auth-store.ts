@@ -5,7 +5,18 @@ import { getAuthVerifyLogin } from "@authentication/apis/auth-verify-login.api";
 import { create, useStore } from "zustand";
 import { devtools } from "zustand/middleware";
 import { IUserSchema } from "@core/schema/user.schema";
-import { getAuthLogout } from "@authentication/apis/auth-logout.api";
+
+/*
+  Store for auth states.
+
+  isAuthenticated:    A boolean state to know if a user is logged in
+  user:               User object if currently logged in
+  loading:            Loading state for verify only
+
+  setUser():          Setter for user
+  init():             Verify the state of authentication for usera
+  clearAuthState():   Clearing the authentication state
+*/
 
 type AuthStore = {
   isAuthenticated: boolean;
@@ -62,10 +73,6 @@ const authStore = create<AuthStore>()(
             isAuthenticated: false,
             user: undefined,
           });
-
-          try {
-            await getAuthLogout();
-          } catch (error) {}
         },
       },
     }),

@@ -76,6 +76,7 @@ const Login = () => {
                     name="username"
                     placeholder="Username"
                     required
+                    className="bg-transparent glass"
                   />
                 </div>
                 <div className="flex flex-col space-y-1.5">
@@ -85,6 +86,7 @@ const Login = () => {
                     placeholder="Password"
                     type="password"
                     required
+                    className="bg-transparent glass"
                   />
                 </div>
               </div>

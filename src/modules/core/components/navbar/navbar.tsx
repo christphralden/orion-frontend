@@ -1,4 +1,4 @@
-import { useAuthActions, useUser } from "@authentication/store/auth-store";
+import { useUser } from "@authentication/store/auth-store";
 
 import {
   NavigationMenu,
@@ -18,10 +18,11 @@ import {
 // } from "../ui/dropdown-menu"
 import { navigationMenuTriggerStyle } from "../ui/navigation-menu";
 import { Button } from "@components/ui/button";
+import { useAuthLogout } from "@authentication/hooks/use-auth-logout";
 
 const NavBar = () => {
   const user = useUser();
-  const { clearAuthState } = useAuthActions();
+  const { handleLogout, isPending: logoutPending } = useAuthLogout();
 
   return (
     <div className="cursor-pointer mb-6 flex items-center w-[1000px] justify-between">
@@ -47,9 +48,10 @@ const NavBar = () => {
             <NavigationMenuContent>
               <div className="flex p-2">
                 <Button
+                  disabled={logoutPending}
                   variant="ghost"
                   className=""
-                  onClick={() => clearAuthState()}
+                  onClick={handleLogout}
                 >
                   Sign Out
                 </Button>

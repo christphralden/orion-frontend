@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import BinusRibbon from "/assets/binus/binus-ribbon.png";
 import SLCLogo from "/assets/binus/binus-slc.svg";
-// import SLCLogoDark from "/assets/binus/binus-logo-dark.png";
 import { Button } from "@components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@components/ui/card";
 import { Input } from "@components/ui/input";
@@ -46,6 +45,10 @@ const Login = () => {
         <ConstellationBackground mode={mode} />
       </Suspense>
 
+      <Suspense fallback={null}>
+        <ConstellationBackground mode={mode} />
+      </Suspense>
+
       <section className="w-full h-screen flex justify-center items-center z-10 ">
         <Card className="w-[350px] z-[100]   border-[1px] pb-4 bg-[#fafafa95] glass">
           <CardHeader className="py-0 mt-[-1px] px-2 pb-8 flex flex-row ">
@@ -73,6 +76,7 @@ const Login = () => {
                     name="username"
                     placeholder="Username"
                     required
+                    className="bg-transparent glass"
                   />
                 </div>
                 <div className="flex flex-col space-y-1.5">
@@ -82,6 +86,7 @@ const Login = () => {
                     placeholder="Password"
                     type="password"
                     required
+                    className="bg-transparent glass"
                   />
                 </div>
               </div>

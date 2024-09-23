@@ -7,6 +7,7 @@ type MessageKeys = {
 type AuthMessages = {
   SUCCESS: "Login successful";
   ERROR: "User unauthorized";
+  LOGOUT: "You have been logged out";
 };
 
 type SchemaMessages = {
@@ -21,6 +22,7 @@ const MESSAGES: MessageKeys = {
   AUTH: {
     SUCCESS: "Login successful",
     ERROR: "User unauthorized",
+    LOGOUT: "You have been logged out",
   },
   SCHEMA: {
     ERROR: "Invalid data schema",

@@ -5,7 +5,9 @@ import GenericLayout from "./generic-layout";
 const MainLayout = () => {
   return (
     <GenericLayout>
-      <Outlet />
+      <div className="flex w-full justify-center">
+        <Outlet />
+      </div>
     </GenericLayout>
   );
 };

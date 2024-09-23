@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Toaster } from "@components/ui/sonner";
 import GenericLayout from "@layouts/generic-layout";
+
 const AuthLayout = () => {
   return (
     <GenericLayout>

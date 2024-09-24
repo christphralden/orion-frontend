@@ -31,6 +31,7 @@
 
       /*Modules*/
       "@authentication/*": ["src/modules/authentication/*"],
+      "@forum/*": ["src/modules/forum/*"],
 
       /* Ini last fallback*/
       "@core/*": ["src/modules/core/*"],

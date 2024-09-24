@@ -6,7 +6,7 @@ import NavBar from "@components/navbar/navbar";
 const MainLayout = ({ className }: { className?: string }) => {
   return (
     <GenericLayout className={className}>
-      <div className="flex w-[80%] h-full justify-center items-center flex-col">
+      <div className="flex w-[80%] h-full justify-start flex-col">
         <NavBar />
         <Outlet />
       </div>

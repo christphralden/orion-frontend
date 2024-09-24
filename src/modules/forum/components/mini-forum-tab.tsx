@@ -15,12 +15,14 @@ const typeToColorsMap: Record<string, string> = {
 };
 
 const MiniForumTab = ({
+  id,
   type,
   name,
   subco,
   participantCount,
   lastMessage,
 }: {
+  id: number; //TODO: fix later
   type: string;
   name: string;
   subco: string;
@@ -30,7 +32,10 @@ const MiniForumTab = ({
   const color = typeToColorsMap[type];
 
   return (
-    <div className="w-full h-fit p-6 px-8 flex-col gap-2 flex hover:bg-gray-100 group">
+    <div
+      id={`forum-${id}`}
+      className="w-full h-fit p-6 px-8 flex-col gap-2 flex hover:bg-gray-100 group"
+    >
       <section className="w-full flex justify-between items-center gap-4">
         <div className="rounded-md border-2 border-gray-300 px-2 flex gap-2 justify-start items-center w-fit">
           <div

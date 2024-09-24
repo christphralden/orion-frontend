@@ -34,7 +34,7 @@ const authStore = create<AuthStore>()(
     (set) => ({
       isAuthenticated: false,
       user: undefined,
-      loading: false,
+      loading: true,
 
       actions: {
         setUser: (user: IUser) => {

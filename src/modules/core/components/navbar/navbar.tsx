@@ -25,7 +25,7 @@ const NavBar = () => {
   const { handleLogout, isPending: logoutPending } = useAuthLogout();
 
   return (
-    <div className="cursor-pointer mb-6 flex items-center w-[1000px] justify-between">
+    <div className="cursor-pointer flex items-center w-full justify-between py-8">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>

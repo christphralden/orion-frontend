@@ -1,11 +1,18 @@
 import { Toaster } from "@components/ui/sonner";
 import AuthMiddleware from "@authentication/middleware/auth.middleware";
 import { ReactNode } from "react";
+import { cn } from "@utils/utils";
 
-const GenericLayout = ({ children }: { children: ReactNode }) => {
+const GenericLayout = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
   return (
     <AuthMiddleware>
-      <div className="w-screen min-h-[100lvh]">
+      <div className={cn("w-full min-h-[100vh]", className)}>
         <Toaster position="top-right" visibleToasts={3} />
         {children}
       </div>

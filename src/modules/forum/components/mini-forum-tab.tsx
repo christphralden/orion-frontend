@@ -3,6 +3,7 @@ import type { GenericMessage } from "@forum/types/message.types";
 
 import { COLORS } from "@constants/colors.constant";
 import { FaChevronRight, FaUserGroup } from "react-icons/fa6";
+import { cn } from "@utils/utils";
 
 const MiniForumTab = ({
   id,
@@ -11,6 +12,7 @@ const MiniForumTab = ({
   subco,
   participantCount,
   lastMessage,
+  className,
 }: {
   id: number; //TODO: fix later
   jobType: Job;
@@ -18,13 +20,17 @@ const MiniForumTab = ({
   subco: string;
   participantCount: number;
   lastMessage: GenericMessage;
+  className?: string;
 }) => {
   const color = COLORS[jobType];
 
   return (
     <div
       id={`forum-${id}`}
-      className="w-full h-fit p-6 px-8 flex-col gap-2 flex hover:bg-gray-100 group"
+      className={cn(
+        "w-full h-fit p-4 flex-col gap-2 flex hover:bg-gray-100 group",
+        className,
+      )}
     >
       <section className="w-full flex justify-between items-center gap-4">
         <div className="rounded-md border-2 border-gray-300 px-2 flex gap-2 justify-start items-center w-fit">
@@ -32,7 +38,7 @@ const MiniForumTab = ({
             className="w-2 h-2 rounded-full"
             style={{ backgroundColor: color }}
           />
-          <p className="text-sm text-gray-500">{jobType}</p>
+          <p className="text-xs font-medium text-gray-500">{jobType}</p>
         </div>
         <div className="flex text-gray-500 text-sm w-full justify-end gap-4">
           {import.meta.env.VITE_EXPERIMENTAL === "true" && (
@@ -42,21 +48,18 @@ const MiniForumTab = ({
             </div>
           )}
           <p>{subco}</p>
-          <p className="text-gray-500 text-sm">{lastMessage.time}&nbsp;</p>
         </div>
       </section>
 
       <section>
         <div className="flex gap-2 justify-start items-baseline">
-          <h1 className="text-base font-semibold">{name}</h1>
-          {import.meta.env.VITE_EXPERIMENTAL === "true" && (
-            <div className="w-fit h-fit overflow-hidden">
-              <FaChevronRight
-                size="0.75rem"
-                className="-translate-x-[100%] group-hover:translate-x-[0%] transition-all duration-300 ease-in-out font-bold"
-              />
-            </div>
-          )}
+          <h1 className="text-sm font-medium ">{name}</h1>
+          <div className="w-fit h-fit overflow-hidden">
+            <FaChevronRight
+              size="0.7rem"
+              className="-translate-x-[100%] group-hover:translate-x-[0%] transition-all duration-300 ease-in-out font-bold"
+            />
+          </div>
         </div>
 
         <div className="flex w-full h-fit text-sm text-gray-500 gap-2 items-center">
@@ -66,8 +69,11 @@ const MiniForumTab = ({
               <span>{lastMessage.message}</span>
             </p>
           </div>
-          <div className="w-fit h-fit rounded-full border-2  px-2 items-center flex text-xs ">
-            3
+          {import.meta.env.VITE_EXPERIMENTAL === "true" && (
+            <p className="text-gray-500 text-sm">{lastMessage.time}&nbsp;</p>
+          )}
+          <div className="w-fit h-fit rounded-full px-2 items-center flex text-xs bg-blue text-white">
+            <span>3</span>
           </div>
         </div>
       </section>

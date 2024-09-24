@@ -21,7 +21,7 @@ const Home = () => {
             <CardDescription>Today's workload</CardDescription>
           </CardHeader>
           <Separator className="" />
-          <CardContent className="p-0">
+          <CardContent className="p-6">
             <ActiveJobTabs />
           </CardContent>
         </Card>
@@ -42,7 +42,7 @@ const Home = () => {
             {fakeForumData.map((data) => {
               return (
                 <div key={data.id}>
-                  <MiniForumTab {...data} />
+                  <MiniForumTab {...data} className="p-6 px-8 " />
                   <Separator />
                 </div>
               );

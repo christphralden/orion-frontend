@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { Command } from "cmdk";
 import { cn } from "@utils/utils";
 import "@search/style/cmdk.css";
@@ -8,15 +8,74 @@ import { COLORS } from "@constants/colors.constant";
 
 const cmdkVariants = {
   dialog:
-    "fixed top-[30%] left-[calc(50%-300px)] -transform-x-[50%] -transform-y-[50%] w-[600px] rounded-lg border-2 border-gray-100 bg-[#00000095] glass text-gray-100 font-light tracking-wide text-base  outline-none",
+    "fixed top-[30%] left-[calc(50%-300px)] -transform-x-[50%] -transform-y-[50%] w-[600px] rounded-lg border-2 border-gray-100 bg-[#00000095] glass text-gray-100 tracking-wide text-base  outline-none",
   input: "outline-none bg-transparent flex w-full",
-  list: "p-4",
-  group: "text-xs text-gray-300 font-normal ",
-  item: "font-light text-sm p-2 text-gray-100 hover:bg-gray-200/10 rounded-md transition-color duration-300 ease-in-out flex gap-2 items-center",
+  list: "p-4 overflow-y-scroll pt-0",
+  group: "my-2 text-xs text-gray-300 font-normal ",
+  item: "text-sm p-2 text-gray-100 hover:bg-gray-200/10 rounded-md transition-color duration-300 ease-in-out flex gap-2 items-center",
   empty: "text-sm",
 };
 
 const PLACEHOLDER_TEXT = "Search for Jobs, Forums, and others";
+
+const fakeCorrectionData = [
+  {
+    type: "Correction",
+    subject: "Computational Basket",
+    class: "BE01",
+    startDate: "06/09/2024",
+    endDate: "27/09/2024",
+    revision: "0",
+  },
+  {
+    type: "Correction",
+    subject: "Competitive Brainrot",
+    class: "BY02",
+    startDate: "06/09/2024",
+    endDate: "27/09/2024",
+    revision: "0",
+  },
+  {
+    type: "Correction",
+    subject: "PopularMMOs Network",
+    class: "BX01",
+    startDate: "06/09/2024",
+    endDate: "27/09/2024",
+    revision: "0",
+  },
+];
+
+const CorrectionItems = memo(() => {
+  return fakeCorrectionData.map((correction) => {
+    const color = COLORS["Correction"];
+
+    return (
+      <Command.Item key={correction.subject} className={cn(cmdkVariants.item)}>
+        <div
+          className="w-2 h-2 rounded-full"
+          style={{ backgroundColor: color }}
+        />
+        <span>{correction.subject}</span>
+      </Command.Item>
+    );
+  });
+});
+
+const JobItems = memo(() => {
+  return JOBS.map((job) => {
+    const color = COLORS[job];
+
+    return (
+      <Command.Item key={job} className={cn(cmdkVariants.item)}>
+        <div
+          className="w-2 h-2 rounded-full"
+          style={{ backgroundColor: color }}
+        />
+        <span>{job}</span>
+      </Command.Item>
+    );
+  });
+});
 
 const CommandSearch = () => {
   const [open, setOpen] = useState(false);
@@ -31,6 +90,10 @@ const CommandSearch = () => {
 
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
+  }, []);
+
+  const key = useMemo(() => {
+    return window.navigator.platform.includes("Mac") ? "⌘" : "Ctrl";
   }, []);
 
   return (
@@ -54,31 +117,20 @@ const CommandSearch = () => {
         </Command.Empty>
 
         <Command.Group heading="Jobs" className={cn(cmdkVariants.group)}>
-          <div className="mt-2">
-            {JOBS.map((job) => {
-              const color = COLORS[job];
-
-              return (
-                <Command.Item className={cn(cmdkVariants.item)}>
-                  <div
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: color }}
-                  />
-                  <span>{job}</span>
-                </Command.Item>
-              );
-            })}
-          </div>
+          <JobItems />
+        </Command.Group>
+        <Command.Group heading="Correction" className={cn(cmdkVariants.group)}>
+          <CorrectionItems />
         </Command.Group>
       </Command.List>
-      <div className="w-full flex justify-end p-2">
-        <section className="text-xs flex gap-2 items-center">
-          <p className="text-sm text-gray-300 font-normal">Actions:</p>
+      <div className="w-full flex justify-end p-2 text-xs">
+        <section className="flex gap-2 items-center font-normal">
+          <p className="text-gray-300">Actions:</p>
           <div className="rounded-md bg-gray-200/10 py-1 px-2 w-fit">
-            <span>Ctrl</span>
+            <span>{key}</span>
           </div>
           <div className="rounded-md bg-gray-200/10 py-1 px-2 w-fit">
-            <span>k</span>
+            <span>K</span>
           </div>
         </section>
       </div>

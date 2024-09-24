@@ -43,6 +43,15 @@ canvas {
   width: 2px;
 }
 
+::-moz-selection {
+  color: white;
+  background: hsl(var(--blue));
+}
+
+::selection {
+  color: white;
+  background: hsl(var(--blue));
+}
 @layer base {
   :root {
     --background: 0 0% 98%;

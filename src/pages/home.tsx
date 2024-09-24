@@ -7,10 +7,9 @@ import {
 } from "@components/ui/card";
 import { Separator } from "@components/ui/separator";
 
-import { Button } from "@components/ui/button";
-import MiniForumTab from "@forum/components/mini-forum-tab";
-
 import { fakeForumData } from "@forum/constants/forum-faker.constant";
+import MiniForumTab from "src/modules/forum/components/mini-forum-tab";
+import ActiveJobTabs from "src/modules/jobs/components/active-jobs-tab";
 
 const Home = () => {
   return (
@@ -21,44 +20,9 @@ const Home = () => {
             <CardTitle>Active Jobs</CardTitle>
             <CardDescription>Today's workload</CardDescription>
           </CardHeader>
-          <Separator className="mb-4" />
-          <CardContent>
-            <div className="grid w-full items-center gap-4">
-              <Button
-                variant="ghost"
-                className="flex h-10 items-center w-[100%]"
-              >
-                <div className="w-[10%]">Type</div>
-                <Separator orientation="vertical" />
-                <div className="w-[40%]">Matkul</div>
-                <Separator orientation="vertical" />
-                <div className="w-[7.5%]">Class</div>
-                <Separator orientation="vertical" />
-                <div className="w-[15%]">Start Time</div>
-                <Separator orientation="vertical" />
-                <div className="w-[15%]">End Time</div>
-                <Separator orientation="vertical" />
-                <div className="w-[10%]">Status</div>
-              </Button>
-              <Button
-                variant="ghost"
-                className="flex h-10 items-center w-[100%] font-normal"
-              >
-                <div className="w-[10%]">Teaching</div>
-                <Separator orientation="vertical" />
-                <div className="w-[40%]">
-                  LANG6969001 - Racism Neural Network
-                </div>
-                <Separator orientation="vertical" />
-                <div className="w-[7.5%]">JE01</div>
-                <Separator orientation="vertical" />
-                <div className="w-[15%]">2024/10/12 </div>
-                <Separator orientation="vertical" />
-                <div className="w-[15%]">2024/11/2</div>
-                <Separator orientation="vertical" />
-                <div className="w-[10%]">Ongoing</div>
-              </Button>
-            </div>
+          <Separator className="" />
+          <CardContent className="p-0">
+            <ActiveJobTabs />
           </CardContent>
         </Card>
 

@@ -19,6 +19,7 @@ import {
 import { navigationMenuTriggerStyle } from "../ui/navigation-menu";
 import { Button } from "@components/ui/button";
 import { useAuthLogout } from "@authentication/hooks/use-auth-logout";
+import { FaSearch } from "react-icons/fa";
 
 const NavBar = () => {
   const user = useUser();
@@ -43,6 +44,11 @@ const NavBar = () => {
       </NavigationMenu>
       <NavigationMenu>
         <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <FaSearch />
+            </NavigationMenuLink>
+          </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger>{user?.username}</NavigationMenuTrigger>
             <NavigationMenuContent>

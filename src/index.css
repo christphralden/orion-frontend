@@ -52,6 +52,7 @@ canvas {
   color: white;
   background: hsl(var(--blue));
 }
+
 @layer base {
   :root {
     --background: 0 0% 98%;

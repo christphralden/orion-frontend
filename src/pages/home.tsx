@@ -10,7 +10,7 @@ import { Separator } from "@components/ui/separator";
 import { Button } from "@components/ui/button";
 import MiniForumTab from "@forum/components/mini-forum-tab";
 
-import { fakeForumData } from "@forum/constants/forum-faker";
+import { fakeForumData } from "@forum/constants/forum-faker.constant";
 
 const Home = () => {
   return (

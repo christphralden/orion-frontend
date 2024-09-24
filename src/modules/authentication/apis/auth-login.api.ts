@@ -2,7 +2,7 @@ import type { IResponse } from "@core/types/api.types";
 import type { IUser } from "@core/types/user.types";
 
 import apiClient from "@core/apis/api-client";
-import { API_ENDPOINTS } from "@constants/api-endpoints";
+import { API_ENDPOINTS } from "@constants/api-endpoints.constant";
 
 type AuthRequest = {
   username: string;

@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
 import Loader from "@components/fallbacks/loader";
-import MainLayout from "@core/layouts/main-layout";
+import MainLayout from "@core/layouts/main.layout";
 import Error from "@components/fallbacks/error";
 import AuthLayout from "@authentication/layouts/auth-layout";
 

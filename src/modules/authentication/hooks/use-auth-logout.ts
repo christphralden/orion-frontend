@@ -8,7 +8,7 @@ import { useCallback } from "react";
 import { getAuthLogout } from "@authentication/apis/auth-logout.api";
 
 import { ToastError, ToastSuccess } from "@components/toast/toast";
-import { MESSAGES } from "@constants/messages";
+import { MESSAGES } from "@constants/messages.constant";
 
 import { getAuthActions } from "@authentication/store/auth-store";
 

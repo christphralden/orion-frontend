@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import GenericLayout from "./generic-layout";
+import GenericLayout from "./generic.layout";
 import NavBar from "@components/navbar/navbar";
 
 const MainLayout = ({ className }: { className?: string }) => {

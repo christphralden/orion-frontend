@@ -1,35 +1,25 @@
-import { COLORS } from "@constants/colors";
+import type { Job } from "@core/types/job.types";
+import type { GenericMessage } from "@forum/types/message.types";
+
+import { COLORS } from "@constants/colors.constant";
 import { FaChevronRight, FaUserGroup } from "react-icons/fa6";
-
-interface GenericMessage {
-  sender: string;
-  message: string;
-  time: string; //TODO: fix later
-}
-
-const typeToColorsMap: Record<string, string> = {
-  // TODO: ?
-  TPA: COLORS.TPA,
-  Casemaking: COLORS.CASEMAKING,
-  Correction: COLORS.CORRECTION,
-};
 
 const MiniForumTab = ({
   id,
-  type,
+  jobType,
   name,
   subco,
   participantCount,
   lastMessage,
 }: {
   id: number; //TODO: fix later
-  type: string;
+  jobType: Job;
   name: string;
   subco: string;
   participantCount: number;
   lastMessage: GenericMessage;
 }) => {
-  const color = typeToColorsMap[type];
+  const color = COLORS[jobType];
 
   return (
     <div
@@ -42,7 +32,7 @@ const MiniForumTab = ({
             className="w-2 h-2 rounded-full"
             style={{ backgroundColor: color }}
           />
-          <p className="text-sm text-gray-500">{type}</p>
+          <p className="text-sm text-gray-500">{jobType}</p>
         </div>
         <div className="flex text-gray-500 text-sm w-full justify-end gap-4">
           {import.meta.env.VITE_EXPERIMENTAL === "true" && (

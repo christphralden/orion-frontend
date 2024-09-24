@@ -1,4 +1,3 @@
-import NavBar from "@components/navbar/navbar";
 import {
   Card,
   CardContent,
@@ -7,12 +6,6 @@ import {
   CardTitle,
 } from "@components/ui/card";
 import { Separator } from "@components/ui/separator";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@components/ui/dropdown-menu";
 
 import { Button } from "@components/ui/button";
 import MiniForumTab from "src/modules/forum/components/mini-forum-tab";

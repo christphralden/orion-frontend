@@ -25,7 +25,7 @@ const ActiveJobTabs = () => {
     );
 
   return (
-    <Table>
+    <Table className="w-full h-full">
       <TableHeader>
         <TableRow>
           <TableHead className="px-10">Type</TableHead>
@@ -42,7 +42,7 @@ const ActiveJobTabs = () => {
             <TableCell>{job.course_name}</TableCell>
             <TableCell>{job.start_date}</TableCell>
             <TableCell>{job.end_date}</TableCell>
-            <TableCell className="text-right px-10">
+            <TableCell className="text-right px-10 tabular-nums">
               {job.revision_count}
             </TableCell>
           </TableRow>

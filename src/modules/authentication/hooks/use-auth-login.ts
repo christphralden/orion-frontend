@@ -22,19 +22,21 @@ import { useAuthActions } from "@authentication/store/auth-store";
 export function useAuthLogin() {
   const { setUser } = useAuthActions();
 
+  const mutationFn = async (authRequest: AuthRequest) => {
+    const res = await postAuthLogin(authRequest);
+
+    if (res.status) {
+      const user: IUser = IUserSchema.parse(res.data);
+      setUser(user);
+    } else {
+      throw new UnauthorizedError();
+    }
+
+    return res;
+  };
+
   const mutation = useMutation<IResponse<IUser>, HTTPError, AuthRequest>({
-    mutationFn: async (authRequest: AuthRequest) => {
-      const res = await postAuthLogin(authRequest);
-
-      if (res.status) {
-        const user: IUser = IUserSchema.parse(res.data);
-        setUser(user);
-      } else {
-        throw new UnauthorizedError();
-      }
-
-      return res;
-    },
+    mutationFn,
     onError: (error: any) => {
       if (error instanceof ZodError) {
         ToastError({

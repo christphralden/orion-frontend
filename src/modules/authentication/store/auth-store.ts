@@ -10,6 +10,9 @@ import { ExtractState } from "@utils/store";
 /*
   Store for auth states.
 
+  Reason using having a userStore is for a global store in the whole application.
+  using useMutation should not interfere with the server state and client state.
+
   isAuthenticated:    A boolean state to know if a user is logged in
   user:               User object if currently logged in
   loading:            Loading state for verify only

@@ -15,16 +15,16 @@ import { useAuthActions } from "@authentication/store/auth-store";
 export function useAuthLogout() {
   const { clearAuthState } = useAuthActions();
 
+  const mutationFn = async () => {
+    const res = await getAuthLogout();
+    if (res.status) {
+      clearAuthState();
+    }
+    return res;
+  };
+
   const mutation = useMutation<IResponse<string>, HTTPError, void>({
-    mutationFn: async () => {
-      const res = await getAuthLogout();
-
-      if (res.status) {
-        clearAuthState();
-      }
-
-      return res;
-    },
+    mutationFn,
     onError: (error: any) => {
       ToastError({
         message: error.message ?? MESSAGES.AUTH.ERROR,

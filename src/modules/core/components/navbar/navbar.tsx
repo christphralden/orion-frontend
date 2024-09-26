@@ -8,14 +8,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "../ui/navigation-menu";
-// import {
-//     DropdownMenu,
-//     DropdownMenuContent,
-//     DropdownMenuItem,
-//     DropdownMenuLabel,
-//     DropdownMenuSeparator,
-//     DropdownMenuTrigger,
-// } from "../ui/dropdown-menu"
 import { navigationMenuTriggerStyle } from "../ui/navigation-menu";
 import { Button } from "@components/ui/button";
 import { useAuthLogout } from "@authentication/hooks/use-auth-logout";

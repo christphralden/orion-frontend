@@ -14,14 +14,14 @@ import ActiveJobTabs from "@job/components/active-jobs-tab";
 const Home = () => {
   return (
     <div className="w-full h-full items-center flex flex-col mt-3">
-      <section className="flex w-full gap-8 h-full">
-        <Card className="w-[65%] h-[90%]">
+      <section className="flex w-full gap-8 h-full ">
+        <Card className="w-[65%] h-full flex flex-col">
           <CardHeader>
             <CardTitle>Active Jobs</CardTitle>
             <CardDescription>Today's workload</CardDescription>
           </CardHeader>
           <Separator className="" />
-          <CardContent className="p-0">
+          <CardContent className="p-0 h-full flex-grow ">
             <ActiveJobTabs />
           </CardContent>
         </Card>
@@ -30,7 +30,7 @@ const Home = () => {
           <CardHeader>
             <CardTitle>
               <div className="flex justify-between">
-                <h1>Forums</h1>
+                <h2>Forums</h2>
               </div>
             </CardTitle>
             <CardDescription>

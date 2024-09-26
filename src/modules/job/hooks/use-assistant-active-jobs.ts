@@ -8,8 +8,9 @@ import HTTPError from "@models/errors/http-error";
 import UnauthorizedError from "@models/errors/unauthorized-error";
 
 import { useQuery } from "@tanstack/react-query";
-import { useUser } from "@authentication/store/auth-store";
+import { getUser } from "@authentication/store/auth-store";
 import { QUERY_KEYS } from "@constants/query-keys.constant";
+import { useCallback, useMemo } from "react";
 
 /*
   Params:
@@ -18,32 +19,38 @@ import { QUERY_KEYS } from "@constants/query-keys.constant";
       when given a semester_id, it will query said semester_id
     username: 
       when not given a username, it will default to current user
-      when given a usernmae, it will query said users active jobs
+      when given a username, it will query said users active jobs
 */
 
 export function useAssistantActiveJobs({
   semester_id,
   username,
 }: Partial<AssistantActiveJobsRequest>) {
-  const user = useUser();
-  const finalUsername = user?.username ?? username;
+  const user = getUser(); // UNSTABLE
+
+  const finalUsername = useMemo(
+    () => user?.username ?? username,
+    [user?.username, username],
+  );
+
+  const queryFn = useCallback(async () => {
+    if (!semester_id || !finalUsername) {
+      throw new UnauthorizedError();
+    }
+    return await getAssistantActiveJobs({
+      semester_id,
+      username: finalUsername,
+    });
+  }, [semester_id, finalUsername]);
 
   const query = useQuery<IResponse<IJob[]>, HTTPError>({
     queryKey: [
       QUERY_KEYS.JOB.ASSISTANT.ACTIVE,
       { semester_id, username: finalUsername },
     ],
-    queryFn: async () => {
-      if (!semester_id || !finalUsername) {
-        throw new UnauthorizedError();
-      }
-      return await getAssistantActiveJobs({
-        semester_id,
-        username: finalUsername,
-      });
-    },
+    queryFn,
     enabled: !!finalUsername && !!semester_id,
-    retry: 3,
+    retry: 1,
     refetchOnMount: true,
   });
 

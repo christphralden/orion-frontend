@@ -35,12 +35,22 @@ canvas {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #0a0a0a50;
+  background-color: #e5e7eb;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar {
   width: 2px;
+}
+
+::-moz-selection {
+  color: white;
+  background: hsl(var(--blue));
+}
+
+::selection {
+  color: white;
+  background: hsl(var(--blue));
 }
 
 @layer base {

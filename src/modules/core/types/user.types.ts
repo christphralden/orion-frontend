@@ -7,4 +7,5 @@ interface IUser {
   binusianNumber: string;
 }
 
-export type { IUser };
+type UserString = string;
+export type { IUser, UserString };

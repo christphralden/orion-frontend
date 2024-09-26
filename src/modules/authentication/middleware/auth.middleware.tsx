@@ -13,17 +13,17 @@ const AuthMiddleware = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
   const isLoginPath = location.pathname === "/auth/login";
 
-  // if (loading) {
-  //   return <Loader />;
-  // }
+  if (loading) {
+    return <Loader />;
+  }
 
-  // if (isAuthenticated && isLoginPath) {
-  //   return <Navigate to="/" replace />;
-  // }
+  if (isAuthenticated && isLoginPath) {
+    return <Navigate to="/" replace />;
+  }
 
-  // if (!isAuthenticated && !isLoginPath) {
-  //   return <Navigate to="/auth/login" replace />;
-  // }
+  if (!isAuthenticated && !isLoginPath) {
+    return <Navigate to="/auth/login" replace />;
+  }
 
   return children;
 };

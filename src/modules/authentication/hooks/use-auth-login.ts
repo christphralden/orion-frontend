@@ -13,7 +13,7 @@ import {
 } from "@authentication/apis/auth-login.api";
 
 import { ToastError, ToastSuccess } from "@components/toast/toast";
-import { MESSAGES } from "@constants/messages";
+import { MESSAGES } from "@constants/messages.constant";
 
 import { IUserSchema } from "@core/schema/user.schema";
 import { ZodError } from "zod";

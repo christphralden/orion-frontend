@@ -12,7 +12,7 @@ const GenericLayout = ({
 }) => {
   return (
     <AuthMiddleware>
-      <div className={cn("w-full min-h-[100vh]", className)}>
+      <div className={cn("w-full min-h-[100vh] relative ", className)}>
         <Toaster position="top-right" visibleToasts={3} />
         {children}
       </div>

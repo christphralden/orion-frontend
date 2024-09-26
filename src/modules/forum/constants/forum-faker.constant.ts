@@ -1,9 +1,9 @@
-import { Job } from "@core/types/job.types";
+import { JobList } from "@job/types/job.types";
 
 export const fakeForumData = [
   {
     id: 1,
-    jobType: "Correction" as Job,
+    jobType: "Correction" as JobList,
     name: "Racism Neural Network",
     classCode: "BE01",
     subco: "WB23-1",
@@ -17,7 +17,7 @@ export const fakeForumData = [
   },
   {
     id: 2,
-    jobType: "TPA" as Job,
+    jobType: "TPA" as JobList,
     name: "TPA Network",
     subco: "EF23-2",
     participantCount: 11,
@@ -29,7 +29,7 @@ export const fakeForumData = [
   },
   {
     id: 3,
-    jobType: "Casemaking" as Job,
+    jobType: "Casemaking" as JobList,
     name: "Computational Cooking",
     subco: "WB23-1",
     participantCount: 12,
@@ -42,7 +42,7 @@ export const fakeForumData = [
   },
   {
     id: 4,
-    jobType: "Correction" as Job,
+    jobType: "Correction" as JobList,
     name: "Racism Neural Network",
     classCode: "BE01",
     subco: "WB23-1",
@@ -55,7 +55,7 @@ export const fakeForumData = [
   },
   {
     id: 5,
-    jobType: "Correction" as Job,
+    jobType: "Correction" as JobList,
     name: "Racism Neural Network",
     classCode: "BX01",
     subco: "WB23-1",
@@ -68,7 +68,7 @@ export const fakeForumData = [
   },
   {
     id: 6,
-    jobType: "Correction" as Job,
+    jobType: "Correction" as JobList,
     name: "Racism Neural Network",
     classCode: "BR02",
     subco: "WB23-1",

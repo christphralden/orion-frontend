@@ -1,7 +1,9 @@
-type QueryKeys = "MESSIER_LOGIN";
-
-const QUERY_KEYS: Record<QueryKeys, string> = {
-  MESSIER_LOGIN: "MESSIER_LOGIN",
+const QUERY_KEYS = {
+  JOB: {
+    ASSISTANT: {
+      ACTIVE: "assistantActiveJobs",
+    },
+  },
 };
 
 export { QUERY_KEYS };

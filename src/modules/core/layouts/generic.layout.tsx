@@ -1,7 +1,7 @@
-import { Toaster } from "@components/ui/sonner";
 import AuthMiddleware from "@authentication/middleware/auth.middleware";
 import { ReactNode } from "react";
 import { cn } from "@utils/utils";
+import { Toaster } from "sonner";
 
 const GenericLayout = ({
   children,

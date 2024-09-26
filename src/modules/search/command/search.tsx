@@ -3,7 +3,7 @@ import { Command } from "cmdk";
 import { cn } from "@utils/utils";
 import "@search/style/cmdk.css";
 import { IoIosSearch } from "react-icons/io";
-import { JOBS } from "@constants/job.constant";
+import { JOBS } from "@job/constants/job.constant";
 import { COLORS } from "@constants/colors.constant";
 
 const cmdkVariants = {

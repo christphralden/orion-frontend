@@ -5,9 +5,13 @@ import { getAuthVerifyLogin } from "@authentication/apis/auth-verify-login.api";
 import { create, useStore } from "zustand";
 import { devtools } from "zustand/middleware";
 import { IUserSchema } from "@core/schema/user.schema";
+import { ExtractState } from "@utils/store";
 
 /*
   Store for auth states.
+
+  Reason using having a userStore is for a global store in the whole application.
+  using useMutation should not interfere with the server state and client state.
 
   isAuthenticated:    A boolean state to know if a user is logged in
   user:               User object if currently logged in
@@ -82,12 +86,6 @@ const authStore = create<AuthStore>()(
     },
   ),
 );
-
-export type ExtractState<S> = S extends {
-  getState: () => infer T;
-}
-  ? T
-  : never;
 
 type Params<U> = Parameters<typeof useStore<typeof authStore, U>>;
 

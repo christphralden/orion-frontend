@@ -1,6 +1,6 @@
-import type { Job } from "@core/types/job.types";
+import type { JobList } from "@job/types/job.types";
 
-export const COLORS: Record<Job, string> = {
+export const COLORS: Record<JobList, string> = {
   TPA: "#FA8072",
   Correction: "#00a8e0",
   Casemaking: "#9AB973",

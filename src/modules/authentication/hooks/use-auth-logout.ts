@@ -10,21 +10,21 @@ import { getAuthLogout } from "@authentication/apis/auth-logout.api";
 import { ToastError, ToastSuccess } from "@components/toast/toast";
 import { MESSAGES } from "@constants/messages.constant";
 
-import { getAuthActions } from "@authentication/store/auth-store";
+import { useAuthActions } from "@authentication/store/auth-store";
 
 export function useAuthLogout() {
-  const { clearAuthState } = getAuthActions();
+  const { clearAuthState } = useAuthActions();
+
+  const mutationFn = async () => {
+    const res = await getAuthLogout();
+    if (res.status) {
+      clearAuthState();
+    }
+    return res;
+  };
 
   const mutation = useMutation<IResponse<string>, HTTPError, void>({
-    mutationFn: async () => {
-      const res = await getAuthLogout();
-
-      if (res.status) {
-        clearAuthState();
-      }
-
-      return res;
-    },
+    mutationFn,
     onError: (error: any) => {
       ToastError({
         message: error.message ?? MESSAGES.AUTH.ERROR,

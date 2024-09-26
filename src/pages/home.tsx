@@ -6,7 +6,6 @@ import {
   CardTitle,
 } from "@components/ui/card";
 import { Separator } from "@components/ui/separator";
-
 import { fakeForumData } from "@forum/constants/forum-faker.constant";
 import MiniForumTab from "@forum/components/mini-forum-tab";
 import ActiveJobTabs from "@job/components/active-jobs-tab";
@@ -25,7 +24,6 @@ const Home = () => {
             <ActiveJobTabs />
           </CardContent>
         </Card>
-
         <Card className="min-w-[500px] flex-grow h-fit overflow-x-hidden">
           <CardHeader>
             <CardTitle>

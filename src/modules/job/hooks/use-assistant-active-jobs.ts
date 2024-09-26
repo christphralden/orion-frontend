@@ -12,11 +12,15 @@ import { useUser } from "@authentication/store/auth-store";
 import { QUERY_KEYS } from "@constants/query-keys.constant";
 
 /*
-  Note:
-    Ibaratnya cuman perlu fetch active jobs di home kan
-    sisanya yaudah di store aja
-
+  Params:
+    semester_id:
+      when not given a semester_id, it will default to the current semester
+      when given a semester_id, it will query said semester_id
+    username: 
+      when not given a username, it will default to current user
+      when given a usernmae, it will query said users active jobs
 */
+
 export function useAssistantActiveJobs({
   semester_id,
   username,
@@ -40,7 +44,6 @@ export function useAssistantActiveJobs({
     },
     enabled: !!finalUsername && !!semester_id,
     retry: 3,
-    staleTime: 0,
     refetchOnMount: true,
   });
 

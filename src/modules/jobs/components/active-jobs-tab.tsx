@@ -8,7 +8,7 @@ import {
 } from "@components/ui/table";
 const activeJobs = [
   {
-    type: "Casemaking",
+    type: "agagagaggagagagaggaggaga",
     subject: "Computational Basket",
     startDate: "06/09/2024",
     endDate: "27/09/2024",
@@ -42,21 +42,21 @@ const ActiveJobTabs = () => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Type</TableHead>
+          <TableHead className="px-10">Type</TableHead>
           <TableHead>Subject</TableHead>
           <TableHead>Start Date</TableHead>
           <TableHead>End Date</TableHead>
-          <TableHead className="text-right">Revision</TableHead>
+          <TableHead className="text-right px-10">Revision</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {activeJobs.map((job, index) => (
           <TableRow key={index}>
-            <TableCell className="font-medium">{job.type}</TableCell>
+            <TableCell className="font-medium px-10">{job.type}</TableCell>
             <TableCell>{job.subject}</TableCell>
             <TableCell>{job.startDate}</TableCell>
             <TableCell>{job.endDate}</TableCell>
-            <TableCell className="text-right">{job.revision}</TableCell>
+            <TableCell className="text-right px-10">{job.revision}</TableCell>
           </TableRow>
         ))}
       </TableBody>

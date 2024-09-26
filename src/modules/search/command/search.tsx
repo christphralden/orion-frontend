@@ -22,7 +22,7 @@ const fakeCorrectionData = [
   {
     type: "Correction",
     subject: "Computational Basket",
-    class: "BE01",
+    classCode: "BE01",
     startDate: "06/09/2024",
     endDate: "27/09/2024",
     revision: "0",
@@ -30,7 +30,7 @@ const fakeCorrectionData = [
   {
     type: "Correction",
     subject: "Competitive Brainrot",
-    class: "BY02",
+    classCode: "BY02",
     startDate: "06/09/2024",
     endDate: "27/09/2024",
     revision: "0",
@@ -38,7 +38,7 @@ const fakeCorrectionData = [
   {
     type: "Correction",
     subject: "PopularMMOs Network",
-    class: "BX01",
+    classCode: "BX01",
     startDate: "06/09/2024",
     endDate: "27/09/2024",
     revision: "0",
@@ -55,7 +55,10 @@ const CorrectionItems = memo(() => {
           className="w-2 h-2 rounded-full"
           style={{ backgroundColor: color }}
         />
-        <span>{correction.subject}</span>
+        <span>
+          {correction.subject}
+          {correction.classCode && <span>{` - ${correction.classCode}`}</span>}
+        </span>
       </Command.Item>
     );
   });

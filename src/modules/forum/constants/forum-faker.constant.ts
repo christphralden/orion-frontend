@@ -5,8 +5,10 @@ export const fakeForumData = [
     id: 1,
     jobType: "Correction" as Job,
     name: "Racism Neural Network",
+    classCode: "BE01",
     subco: "WB23-1",
     participantCount: 12,
+    unreadMessages: 12,
     lastMessage: {
       sender: "AL23-2",
       message: "Ko, boleh liat ini gimana cara nilai nya ga",
@@ -31,6 +33,7 @@ export const fakeForumData = [
     name: "Computational Cooking",
     subco: "WB23-1",
     participantCount: 12,
+    unreadMessages: 2,
     lastMessage: {
       sender: "AL23-2",
       message: "Ko, boleh liat ini gimana cara nilai nya ga",
@@ -41,6 +44,7 @@ export const fakeForumData = [
     id: 4,
     jobType: "Correction" as Job,
     name: "Racism Neural Network",
+    classCode: "BE01",
     subco: "WB23-1",
     participantCount: 12,
     lastMessage: {
@@ -53,6 +57,7 @@ export const fakeForumData = [
     id: 5,
     jobType: "Correction" as Job,
     name: "Racism Neural Network",
+    classCode: "BX01",
     subco: "WB23-1",
     participantCount: 12,
     lastMessage: {
@@ -65,6 +70,7 @@ export const fakeForumData = [
     id: 6,
     jobType: "Correction" as Job,
     name: "Racism Neural Network",
+    classCode: "BR02",
     subco: "WB23-1",
     participantCount: 12,
     lastMessage: {

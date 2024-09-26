@@ -2,23 +2,26 @@ import type { Job } from "@core/types/job.types";
 import type { GenericMessage } from "@forum/types/message.types";
 
 import { COLORS } from "@constants/colors.constant";
-import { FaChevronRight, FaUserGroup } from "react-icons/fa6";
+import { FaChevronRight } from "react-icons/fa6";
 import { cn } from "@utils/utils";
 
 const MiniForumTab = ({
   id,
   jobType,
+  classCode,
   name,
   subco,
-  participantCount,
   lastMessage,
+  unreadMessages,
   className,
 }: {
   id: number; //TODO: fix later
   jobType: Job;
+  classCode?: string;
   name: string;
   subco: string;
   participantCount: number;
+  unreadMessages?: number;
   lastMessage: GenericMessage;
   className?: string;
 }) => {
@@ -41,19 +44,15 @@ const MiniForumTab = ({
           <p className="text-xs font-medium text-gray-500">{jobType}</p>
         </div>
         <div className="flex text-gray-500 text-sm w-full justify-end gap-4">
-          {import.meta.env.VITE_EXPERIMENTAL === "true" && (
-            <div className="w-fit flex gap-1 justify-center items-center">
-              <FaUserGroup />
-              <p>{participantCount}</p>
-            </div>
-          )}
           <p>{subco}</p>
         </div>
       </section>
 
       <section>
         <div className="flex gap-2 justify-start items-baseline">
-          <h1 className="text-sm font-medium ">{name}</h1>
+          <p className="text-sm font-medium ">
+            {name} {classCode && <span>{`- ${classCode}`}</span>}
+          </p>
           <div className="w-fit h-fit overflow-hidden">
             <FaChevronRight
               size="0.7rem"
@@ -72,9 +71,11 @@ const MiniForumTab = ({
           {import.meta.env.VITE_EXPERIMENTAL === "true" && (
             <p className="text-gray-500 text-sm">{lastMessage.time}&nbsp;</p>
           )}
-          <div className="w-fit h-fit rounded-full px-2 items-center flex text-xs bg-blue text-white">
-            <span>3</span>
-          </div>
+          {unreadMessages && (
+            <div className="w-fit h-fit rounded-full px-2 items-center flex text-xs bg-blue text-white">
+              <span>{unreadMessages}</span>
+            </div>
+          )}{" "}
         </div>
       </section>
     </div>

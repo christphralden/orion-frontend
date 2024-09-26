@@ -21,7 +21,7 @@ const Home = () => {
             <CardDescription>Today's workload</CardDescription>
           </CardHeader>
           <Separator className="" />
-          <CardContent className="p-6">
+          <CardContent className="p-0">
             <ActiveJobTabs />
           </CardContent>
         </Card>

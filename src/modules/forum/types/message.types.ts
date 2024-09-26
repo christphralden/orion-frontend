@@ -1,7 +1,7 @@
-interface GenericMessage {
+interface IMessage {
   sender: string;
   message: string;
   time: string; //TODO: fix later
 }
 
-export type { GenericMessage };
+export type { IMessage };

@@ -1,5 +1,5 @@
-import type { Job } from "@core/types/job.types";
-import type { GenericMessage } from "@forum/types/message.types";
+import type { JobList } from "@job/types/job.types";
+import type { IMessage } from "@forum/types/message.types";
 
 import { COLORS } from "@constants/colors.constant";
 import { FaChevronRight } from "react-icons/fa6";
@@ -16,13 +16,13 @@ const MiniForumTab = ({
   className,
 }: {
   id: number; //TODO: fix later
-  jobType: Job;
+  jobType: JobList;
   classCode?: string;
   name: string;
   subco: string;
   participantCount: number;
   unreadMessages?: number;
-  lastMessage: GenericMessage;
+  lastMessage: IMessage;
   className?: string;
 }) => {
   const color = COLORS[jobType];

@@ -31,9 +31,21 @@ class APIClient {
     return await res.json();
   }
 
-  get<Response>({ url, options }: { url: string; options?: RequestInit }) {
+  get<Response>({
+    url,
+    params,
+    options,
+  }: {
+    url: string;
+    params?: Record<string, string>;
+    options?: RequestInit;
+  }) {
+    const queryString = params
+      ? `?${new URLSearchParams(params).toString()}`
+      : "";
+
     return this.request<Response>({
-      url,
+      url: `${url}${queryString}`,
       options: {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -41,7 +53,6 @@ class APIClient {
       },
     });
   }
-
   post<Response, Data>({
     url,
     data,

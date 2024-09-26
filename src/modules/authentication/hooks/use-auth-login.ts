@@ -17,10 +17,10 @@ import { MESSAGES } from "@constants/messages.constant";
 
 import { IUserSchema } from "@core/schema/user.schema";
 import { ZodError } from "zod";
-import { getAuthActions } from "@authentication/store/auth-store";
+import { useAuthActions } from "@authentication/store/auth-store";
 
 export function useAuthLogin() {
-  const { setUser } = getAuthActions();
+  const { setUser } = useAuthActions();
 
   const mutation = useMutation<IResponse<IUser>, HTTPError, AuthRequest>({
     mutationFn: async (authRequest: AuthRequest) => {

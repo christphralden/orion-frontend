@@ -10,10 +10,10 @@ import { getAuthLogout } from "@authentication/apis/auth-logout.api";
 import { ToastError, ToastSuccess } from "@components/toast/toast";
 import { MESSAGES } from "@constants/messages.constant";
 
-import { getAuthActions } from "@authentication/store/auth-store";
+import { useAuthActions } from "@authentication/store/auth-store";
 
 export function useAuthLogout() {
-  const { clearAuthState } = getAuthActions();
+  const { clearAuthState } = useAuthActions();
 
   const mutation = useMutation<IResponse<string>, HTTPError, void>({
     mutationFn: async () => {

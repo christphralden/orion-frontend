@@ -5,6 +5,7 @@ import { getAuthVerifyLogin } from "@authentication/apis/auth-verify-login.api";
 import { create, useStore } from "zustand";
 import { devtools } from "zustand/middleware";
 import { IUserSchema } from "@core/schema/user.schema";
+import { ExtractState } from "@utils/store";
 
 /*
   Store for auth states.
@@ -82,12 +83,6 @@ const authStore = create<AuthStore>()(
     },
   ),
 );
-
-export type ExtractState<S> = S extends {
-  getState: () => infer T;
-}
-  ? T
-  : never;
 
 type Params<U> = Parameters<typeof useStore<typeof authStore, U>>;
 

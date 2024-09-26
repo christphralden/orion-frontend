@@ -8,8 +8,8 @@ import {
 import { Separator } from "@components/ui/separator";
 
 import { fakeForumData } from "@forum/constants/forum-faker.constant";
-import MiniForumTab from "src/modules/forum/components/mini-forum-tab";
-import ActiveJobTabs from "src/modules/jobs/components/active-jobs-tab";
+import MiniForumTab from "@forum/components/mini-forum-tab";
+import ActiveJobTabs from "@job/components/active-jobs-tab";
 
 const Home = () => {
   return (

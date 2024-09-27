@@ -5,7 +5,7 @@ import GenericLayout from "@layouts/generic.layout";
 const AuthLayout = () => {
   return (
     <GenericLayout className="overflow-x-hidden h-[100dvh]">
-      <div className="w-full h-full relative">
+      <div className="w-full h-full ">
         <Toaster position="top-right" visibleToasts={3} />
         <Outlet />
       </div>

@@ -48,8 +48,8 @@ const MiniForumTab = ({
         </div>
       </section>
 
-      <section>
-        <div className="flex gap-2 justify-start items-baseline">
+      <section className="flex flex-col w-full">
+        <div className="flex gap-2 justify-start items-baseline ">
           <p className="text-sm font-medium ">
             {name} {classCode && <span>{`- ${classCode}`}</span>}
           </p>
@@ -60,22 +60,26 @@ const MiniForumTab = ({
             />
           </div>
         </div>
-
         <div className="flex w-full h-fit text-sm text-gray-500 gap-2 items-center">
-          <div className="flex gap-6 items-end justify-between w-full">
-            <p className="truncate text-sm space-x-2">
-              <span className="text-nowrap ">{lastMessage.sender}&nbsp;:</span>
-              <span>{lastMessage.message}</span>
+          <div className="flex flex-shrink w-[80%] items-center start">
+            <p className="whitespace-nowrap pr-2 w-fit ">
+              {lastMessage.sender}&nbsp;:
+            </p>
+            <p className="truncate flex-shrink truncate max-w-[60%]">
+              {lastMessage.message}
             </p>
           </div>
-          {import.meta.env.VITE_EXPERIMENTAL === "true" && (
-            <p className="text-gray-500 text-sm">{lastMessage.time}&nbsp;</p>
-          )}
-          {unreadMessages && (
-            <div className="w-fit h-fit rounded-full px-2 items-center flex text-xs bg-blue text-white">
-              <span>{unreadMessages}</span>
-            </div>
-          )}{" "}
+
+          <div className="flex items-center justify-end flex-1">
+            {unreadMessages && (
+              <div className="w-fit h-fit rounded-full px-2 items-center flex text-xs bg-blue text-white">
+                <span>{unreadMessages}</span>
+              </div>
+            )}
+            <p className="whitespace-nowrap text-gray-500 text-sm ml-auto pl-2 w-fit">
+              {lastMessage.time}&nbsp;
+            </p>
+          </div>
         </div>
       </section>
     </div>

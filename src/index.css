@@ -41,6 +41,7 @@ canvas {
 
 ::-webkit-scrollbar {
   width: 2px;
+  height: 4px;
 }
 
 ::-moz-selection {

@@ -12,19 +12,20 @@ import ActiveJobTabs from "@job/components/active-jobs-tab";
 
 const Home = () => {
   return (
-    <div className="w-full h-full items-center flex flex-col mt-3">
-      <section className="flex w-full gap-8 h-full ">
-        <Card className="w-[65%] h-full flex flex-col">
+    <div className="w-full h-full items-center flex flex-col ">
+      <section className="flex w-full min-h-full gap-8 h-full flex-col xl:flex-row ">
+        <Card className="w-full xl:w-[65%] h-fit xl:h-full flex flex-col ">
           <CardHeader>
             <CardTitle>Active Jobs</CardTitle>
             <CardDescription>Today's workload</CardDescription>
           </CardHeader>
-          <Separator className="" />
-          <CardContent className="p-0 h-full flex-grow ">
-            <ActiveJobTabs />
+          <Separator />
+          <CardContent className="p-0 ">
+            <ActiveJobTabs className="h-fit max-h-[600px] xl:h-full" />
           </CardContent>
         </Card>
-        <Card className="min-w-[500px] flex-grow h-fit overflow-x-hidden">
+
+        <Card className="h-fit">
           <CardHeader>
             <CardTitle>
               <div className="flex justify-between">
@@ -36,7 +37,7 @@ const Home = () => {
             </CardDescription>
           </CardHeader>
           <Separator />
-          <CardContent className="flex flex-col cursor-pointer p-0 h-[50%] max-h-[500px] overflow-scroll">
+          <CardContent className="flex flex-col xl:max-h-[500px] max-h-[600px] cursor-pointer p-0 overflow-scroll">
             {fakeForumData.map((data) => {
               return (
                 <div key={data.id}>

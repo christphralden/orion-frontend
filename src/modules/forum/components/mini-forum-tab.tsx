@@ -70,13 +70,13 @@ const MiniForumTab = ({
             </p>
           </div>
 
-          <div className="flex items-center justify-end flex-1">
+          <div className="flex items-center justify-end flex-1 gap-2">
             {unreadMessages && (
               <div className="w-fit h-fit rounded-full px-2 items-center flex text-xs bg-blue text-white">
                 <span>{unreadMessages}</span>
               </div>
             )}
-            <p className="whitespace-nowrap text-gray-500 text-sm ml-auto pl-2 w-fit">
+            <p className="whitespace-nowrap text-gray-500 text-sm w-fit">
               {lastMessage.time}&nbsp;
             </p>
           </div>

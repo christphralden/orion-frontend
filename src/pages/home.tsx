@@ -8,48 +8,39 @@ import {
 import { Separator } from "@components/ui/separator";
 import { fakeForumData } from "@forum/constants/forum-faker.constant";
 import MiniForumTab from "@forum/components/mini-forum-tab";
-import ActiveJobTabs from "@job/components/active-jobs-tab";
+import ActiveJobTabs from "@job/components/active-jobs-tabs";
 
 const Home = () => {
   return (
-    <div className="w-full h-full items-center flex flex-col ">
-      <section className="flex w-full min-h-full gap-8 h-full flex-col xl:flex-row ">
-        <Card className="w-full xl:w-[65%] h-fit xl:h-full flex flex-col ">
-          <CardHeader>
-            <CardTitle>Active Jobs</CardTitle>
-            <CardDescription>Today's workload</CardDescription>
-          </CardHeader>
-          <Separator />
-          <CardContent className="p-0 ">
-            <ActiveJobTabs className="h-fit max-h-[600px] xl:h-full" />
-          </CardContent>
-        </Card>
-
-        <Card className="h-fit">
-          <CardHeader>
-            <CardTitle>
-              <div className="flex justify-between">
-                <h2>Forums</h2>
+    <section className="flex w-full justify-between gap-10 h-full flex-col xl:flex-row relative">
+      <Card className="h-[90%] w-full xl:w-[65%] flex flex-col">
+        <CardHeader>
+          <CardTitle>Active Jobs</CardTitle>
+          <CardDescription>Today's workload</CardDescription>
+        </CardHeader>
+        <Separator />
+        <CardContent className="p-0 w-full flex-grow overflow-y-auto">
+          <ActiveJobTabs />
+        </CardContent>
+      </Card>
+      <Card className="h-fit w-full xl:w-[35%] xl:max-w-[750px] flex-shrink ">
+        <CardHeader>
+          <CardTitle>Forums</CardTitle>
+          <CardDescription>7 currently active forums</CardDescription>
+        </CardHeader>
+        <Separator />
+        <CardContent className="p-0 h-full h-[400px] flex flex-col overflow-y-auto">
+          {fakeForumData.map((forum, idx) => {
+            return (
+              <div key={idx}>
+                <MiniForumTab className="px-6 py-4 " {...forum} />
+                <Separator />
               </div>
-            </CardTitle>
-            <CardDescription>
-              {fakeForumData.length}&nbsp;currently active forums
-            </CardDescription>
-          </CardHeader>
-          <Separator />
-          <CardContent className="flex flex-col xl:max-h-[500px] max-h-[600px] cursor-pointer p-0 overflow-scroll">
-            {fakeForumData.map((data) => {
-              return (
-                <div key={data.id}>
-                  <MiniForumTab {...data} className="p-6 px-8 " />
-                  <Separator />
-                </div>
-              );
-            })}
-          </CardContent>
-        </Card>
-      </section>
-    </div>
+            );
+          })}
+        </CardContent>
+      </Card>
+    </section>
   );
 };
 

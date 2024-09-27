@@ -48,7 +48,6 @@ const NavBar = () => {
                 <Button
                   disabled={logoutPending}
                   variant="ghost"
-                  className=""
                   onClick={handleLogout}
                 >
                   Sign Out

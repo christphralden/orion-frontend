@@ -1,4 +1,3 @@
-import { Separator } from "@components/ui/separator";
 import {
   Table,
   TableBody,
@@ -37,17 +36,6 @@ const ActiveJobTabs = ({ className }: { className?: string }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {activeJobs?.data.map((job: IJob, index: number) => (
-          <TableRow className="whitespace-nowrap" key={index}>
-            <TableCell className="font-medium px-10">{job.job}</TableCell>
-            <TableCell>{job.course_name}</TableCell>
-            <TableCell>{job.start_date}</TableCell>
-            <TableCell>{job.end_date}</TableCell>
-            <TableCell className="text-right px-10 tabular-nums">
-              {job.revision_count}
-            </TableCell>
-          </TableRow>
-        ))}
         {activeJobs?.data.map((job: IJob, index: number) => (
           <TableRow className="whitespace-nowrap" key={index}>
             <TableCell className="font-medium px-10">{job.job}</TableCell>

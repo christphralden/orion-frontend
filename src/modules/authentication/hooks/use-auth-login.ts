@@ -19,7 +19,7 @@ import { IUserSchema } from "@core/schema/user.schema";
 import { ZodError } from "zod";
 import { useAuthActions } from "@authentication/store/auth-store";
 
-export function useAuthLogin() {
+function useAuthLogin() {
   const { setUser } = useAuthActions();
 
   const mutationFn = async (authRequest: AuthRequest) => {
@@ -65,3 +65,5 @@ export function useAuthLogin() {
     handleLogin,
   };
 }
+
+export { useAuthLogin };

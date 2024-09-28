@@ -98,20 +98,29 @@ const authActionSelector = (state: ExtractState<typeof authStore>) =>
   state.actions;
 
 // Getters
-export const getIsAuthenticated = () =>
-  isAuthenticatedSelector(authStore.getState());
-export const getUser = () => userSelector(authStore.getState());
-export const getAuthLoading = () => authLoadingSelector(authStore.getState());
-export const getAuthActions = () => authActionSelector(authStore.getState());
+const getIsAuthenticated = () => isAuthenticatedSelector(authStore.getState());
+const getUser = () => userSelector(authStore.getState());
+const getAuthLoading = () => authLoadingSelector(authStore.getState());
+const getAuthActions = () => authActionSelector(authStore.getState());
 
 function useAuthStore<U>(selector: Params<U>[1]) {
   return useStore(authStore, selector);
 }
 
 // Hooks
-export const useIsAuthenticated = () => useAuthStore(isAuthenticatedSelector);
-export const useUser = () => useAuthStore(userSelector);
-export const useAuthLoading = () => useAuthStore(authLoadingSelector);
-export const useAuthActions = () => useAuthStore(authActionSelector);
+const useIsAuthenticated = () => useAuthStore(isAuthenticatedSelector);
+const useUser = () => useAuthStore(userSelector);
+const useAuthLoading = () => useAuthStore(authLoadingSelector);
+const useAuthActions = () => useAuthStore(authActionSelector);
 
-export { useAuthStore };
+export {
+  useAuthStore,
+  getIsAuthenticated,
+  getUser,
+  getAuthLoading,
+  getAuthActions,
+  useIsAuthenticated,
+  useUser,
+  useAuthLoading,
+  useAuthActions,
+};

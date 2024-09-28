@@ -1,6 +1,6 @@
 import { JobList } from "@job/types/job.types";
 
-export const fakeForumData = [
+const fakeForumData = [
   {
     id: 1,
     jobType: "Correction" as JobList,
@@ -29,7 +29,7 @@ export const fakeForumData = [
   },
   {
     id: 3,
-    jobType: "Casemaking" as JobList,
+    jobType: "Case Making" as JobList,
     name: "Computational Cooking",
     subco: "WB23-1",
     participantCount: 12,
@@ -80,3 +80,5 @@ export const fakeForumData = [
     },
   },
 ];
+
+export { fakeForumData };

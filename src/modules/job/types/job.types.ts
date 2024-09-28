@@ -16,7 +16,7 @@ interface IJob {
   user: UserString;
   subco: UserString;
   class: string;
-  job: string;
+  job: JobList;
   type: string;
   start_date: string;
   end_date: string;

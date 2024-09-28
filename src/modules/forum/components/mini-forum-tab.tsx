@@ -41,7 +41,9 @@ const MiniForumTab = ({
             className="w-2 h-2 rounded-full"
             style={{ backgroundColor: color }}
           />
-          <p className="text-xs font-medium text-gray-500">{jobType}</p>
+          <p className="text-xs font-medium text-gray-500 text-nowrap">
+            {jobType}
+          </p>
         </div>
         <div className="flex text-gray-500 text-sm w-full justify-end gap-4">
           <p>{subco}</p>

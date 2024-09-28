@@ -12,8 +12,8 @@ import ActiveJobTabs from "@job/components/active-jobs-tabs";
 
 const Home = () => {
   return (
-    <section className="flex w-full justify-between gap-10 h-full flex-col xl:flex-row relative">
-      <Card className="h-[90%] w-full xl:w-[65%] flex flex-col">
+    <section className="flex w-full justify-between gap-6 xl:gap-12 h-full flex-col xl:flex-row relative">
+      <Card className="h-[100%] w-full xl:w-[65%] flex flex-col">
         <CardHeader>
           <CardTitle>Active Jobs</CardTitle>
           <CardDescription>Today's workload</CardDescription>

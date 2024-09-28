@@ -3,8 +3,10 @@ import { Command } from "cmdk";
 import { cn } from "@utils/utils";
 import "@search/style/cmdk.css";
 import { IoIosSearch } from "react-icons/io";
-import { JOBS } from "@job/constants/job.constant";
 import { COLORS } from "@constants/colors.constant";
+import { useAssistantActiveJobs } from "@job/hooks/use-assistant-active-jobs";
+import { IJob, JobList } from "@job/types/job.types";
+import { groupByJob } from "@job/utils/job-parse";
 
 const cmdkVariants = {
   dialog:
@@ -13,75 +15,62 @@ const cmdkVariants = {
   list: "p-4 overflow-y-scroll pt-0",
   group: "my-2 text-xs text-gray-300 font-normal ",
   item: "text-sm p-2 text-gray-100 hover:bg-gray-200/10 rounded-md transition-color duration-300 ease-in-out flex gap-2 items-center",
-  empty: "text-sm",
+  empty: "text-sm w-full flex justify-center items-center p-8",
 };
 
 const PLACEHOLDER_TEXT = "Search for Jobs, Forums, and others";
 
-const fakeCorrectionData = [
-  {
-    type: "Correction",
-    subject: "Computational Basket",
-    classCode: "BE01",
-    startDate: "06/09/2024",
-    endDate: "27/09/2024",
-    revision: "0",
+const JobItems = memo(
+  ({ groupedJobs }: { groupedJobs: Record<string, IJob[]> }) => {
+    return Object.entries(groupedJobs).map(([jobType, jobs]) => {
+      const color = COLORS[jobType as JobList];
+      return (
+        <Command.Group
+          heading={jobType}
+          key={jobType}
+          className={cn(cmdkVariants.group)}
+        >
+          {jobs.map((job, index) => (
+            <Command.Item key={index} className={cn(cmdkVariants.item)}>
+              <div
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: color }}
+              />
+              <span>
+                {job.course_name} - {job.type}
+              </span>
+            </Command.Item>
+          ))}
+        </Command.Group>
+      );
+    });
   },
-  {
-    type: "Correction",
-    subject: "Competitive Brainrot",
-    classCode: "BY02",
-    startDate: "06/09/2024",
-    endDate: "27/09/2024",
-    revision: "0",
-  },
-  {
-    type: "Correction",
-    subject: "PopularMMOs Network",
-    classCode: "BX01",
-    startDate: "06/09/2024",
-    endDate: "27/09/2024",
-    revision: "0",
-  },
-];
+);
 
-const CorrectionItems = memo(() => {
-  return fakeCorrectionData.map((correction) => {
-    const color = COLORS["Correction"];
+const CmdKIcon = () => {
+  const key = useMemo(() => {
+    return window.navigator.platform.includes("Mac") ? "⌘" : "Ctrl"; // WARN: might be deprecated but still works
+  }, []);
 
-    return (
-      <Command.Item key={correction.subject} className={cn(cmdkVariants.item)}>
-        <div
-          className="w-2 h-2 rounded-full"
-          style={{ backgroundColor: color }}
-        />
-        <span>
-          {correction.subject}
-          {correction.classCode && <span>{` - ${correction.classCode}`}</span>}
-        </span>
-      </Command.Item>
-    );
-  });
-});
-
-const JobItems = memo(() => {
-  return JOBS.map((job) => {
-    const color = COLORS[job];
-
-    return (
-      <Command.Item key={job} className={cn(cmdkVariants.item)}>
-        <div
-          className="w-2 h-2 rounded-full"
-          style={{ backgroundColor: color }}
-        />
-        <span>{job}</span>
-      </Command.Item>
-    );
-  });
-});
+  return (
+    <>
+      <div className="rounded-md bg-gray-200/10 py-1 px-2 w-fit">
+        <span>{key}</span>
+      </div>
+      <div className="rounded-md bg-gray-200/10 py-1 px-2 w-fit">
+        <span>K</span>
+      </div>
+    </>
+  );
+};
 
 const CommandSearch = () => {
   const [open, setOpen] = useState(false);
+
+  const { data: activeJobs, isPending: activeJobsLoading } =
+    useAssistantActiveJobs({
+      semester_id: "a7ff28f1-bd85-410b-b222-a29c619068fa",
+    });
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -95,9 +84,12 @@ const CommandSearch = () => {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
-  const key = useMemo(() => {
-    return window.navigator.platform.includes("Mac") ? "⌘" : "Ctrl";
-  }, []);
+  const groupedJobs = useMemo(() => {
+    if (activeJobs && activeJobs.data) {
+      return groupByJob(activeJobs.data);
+    }
+    return {};
+  }, [activeJobs]);
 
   return (
     <Command.Dialog
@@ -116,25 +108,23 @@ const CommandSearch = () => {
       </div>
       <Command.List className={cn(cmdkVariants.list)}>
         <Command.Empty className={cmdkVariants.empty}>
-          No results found.
+          <p className="text-center">
+            {activeJobsLoading ? (
+              <span>Fetching active jobs</span>
+            ) : (
+              <span>No results found.</span>
+            )}
+          </p>
         </Command.Empty>
 
-        <Command.Group heading="Jobs" className={cn(cmdkVariants.group)}>
-          <JobItems />
-        </Command.Group>
-        <Command.Group heading="Correction" className={cn(cmdkVariants.group)}>
-          <CorrectionItems />
-        </Command.Group>
+        {Object.keys(groupedJobs).length > 0 && (
+          <JobItems groupedJobs={groupedJobs} />
+        )}
       </Command.List>
       <div className="w-full flex justify-end p-2 text-xs">
         <section className="flex gap-2 items-center font-normal">
           <p className="text-gray-300">Actions:</p>
-          <div className="rounded-md bg-gray-200/10 py-1 px-2 w-fit">
-            <span>{key}</span>
-          </div>
-          <div className="rounded-md bg-gray-200/10 py-1 px-2 w-fit">
-            <span>K</span>
-          </div>
+          <CmdKIcon />
         </section>
       </div>
     </Command.Dialog>
@@ -142,3 +132,4 @@ const CommandSearch = () => {
 };
 
 export default CommandSearch;
+export { CmdKIcon };

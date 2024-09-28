@@ -31,13 +31,18 @@ const JobItems = memo(
           className={cn(cmdkVariants.group)}
         >
           {jobs.map((job, index) => (
-            <Command.Item key={index} className={cn(cmdkVariants.item)}>
+            <Command.Item
+              key={index}
+              className={cn(cmdkVariants.item)}
+              value={`${job.course_name} ${job.class} ${job.type}`}
+              keywords={[jobType]}
+            >
               <div
                 className="w-2 h-2 rounded-full"
                 style={{ backgroundColor: color }}
               />
               <span>
-                {job.course_name} - {job.type}
+                {job.course_name} - {job.class} - {job.type}
               </span>
             </Command.Item>
           ))}
@@ -46,7 +51,6 @@ const JobItems = memo(
     });
   },
 );
-
 const CmdKIcon = () => {
   const key = useMemo(() => {
     return window.navigator.platform.includes("Mac") ? "⌘" : "Ctrl"; // WARN: might be deprecated but still works
@@ -97,6 +101,14 @@ const CommandSearch = () => {
       open={open}
       onOpenChange={setOpen}
       label="Global Command Menu"
+      filter={(value, search, keywords) => {
+        // Extend value with keywords (which include group name)
+        const extendedValue = value + " " + keywords?.join(" ");
+        return extendedValue.toLowerCase().includes(search.toLowerCase())
+          ? 1
+          : 0;
+      }}
+      shouldFilter={true} // Enable custom filtering
     >
       <div className="flex justify-start items-center p-4 gap-2">
         <IoIosSearch size="1.25rem" color="#d1d5db" />

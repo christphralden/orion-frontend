@@ -8,7 +8,7 @@ const MainLayout = ({ className }: { className?: string }) => {
   return (
     <GenericLayout className={className}>
       <CommandSearch />
-      <div className="flex w-[90%] 2xl:w-[80%] h-full justify-start flex-col pb-20 ">
+      <div className="flex w-[90%] h-full justify-start flex-col pb-20 ">
         <NavBar />
         <Outlet />
       </div>

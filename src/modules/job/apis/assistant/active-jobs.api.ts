@@ -5,18 +5,18 @@ import { API_ENDPOINTS } from "@constants/api-endpoints.constant";
 import { IJob } from "@job/types/job.types";
 
 type AssistantActiveJobsRequest = {
-  semester_id: string;
+  semesterId: string;
   username: string;
 };
 
 async function getAssistantActiveJobs({
-  semester_id,
+  semesterId,
   username,
 }: AssistantActiveJobsRequest) {
   const res = await apiClient.get<IResponse<IJob[]>>({
     url: API_ENDPOINTS.JOB.ASSISTANT.ACTIVE,
     params: {
-      semester_id: semester_id,
+      semesterId: semesterId,
       username: username,
     },
     options: {

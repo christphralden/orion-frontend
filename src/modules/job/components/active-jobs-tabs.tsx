@@ -14,7 +14,7 @@ import { Loader } from "lucide-react";
 const ActiveJobTabs = ({ className }: { className?: string }) => {
   const { data: activeJobs, isPending: activeJobsLoading } =
     useAssistantActiveJobs({
-      semester_id: "a7ff28f1-bd85-410b-b222-a29c619068fa",
+      semesterId: "a7ff28f1-bd85-410b-b222-a29c619068fa",
     });
 
   if (activeJobsLoading)

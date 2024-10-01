@@ -14,7 +14,7 @@ import { useCallback, useMemo } from "react";
 
 /*
   Params:
-    semester_id:
+    semester_id: (be using snake_case)
       when not given a semester_id, it will default to the current semester
       when given a semester_id, it will query said semester_id
     username: 
@@ -22,7 +22,7 @@ import { useCallback, useMemo } from "react";
       when given a username, it will query said users active jobs
 */
 
-export function useAssistantActiveJobs({
+function useAssistantActiveJobs({
   semester_id,
   username,
 }: Partial<AssistantActiveJobsRequest>) {
@@ -56,3 +56,5 @@ export function useAssistantActiveJobs({
 
   return query;
 }
+
+export { useAssistantActiveJobs };

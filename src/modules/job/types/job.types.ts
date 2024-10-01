@@ -5,26 +5,26 @@ type JobList = (typeof JOBS)[number];
 type JobStatus = (typeof JOB_STATUS)[number];
 
 type QueueTransaction = {
-  submit_date: string;
-  return_date: string;
-  is_revision: boolean;
+  submitDate: string;
+  returnDate: string;
+  isRevision: boolean;
 };
 
 interface IJob {
-  course_code: string;
-  course_name: string;
+  courseCode: string;
+  courseName: string;
   user: UserString;
   subco: UserString;
   class: string;
-  job: string;
+  job: JobList;
   type: string;
-  start_date: string;
-  end_date: string;
-  revision_count: number;
+  startDate: string;
+  endDate: string;
+  revisionCount: number;
   weight: number;
   number: number | string;
   status: JobStatus;
-  queue_transactions: QueueTransaction[];
+  queueTransactions: QueueTransaction[];
 }
 
 export type { IJob, QueueTransaction };

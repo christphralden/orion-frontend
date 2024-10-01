@@ -12,7 +12,7 @@ import { MESSAGES } from "@constants/messages.constant";
 
 import { useAuthActions } from "@authentication/store/auth-store";
 
-export function useAuthLogout() {
+function useAuthLogout() {
   const { clearAuthState } = useAuthActions();
 
   const mutationFn = async () => {
@@ -44,3 +44,5 @@ export function useAuthLogout() {
     handleLogout,
   };
 }
+
+export { useAuthLogout };

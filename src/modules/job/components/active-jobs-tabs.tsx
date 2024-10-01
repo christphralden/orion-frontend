@@ -44,11 +44,11 @@ const ActiveJobTabs = ({ className }: { className?: string }) => {
             <TableCell className="font-medium px-8">{job.job}</TableCell>
             <TableCell>{job.type}</TableCell>
             <TableCell>{job.class}</TableCell>
-            <TableCell>{job.course_name}</TableCell>
-            <TableCell>{job.start_date}</TableCell>
-            <TableCell>{job.end_date}</TableCell>
+            <TableCell>{job.courseName}</TableCell>
+            <TableCell>{job.startDate}</TableCell>
+            <TableCell>{job.endDate}</TableCell>
             <TableCell className="text-right px-10 tabular-nums">
-              {job.revision_count}
+              {job.revisionCount}
             </TableCell>
           </TableRow>
         ))}

@@ -14,7 +14,7 @@ import { useCallback, useMemo } from "react";
 
 /*
   Params:
-    semester_id:
+    semester_id: (be using snake_case)
       when not given a semester_id, it will default to the current semester
       when given a semester_id, it will query said semester_id
     username: 

@@ -78,9 +78,6 @@ const MiniForumTab = ({
                 <span>{unreadMessages}</span>
               </div>
             )}
-            <p className="whitespace-nowrap text-gray-500 text-sm w-fit">
-              {lastMessage.time}&nbsp;
-            </p>
           </div>
         </div>
       </section>

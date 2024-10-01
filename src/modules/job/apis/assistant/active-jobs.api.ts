@@ -5,7 +5,7 @@ import { API_ENDPOINTS } from "@constants/api-endpoints.constant";
 import { IJob } from "@job/types/job.types";
 
 type AssistantActiveJobsRequest = {
-  semester_id: string; //TODO: change
+  semester_id: string;
   username: string;
 };
 

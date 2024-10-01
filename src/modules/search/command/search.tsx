@@ -34,7 +34,7 @@ const JobItems = memo(
             <Command.Item
               key={index}
               className={cn(cmdkVariants.item)}
-              value={`${job.course_name} ${job.class} ${job.type}`}
+              value={`${job.courseName} ${job.class} ${job.type}`}
               keywords={[jobType]}
             >
               <div
@@ -42,7 +42,7 @@ const JobItems = memo(
                 style={{ backgroundColor: color }}
               />
               <span>
-                {job.course_name} - {job.class} - {job.type}
+                {job.courseName} - {job.class} - {job.type}
               </span>
             </Command.Item>
           ))}

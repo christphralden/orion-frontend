@@ -31,7 +31,6 @@ const ActiveJobTabs = ({ className }: { className?: string }) => {
           <TableHead className="px-8">Job</TableHead>
           <TableHead className="">Type</TableHead>
           <TableHead className="">Class</TableHead>
-
           <TableHead>Subject</TableHead>
           <TableHead>Start Date</TableHead>
           <TableHead>End Date</TableHead>

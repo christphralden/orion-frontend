@@ -14,10 +14,10 @@ import { useCallback, useMemo } from "react";
 
 /*
   Params:
-    semesterId: 
+    semesterId:
       when not given a semesterId, it will default to the current semester
       when given a semesterId, it will query said semesterId
-    username: 
+    username:
       when not given a username, it will default to current user
       when given a username, it will query said users active jobs
 */
@@ -29,7 +29,7 @@ function useAssistantActiveJobs({
   const user = getUser(); // UNSTABLE
 
   const finalUsername = useMemo(
-    () => user?.username ?? username,
+    () => username ?? user?.username,
     [user?.username, username],
   );
 
@@ -37,24 +37,22 @@ function useAssistantActiveJobs({
     if (!semesterId || !finalUsername) {
       throw new UnauthorizedError();
     }
-    return await getAssistantActiveJobs({
+    return getAssistantActiveJobs({
       semesterId,
       username: finalUsername,
     });
   }, [semesterId, finalUsername]);
 
-  const query = useQuery<IResponse<IJob[]>, HTTPError>({
+  return useQuery<IResponse<IJob[]>, HTTPError>({
     queryKey: [
       QUERY_KEYS.JOB.ASSISTANT.ACTIVE,
       { semesterId, username: finalUsername },
     ],
     queryFn,
-    enabled: !!finalUsername && !!semesterId,
+    enabled: Boolean(finalUsername && semesterId),
     retry: 1,
     refetchOnMount: true,
   });
-
-  return query;
 }
 
 export { useAssistantActiveJobs };

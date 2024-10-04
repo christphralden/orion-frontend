@@ -13,13 +13,13 @@ import ActiveJobTabs from "@job/components/active-jobs-tabs";
 const Home = () => {
   return (
     <section className="flex w-full justify-between gap-6 xl:gap-12 h-full flex-col xl:flex-row relative">
-      <Card className="h-[100%] w-full xl:w-[65%] flex flex-col">
+      <Card className="h-full w-full xl:w-[65%] flex flex-col flex-1">
         <CardHeader>
           <CardTitle>Active Jobs</CardTitle>
           <CardDescription>Today's workload</CardDescription>
         </CardHeader>
         <Separator />
-        <CardContent className="p-0 w-full flex-grow overflow-y-auto">
+        <CardContent className="p-0 w-full flex-grow overflow-y-auto h-1 min-h-[75vh]">
           <ActiveJobTabs />
         </CardContent>
       </Card>
@@ -29,7 +29,7 @@ const Home = () => {
           <CardDescription>7 currently active forums</CardDescription>
         </CardHeader>
         <Separator />
-        <CardContent className="p-0 h-full h-[400px] flex flex-col overflow-y-auto">
+        <CardContent className="p-0 h-full min-h-[75vh] xl:min-h-[50vh] xl:h-[50vh] flex flex-col overflow-y-auto">
           {fakeForumData.map((forum, idx) => {
             return (
               <div key={idx}>

@@ -25,7 +25,9 @@ const ActiveJobTabs = ({ className }: { className?: string }) => {
     );
 
   return (
-    <Table className={cn("table-auto w-full", className)}>
+    <Table
+      className={cn("table-auto w-full h-fit overflow-y-auto ", className)}
+    >
       <TableHeader className="sticky top-0 bg-white z-10">
         <TableRow className="whitespace-nowrap">
           <TableHead className="px-8">Job</TableHead>

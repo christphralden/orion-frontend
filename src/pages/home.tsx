@@ -8,7 +8,7 @@ import {
 import { Separator } from "@components/ui/separator";
 import { fakeForumData } from "@forum/constants/forum-faker.constant";
 import MiniForumTab from "@forum/components/mini-forum-tab";
-import ActiveJobTabs from "@job/components/active-jobs-tabs";
+import ActiveJobsTable from "@job/components/active-jobs-table";
 
 const Home = () => {
   return (
@@ -20,7 +20,7 @@ const Home = () => {
         </CardHeader>
         <Separator />
         <CardContent className="p-0 w-full flex-grow overflow-y-auto h-1 min-h-[75vh]">
-          <ActiveJobTabs />
+          <ActiveJobsTable />
         </CardContent>
       </Card>
       <Card className="h-fit w-full xl:w-[35%] xl:max-w-[750px] flex-shrink ">

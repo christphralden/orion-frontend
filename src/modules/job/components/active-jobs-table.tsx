@@ -1,3 +1,4 @@
+import { useMetadata } from "@authentication/store/auth-store";
 import {
   Table,
   TableBody,
@@ -7,15 +8,28 @@ import {
   TableRow,
 } from "@components/ui/table";
 import { useAssistantActiveJobs } from "@job/hooks/use-assistant-active-jobs";
-import { IJob } from "@job/types/job.types";
+import { IJob, JobFilters } from "@job/types/job.types";
 import { cn } from "@utils/utils";
 import { Loader } from "lucide-react";
 
-const ActiveJobTabs = ({ className }: { className?: string }) => {
-  const { data: activeJobs, isPending: activeJobsLoading } =
-    useAssistantActiveJobs({
-      semesterId: "a7ff28f1-bd85-410b-b222-a29c619068fa",
-    });
+const ActiveJobsTable = ({
+  className,
+  filters,
+}: {
+  className?: string;
+  filters?: JobFilters;
+}) => {
+  const metadata = useMetadata();
+
+  const semesterId = metadata?.semester?.semesterId;
+
+  const { data: activeJobs, isLoading: activeJobsLoading } =
+    useAssistantActiveJobs(
+      {
+        semesterId,
+      },
+      filters,
+    );
 
   if (activeJobsLoading)
     return (
@@ -44,7 +58,13 @@ const ActiveJobTabs = ({ className }: { className?: string }) => {
           <TableRow className="whitespace-nowrap" key={index}>
             <TableCell className="font-medium px-8">{job.job}</TableCell>
             <TableCell>{job.type}</TableCell>
-            <TableCell>{job.class}</TableCell>
+            <TableCell>
+              {job.job == "Correction" ? (
+                <span>{job.class}</span>
+              ) : (
+                <span>-</span>
+              )}
+            </TableCell>
             <TableCell>{job.courseName}</TableCell>
             <TableCell>{job.startDate}</TableCell>
             <TableCell>{job.endDate}</TableCell>
@@ -57,4 +77,4 @@ const ActiveJobTabs = ({ className }: { className?: string }) => {
     </Table>
   );
 };
-export default ActiveJobTabs;
+export default ActiveJobsTable;

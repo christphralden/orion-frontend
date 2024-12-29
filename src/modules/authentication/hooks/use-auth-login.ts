@@ -15,19 +15,17 @@ import {
 import { ToastError, ToastSuccess } from "@components/toast/toast";
 import { MESSAGES } from "@constants/messages.constant";
 
-import { IUserSchema } from "@core/schema/user.schema";
 import { ZodError } from "zod";
 import { useAuthActions } from "@authentication/store/auth-store";
 
 function useAuthLogin() {
-  const { setUser } = useAuthActions();
+  const { init } = useAuthActions();
 
   const mutationFn = async (authRequest: AuthRequest) => {
     const res = await postAuthLogin(authRequest);
 
     if (res.status) {
-      const user: IUser = IUserSchema.parse(res.data);
-      setUser(user);
+      init();
     } else {
       throw new UnauthorizedError();
     }

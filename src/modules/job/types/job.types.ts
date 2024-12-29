@@ -27,5 +27,15 @@ interface IJob {
   queueTransactions: QueueTransaction[];
 }
 
-export type { IJob, QueueTransaction };
+interface JobFilters {
+  courseCode?: string;
+  courseName?: string;
+  job?: JobList;
+  jobType?: string;
+  status?: string;
+  startDateFrom?: string; // YYYY-MM-DD
+  startDateTo?: string; // YYYY-MM-DD
+}
+
+export type { IJob, QueueTransaction, JobFilters };
 export type { JobList, JobStatus };

@@ -7,52 +7,99 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
-import { navigationMenuTriggerStyle } from "../ui/navigation-menu";
 import { Button } from "@components/ui/button";
 import { useAuthLogout } from "@authentication/hooks/use-auth-logout";
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
+const primaryMenuItems = [
+  {
+    label: "Home",
+    link: "/",
+  },
+  {
+    label: "Correction",
+    subMenu: [
+      {
+        title: "Correction List",
+        description: "View a list of corrections",
+        link: "/correction/list",
+      },
+      {
+        title: "Correction Groups",
+        description: "View assigend correction groups",
+        link: "/correction/groups",
+      },
+    ],
+  },
+  {
+    label: "Case Making",
+    link: "/case-making",
+  },
+];
 
 const NavBar = () => {
   const user = useUser();
   const { handleLogout, isPending: logoutPending } = useAuthLogout();
 
   return (
-    <div className="cursor-pointer flex items-center w-full justify-between py-4 lg:py-8">
+    <div className="cursor-pointer flex items-center w-full justify-between py-4 lg:py-8 ">
       <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Case Making</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <NavigationMenuLink>Link</NavigationMenuLink>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Correction
-            </NavigationMenuLink>
-          </NavigationMenuItem>
+        <NavigationMenuList className="gap-8">
+          {primaryMenuItems.map((item, index) => (
+            <NavigationMenuItem key={index}>
+              {item.subMenu ? (
+                <>
+                  <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
+                  <NavigationMenuContent className="relative p-2">
+                    <ul className="grid w-[400px] gap-4 md:w-[500px] md:grid-cols-2">
+                      {item.subMenu.map((subItem, subIndex) => (
+                        <li
+                          key={subIndex}
+                          className="text-sm hover:bg-accent duration-500 p-4 rounded-sm"
+                        >
+                          <Link to={subItem.link}>
+                            <p className="font-medium">{subItem.title}</p>
+                            <p className="text-muted-foreground">
+                              {subItem.description}
+                            </p>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </>
+              ) : (
+                <Link to={item.link}>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    {item.label}
+                  </NavigationMenuLink>
+                </Link>
+              )}
+            </NavigationMenuItem>
+          ))}
         </NavigationMenuList>
       </NavigationMenu>
+
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <NavigationMenuLink>
               <FaSearch />
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger>{user?.username}</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="flex p-2">
-                <Button
-                  disabled={logoutPending}
-                  variant="ghost"
-                  onClick={handleLogout}
-                >
-                  Sign Out
-                </Button>
-              </div>
+              <Button
+                disabled={logoutPending}
+                variant="ghost"
+                className={navigationMenuTriggerStyle()}
+                onClick={handleLogout}
+              >
+                Sign Out
+              </Button>
             </NavigationMenuContent>
           </NavigationMenuItem>
         </NavigationMenuList>

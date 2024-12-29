@@ -30,27 +30,38 @@ const JobItems = memo(
           key={jobType}
           className={cn(cmdkVariants.group)}
         >
-          {jobs.map((job, index) => (
-            <Command.Item
-              key={index}
-              className={cn(cmdkVariants.item)}
-              value={`${job.courseName} ${job.class} ${job.type}`}
-              keywords={[jobType]}
-            >
-              <div
-                className="w-2 h-2 rounded-full"
-                style={{ backgroundColor: color }}
-              />
-              <span>
-                {job.courseName} - {job.class} - {job.type}
-              </span>
-            </Command.Item>
-          ))}
+          {jobs.map((job, index) => {
+            const displayText = (
+              <>
+                <span>{job.courseName}</span>
+                {job.job === "Correction" && (
+                  <span>&nbsp;-&nbsp;{job.class}</span>
+                )}
+                <span>&nbsp;-&nbsp;{job.type}</span>
+              </>
+            );
+
+            return (
+              <Command.Item
+                key={index}
+                className={cn(cmdkVariants.item)}
+                value={`${job.courseName} ${job.class} ${job.type}`}
+                keywords={[jobType]}
+              >
+                <div
+                  className="w-2 h-2 rounded-full"
+                  style={{ backgroundColor: color }}
+                />
+                <span>{displayText}</span>
+              </Command.Item>
+            );
+          })}
         </Command.Group>
       );
     });
   },
 );
+
 const CmdKIcon = () => {
   const key = useMemo(() => {
     return window.navigator.platform.includes("Mac") ? "⌘" : "Ctrl"; // WARN: might be deprecated but still works

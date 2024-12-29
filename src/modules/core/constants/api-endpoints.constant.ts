@@ -9,11 +9,16 @@ const API_ENDPOINTS = {
       ACTIVE: "job/assistant/active",
     },
   },
+  SEMESTER: {
+    ALL: "semester/all",
+    ACTIVE: "semester/active",
+  },
 } as const;
 
 type AuthEndpoints = typeof API_ENDPOINTS.AUTH;
 type JobEnpoints = typeof API_ENDPOINTS.JOB;
+type SemesterEndpoints = typeof API_ENDPOINTS.SEMESTER;
 type ApiEndpoints = typeof API_ENDPOINTS;
 
 export { API_ENDPOINTS };
-export type { ApiEndpoints, AuthEndpoints, JobEnpoints };
+export type { ApiEndpoints, AuthEndpoints, JobEnpoints, SemesterEndpoints };

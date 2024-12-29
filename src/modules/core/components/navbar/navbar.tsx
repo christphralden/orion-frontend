@@ -23,12 +23,12 @@ const primaryMenuItems = [
     subMenu: [
       {
         title: "Correction List",
-        description: "View a list of corrections",
+        description: "View a list of active corrections",
         link: "/correction/list",
       },
       {
         title: "Correction Groups",
-        description: "View assigend correction groups",
+        description: "View assigned correction groups",
         link: "/correction/groups",
       },
     ],

@@ -8,6 +8,12 @@ const API_ENDPOINTS = {
     ASSISTANT: {
       ACTIVE: "job/assistant/active",
     },
+    SUBCO: {
+      ASSIGN_OR_SYNC_GROUPS: "group/assign/",
+      CORRECTION: {
+        GROUP: "group/corrections",
+      },
+    },
   },
   SEMESTER: {
     ALL: "semester/all",

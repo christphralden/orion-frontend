@@ -61,7 +61,6 @@ class APIClient {
   }: {
     url: string;
     data?: Data;
-    params?: Record<string, string>;
     options?: RequestInit;
   }) {
     return this.request<Response>({

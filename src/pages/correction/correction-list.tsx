@@ -13,7 +13,7 @@ const CorrectionList = () => {
     <div className="h-full">
       <Card className="w-full flex flex-col flex-1">
         <CardHeader>
-          <CardTitle>Correction List</CardTitle>
+          <CardTitle>My Correction List</CardTitle>
           <CardDescription className="flex">
             Today's workload filtered by corrections
           </CardDescription>

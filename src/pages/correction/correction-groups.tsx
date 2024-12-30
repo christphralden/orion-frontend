@@ -5,58 +5,60 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardContent,
 } from "@components/ui/card";
+import CorrectionGroupsGrid from "@job/components/correction-groups-grid";
+
 import { useGroup } from "@job/hooks/use-group";
-import { MESSAGES } from "@constants/messages.constant";
-import Loader from "@components/fallbacks/loader";
+import { Loader } from "lucide-react";
+import { useEffect } from "react";
 
 const CorrectionGroups = () => {
-  const { assignOrSyncGroups, getCorrection: getCorrectionGroups } = useGroup();
+  const { assignOrSyncGroups } = useGroup();
 
-  const { mutate } = assignOrSyncGroups;
-
+  console.log("correction master");
   const {
-    data: correctionGroups,
-    isLoading: correctionGroupsLoading,
-    isError,
-  } = getCorrectionGroups();
+    mutate: handleAssignOrSyncGroups,
+    isPending: assignPending,
+    isError: assignError,
+    error,
+  } = assignOrSyncGroups;
 
-  // if (isError) {
-  //   ToastError({ message: MESSAGES.GENERIC.UNHANDLED });
-  // }
+  useEffect(() => {
+    if (assignError) {
+      ToastError({ message: error.message });
+    }
+  }, [assignError, error]);
 
-  if (correctionGroupsLoading) {
-    <div className="w-full h-full p-20 flex justify-center items-center">
-      <Loader />
-    </div>;
-  }
   return (
     <div className="h-full">
       <Card className="w-full h-fit flex flex-col flex-1">
         <CardHeader className="flex flex-row justify-between items-center w-full">
-          <div className="flex flex-col gap-1 ">
+          <div className="flex flex-col gap-1">
             <CardTitle>Correction Groups</CardTitle>
             <CardDescription className="flex">
-              Correction groups
+              A list of correction groups assigned to you.
             </CardDescription>
           </div>
           <div className="w-fit">
             <Button
               onClick={() => {
-                mutate();
+                handleAssignOrSyncGroups();
               }}
               variant="default"
             >
-              Sync groups
+              Sync Groups
             </Button>
           </div>
         </CardHeader>
       </Card>
-      <div>
-        {correctionGroups?.data.map((group) => {
-          <h3>{group.id}</h3>;
-        })}
-      </div>
+      {assignPending ? (
+        <div className="w-full h-fit p-20 flex justify-center items-center">
+          <Loader className="animate-spin text-primary w-8 h-8" />
+        </div>
+      ) : (
+        <CorrectionGroupsGrid />
+      )}
     </div>
   );
 };

@@ -7,6 +7,13 @@ import { postAssignOrSyncGroups } from "@job/apis/subco/group.api";
 import { getCorrectionGroups } from "@job/apis/subco/correction.api";
 import { QUERY_KEYS } from "@constants/query-keys.constant";
 import UnauthorizedError from "@models/errors/unauthorized-error";
+import { IResponseSchema } from "@core/schema/api.schema";
+import { GroupSchema } from "@job/schema/group.schema";
+import { Group } from "@job/types/group.types";
+import { MESSAGES } from "@constants/messages.constant";
+import { z } from "zod";
+import { queryClient } from "@core/configs/react-query";
+import { useCallback } from "react";
 
 function useGroup() {
   const user = getUser();
@@ -27,6 +34,11 @@ function useGroup() {
       });
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.JOB.SUBCO.CORRECTION],
+        refetchType: "all",
+      });
+
       ToastSuccess({
         message: "Groups assigned or synced successfully.",
       });
@@ -36,12 +48,23 @@ function useGroup() {
   const getCorrection = () => {
     if (!user?.username) throw new UnauthorizedError();
     if (!user?.roles.includes("Software Subject Coordinator"))
-      // WARN
-      throw new UnauthorizedError();
+      throw new UnauthorizedError(); // WARN
 
-    return useQuery<IResponse<any>, HTTPError>({
+    const queryFn = useCallback(async () => {
+      const res = await getCorrectionGroups(user.username);
+      const parseResult = await IResponseSchema(
+        z.array(GroupSchema),
+      ).safeParseAsync(res);
+
+      if (!parseResult.success) {
+        throw new Error(MESSAGES.SCHEMA.ERROR);
+      }
+      return parseResult.data;
+    }, [user.username]);
+
+    return useQuery<IResponse<Group[]>, HTTPError>({
       queryKey: [QUERY_KEYS.JOB.SUBCO.CORRECTION, user.username],
-      queryFn: () => getCorrectionGroups(user.username),
+      queryFn: queryFn,
       enabled: Boolean(user.username),
     });
   };

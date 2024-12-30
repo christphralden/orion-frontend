@@ -1,9 +1,12 @@
 import type { IResponse } from "@core/types/api.types";
 import apiClient from "@core/apis/api-client";
 import { API_ENDPOINTS } from "@constants/api-endpoints.constant";
+import { Group } from "@job/types/group.types";
 
-async function getCorrectionGroups(initial: string): Promise<IResponse<any>> {
-  return apiClient.get<IResponse<any>>({
+async function getCorrectionGroups(
+  initial: string,
+): Promise<IResponse<Group[]>> {
+  return apiClient.get<IResponse<Group[]>>({
     url: API_ENDPOINTS.JOB.SUBCO.CORRECTION.GROUP,
     params: { initial: initial },
     options: {

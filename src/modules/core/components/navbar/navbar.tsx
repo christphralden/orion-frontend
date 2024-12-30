@@ -22,7 +22,7 @@ const primaryMenuItems = [
     label: "Correction",
     subMenu: [
       {
-        title: "Correction List",
+        title: "My Correction List",
         description: "View a list of active corrections",
         link: "/correction/list",
       },

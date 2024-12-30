@@ -1,13 +1,6 @@
 import { ToastError } from "@components/toast/toast";
 import { Button } from "@components/ui/button";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@components/ui/card";
 import CorrectionGroupsGrid from "@job/components/correction-groups-grid";
-
 import { useGroup } from "@job/hooks/use-group";
 import { Loader } from "lucide-react";
 import { useEffect } from "react";

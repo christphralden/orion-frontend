@@ -1,5 +1,4 @@
 import { getUser } from "@authentication/store/auth-store";
-import { Button } from "@components/ui/button";
 import {
   Card,
   CardContent,
@@ -24,9 +23,6 @@ const CaseMakeList = () => {
             <CardDescription className="flex">
               Today's workload filtered by case making
             </CardDescription>
-          </div>
-          <div>
-            <Button variant="default">Sync Group</Button>
           </div>
         </CardHeader>
         <Separator />

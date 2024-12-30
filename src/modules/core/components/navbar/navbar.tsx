@@ -13,7 +13,35 @@ import { Button } from "@components/ui/button";
 import { useAuthLogout } from "@authentication/hooks/use-auth-logout";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-const primaryMenuItems = [
+
+const assistantMenuItems = [
+  {
+    label: "Home",
+    link: "/",
+  },
+  {
+    label: "Correction",
+    subMenu: [
+      {
+        title: "My Correction List",
+        description: "View a list of active corrections",
+        link: "/correction/list",
+      },
+    ],
+  },
+  {
+    label: "Case Making",
+    subMenu: [
+      {
+        title: "Case Making List",
+        description: "View a list of case making",
+        link: "/case-make/list",
+      },
+    ],
+  },
+];
+
+const subcoMenuItems = [
   {
     label: "Home",
     link: "/",
@@ -30,6 +58,7 @@ const primaryMenuItems = [
         title: "Correction Groups",
         description: "View assigned correction groups",
         link: "/correction/groups",
+        role: "Software Subject Coordinator",
       },
     ],
   },
@@ -54,11 +83,16 @@ const NavBar = () => {
   const user = useUser();
   const { handleLogout, isPending: logoutPending } = useAuthLogout();
 
+  // special by VH23-2 & AL23-2, with love. authorization best practices;
+  const menuItems = user?.roles.includes("Software Subject Coordinator")
+    ? subcoMenuItems
+    : assistantMenuItems;
+
   return (
     <div className="cursor-pointer flex items-center w-full justify-between py-4 lg:py-8 ">
       <NavigationMenu>
         <NavigationMenuList className="gap-2 md:gap-8">
-          {primaryMenuItems.map((item, index) => (
+          {menuItems.map((item, index) => (
             <NavigationMenuItem key={index}>
               {item.subMenu ? (
                 <>

@@ -68,7 +68,7 @@ const NewThread = () => {
     });
   };
 
-  if (groupDetailLoading) {
+  if (groupDetailLoading || createNewThreadPending) {
     return (
       <div className="w-full h-fit p-20 flex justify-center items-center">
         <Loader className="animate-spin text-primary w-8 h-8" />
@@ -139,7 +139,7 @@ const NewThread = () => {
                 disabled={createNewThreadPending}
                 className="flex gap-2"
               >
-                {createNewThreadPending ? "Creating..." : "Create Thread"}
+                Create Thread
               </Button>
             </div>
           </form>

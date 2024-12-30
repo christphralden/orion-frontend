@@ -9,7 +9,7 @@ const API_ENDPOINTS = {
       ACTIVE: "job/assistant/active",
       GROUP: "group",
       GET_GROUP_BY_JOB: "group/get-group-from-job",
-      PUT_SUBMISSION_LINK: "group/submit-link"
+      PUT_SUBMISSION_LINK: "group/submit-link",
     },
     SUBCO: {
       ASSIGN_OR_SYNC_GROUPS: "group/assign",
@@ -28,6 +28,10 @@ const API_ENDPOINTS = {
   GROUP: {
     THREAD: {
       CREATE: "group/thread/create",
+      THREAD: "group/thread/",
+      DISCUSSION: {
+        CREATE: "group/thread/discussion/create",
+      },
     },
   },
 } as const;

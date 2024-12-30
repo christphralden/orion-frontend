@@ -1,5 +1,6 @@
 @import url("/styles/typography.css");
 @import url("/styles/custom.css");
+@import url("swiper/swiper-bundle.css");
 
 @tailwind base;
 @tailwind components;

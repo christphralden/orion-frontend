@@ -21,6 +21,7 @@ import { IResponse } from "@core/types/api.types";
 import { API_ENDPOINTS } from "@constants/api-endpoints.constant";
 import apiClient from "@core/apis/api-client";
 import { queryClient } from "@core/configs/react-query";
+import { QUERY_KEYS } from "@constants/query-keys.constant";
 
 const CorrectionDetails = () => {
   const { id } = useParams();
@@ -66,33 +67,37 @@ const CorrectionDetails = () => {
   const groupDetail = data.data;
 
   const handleLinkSubmission = async () => {
-    
     if (!user || !link || !id) {
       return ToastError({ message: "Unauthorized to submit correction link." });
     }
     const initial = user.username;
 
-    const res = await apiClient.put<IResponse<{initial: string, link: string, id : string}>, any>({
-      url: API_ENDPOINTS.JOB.ASSISTANT.PUT_SUBMISSION_LINK,
-      data: {
-        initial,
-        submissionLink: link,
-        groupId: id
-      },
-      options: {
-        credentials: "include",
-      },
-    });
-
-    console.log(res);
+    try {
+      await apiClient.put<
+        IResponse<void>,
+        { initial: string; submissionLink: string; groupId: string }
+      >({
+        url: API_ENDPOINTS.JOB.ASSISTANT.PUT_SUBMISSION_LINK,
+        data: {
+          initial,
+          submissionLink: link,
+          groupId: id,
+        },
+        options: {
+          credentials: "include",
+        },
+      });
+    } catch (err: any) {
+      return ToastError({ message: err.message });
+    }
 
     queryClient.invalidateQueries({
-      queryKey: [API_ENDPOINTS.JOB.ASSISTANT.GROUP],
+      queryKey: [QUERY_KEYS.JOB.SUBCO.CORRECTION],
       refetchType: "all",
-    })
-    
+    });
+
     return ToastSuccess({ message: "Successfully submitted correction link." });
-  }
+  };
   return (
     <div className="h-full flex flex-col gap-4">
       <div className="flex flex-col">
@@ -139,7 +144,9 @@ const CorrectionDetails = () => {
                       }}
                       className="bg-white"
                     />
-                    <Button onClick={handleLinkSubmission} variant="default">Submit Link</Button>
+                    <Button onClick={handleLinkSubmission} variant="default">
+                      Submit Link
+                    </Button>
                   </div>
                 </CardContent>
               </Card>

@@ -18,6 +18,9 @@ const QUERY_KEYS = {
     ALL: "all",
     ACTIVE: "active",
   },
+  GROUP: {
+    THREAD: "thead",
+  },
 };
 
 export { QUERY_KEYS };

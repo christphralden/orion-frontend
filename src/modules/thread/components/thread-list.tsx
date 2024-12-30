@@ -7,8 +7,11 @@ import {
   TableRow,
 } from "@components/ui/table";
 import { GroupThreads } from "@job/types/group.types";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const ThreadsList = ({ threads }: { threads: GroupThreads[] }) => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   // const [filter, setFilter] = useState<"all" | "open" | "closed">("all");
   //
   // const filteredThreads = threads.filter((thread) =>
@@ -30,7 +33,8 @@ export const ThreadsList = ({ threads }: { threads: GroupThreads[] }) => {
             threads.map((thread) => (
               <TableRow
                 key={thread.id}
-                className="hover:bg-gray-50 cursor-pointer "
+                onClick={() => navigate(`/groups/${id}/thread/${thread.id}`)}
+                className="hover:bg-gray-50 cursor-pointer"
               >
                 <TableCell className="px-6">
                   <a

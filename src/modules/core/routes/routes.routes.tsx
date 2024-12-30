@@ -18,6 +18,7 @@ const CorrectionGroups = lazy(
   () => import("@pages/correction/correction-groups"),
 );
 const NewThread = lazy(() => import("@pages/thread/new-thread"));
+const ThreadDetail = lazy(() => import("@pages/thread/thread-detail"));
 
 const router = createBrowserRouter([
   {
@@ -89,6 +90,22 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/groups",
+    element: <MainLayout className="flex justify-center h-fit xl:h-[100vh] " />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: ":id/thread/:threadId",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <ThreadDetail />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+
   {
     path: "/case-make",
     element: <MainLayout className="flex justify-center h-fit xl:h-[100vh] " />,

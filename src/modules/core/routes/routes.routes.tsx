@@ -8,11 +8,10 @@ import AuthLayout from "@authentication/layouts/auth-layout";
 import CaseMakeList from "@pages/case-make/case-make-list";
 import CorrectionDetails from "@pages/correction/correction-details";
 import CasemakingGroups from "@pages/case-make/case-making-groups";
-
+import RIGSubmission from "@pages/rig/rig-submission";
+import RIGGroup from "@pages/rig/rig-group";
 const Login = lazy(() => import("@pages/login"));
 const Home = lazy(() => import("@pages/home"));
-// const ForumDemo = lazy(() => import("@pages/forum-demo"));
-// const ForumDetailDemo = lazy(() => import("@pages/forum-detail-demo"));
 const CorrectionList = lazy(() => import("@pages/correction/correction-list"));
 const CorrectionGroups = lazy(
   () => import("@pages/correction/correction-groups"),
@@ -46,6 +45,29 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loader />}>
             <Home />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/rig",
+    element: <MainLayout className="flex justify-center h-fit xl:h-[100vh] " />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "submission",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <RIGSubmission />
+          </Suspense>
+        ),
+      },
+      {
+        path: "groups",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <RIGGroup />
           </Suspense>
         ),
       },
@@ -105,7 +127,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-
   {
     path: "/case-make",
     element: <MainLayout className="flex justify-center h-fit xl:h-[100vh] " />,
@@ -129,29 +150,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: "/forum",
-  //   element: <MainLayout className="flex justify-center " />,
-  //   errorElement: <Error />,
-  //   children: [
-  //     {
-  //       path: "",
-  //       element: (
-  //         <Suspense fallback={<Loader />}>
-  //           <ForumDemo />
-  //         </Suspense>
-  //       ),
-  //     },
-  //     {
-  //       path: ":id",
-  //       element: (
-  //         <Suspense fallback={<Loader />}>
-  //           <ForumDetailDemo />
-  //         </Suspense>
-  //       ),
-  //     },
-  //   ],
-  // },
 ]);
 
 export { router };

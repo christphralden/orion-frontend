@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from "@components/ui/card";
 import { Input } from "@components/ui/input";
-import AssistantListTable from "@job/components/assistant-list-table";
 import { useGroup } from "@job/hooks/use-group";
 import { Separator } from "@radix-ui/react-separator";
 import { useEffect, useState } from "react";
@@ -22,6 +21,7 @@ import { API_ENDPOINTS } from "@constants/api-endpoints.constant";
 import apiClient from "@core/apis/api-client";
 import { queryClient } from "@core/configs/react-query";
 import { QUERY_KEYS } from "@constants/query-keys.constant";
+import AssistantListTable from "@job/components/assistant-list-table";
 
 const CorrectionDetails = () => {
   const { id } = useParams();

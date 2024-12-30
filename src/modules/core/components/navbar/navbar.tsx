@@ -35,7 +35,18 @@ const primaryMenuItems = [
   },
   {
     label: "Case Making",
-    link: "/case-making",
+    subMenu: [
+      {
+        title: "Case Making List",
+        description: "View a list of case making",
+        link: "/case-make/list",
+      },
+      {
+        title: "Case Making Groups",
+        description: "View assigend case making groups",
+        link: "/case-make/groups",
+      },
+    ],
   },
 ];
 

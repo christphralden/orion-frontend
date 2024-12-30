@@ -8,12 +8,13 @@ import { getCorrectionGroups } from "@job/apis/subco/correction.api";
 import { QUERY_KEYS } from "@constants/query-keys.constant";
 import UnauthorizedError from "@models/errors/unauthorized-error";
 import { IResponseSchema } from "@core/schema/api.schema";
-import { GroupSchema } from "@job/schema/group.schema";
-import { Group } from "@job/types/group.types";
+import { GroupSchema, GroupWithThreadsSchema } from "@job/schema/group.schema";
+import { Group, GroupWithThreads } from "@job/types/group.types";
 import { MESSAGES } from "@constants/messages.constant";
 import { z } from "zod";
 import { queryClient } from "@core/configs/react-query";
 import { useCallback } from "react";
+import { getGroupDetails } from "@job/apis/assistant/group.api";
 
 function useGroup() {
   const user = getUser();
@@ -69,9 +70,38 @@ function useGroup() {
     });
   };
 
+  const getDetails = (id: string) => {
+    if (!user?.username) throw new UnauthorizedError();
+
+    const queryFn =
+      useCallback(async () => {
+        const res = await getGroupDetails(id);
+        const parseResult = await IResponseSchema(
+          GroupWithThreadsSchema,
+        ).safeParseAsync(res);
+
+        if (!parseResult.success) {
+          console.error(
+            "Validation Error: ",
+            JSON.stringify(parseResult.error.errors, null, 2),
+          );
+          throw new Error(MESSAGES.SCHEMA.ERROR);
+        }
+
+        return parseResult.data;
+      }, [id]);
+
+    return useQuery<IResponse<GroupWithThreads>, HTTPError>({
+      queryKey: [QUERY_KEYS.JOB.SUBCO.CORRECTION, id],
+      queryFn: queryFn,
+      enabled: Boolean(user.username && id),
+    });
+  };
+
   return {
     assignOrSyncGroups,
     getCorrection,
+    getDetails,
   };
 }
 

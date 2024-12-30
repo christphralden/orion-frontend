@@ -65,7 +65,9 @@ const ActiveJobsTable = ({
                 <span>-</span>
               )}
             </TableCell>
-            <TableCell>{job.courseName}</TableCell>
+            <TableCell>
+              {job.courseCode} - {job.courseName}
+            </TableCell>
             <TableCell>{job.startDate}</TableCell>
             <TableCell>{job.endDate}</TableCell>
             <TableCell className="text-right px-10 tabular-nums">

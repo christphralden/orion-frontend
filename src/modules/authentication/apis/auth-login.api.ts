@@ -10,7 +10,7 @@ type AuthRequest = {
 };
 
 async function postAuthLogin({ username, password }: AuthRequest) {
-  const res = await apiClient.post<IResponse<IUser>, AuthRequest>({
+  return apiClient.post<IResponse<IUser>, AuthRequest>({
     url: API_ENDPOINTS.AUTH.LOGIN,
     data: {
       username: username,
@@ -20,8 +20,6 @@ async function postAuthLogin({ username, password }: AuthRequest) {
       credentials: "include",
     },
   });
-
-  return res;
 }
 
 export { postAuthLogin };

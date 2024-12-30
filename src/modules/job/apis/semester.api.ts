@@ -8,25 +8,21 @@ interface Semester {
 }
 
 async function getAllSemesters() {
-  const res = await apiClient.get<IResponse<Semester[]>>({
+  return apiClient.get<IResponse<Semester[]>>({
     url: API_ENDPOINTS.SEMESTER.ALL,
     options: {
       credentials: "include",
     },
   });
-
-  return res;
 }
 
 async function getActiveSemester() {
-  const res = await apiClient.get<IResponse<Semester>>({
+  return apiClient.get<IResponse<Semester>>({
     url: API_ENDPOINTS.SEMESTER.ACTIVE,
     options: {
       credentials: "include",
     },
   });
-
-  return res;
 }
 
 export type { Semester };

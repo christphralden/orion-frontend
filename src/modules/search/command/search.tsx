@@ -7,6 +7,7 @@ import { COLORS } from "@constants/colors.constant";
 import { useAssistantActiveJobs } from "@job/hooks/use-assistant-active-jobs";
 import { IJob, JobList } from "@job/types/job.types";
 import { groupByJob } from "@job/utils/job-parse";
+import { useMetadata } from "@authentication/store/auth-store";
 
 const cmdkVariants = {
   dialog:
@@ -82,9 +83,12 @@ const CmdKIcon = () => {
 const CommandSearch = () => {
   const [open, setOpen] = useState(false);
 
-  const { data: activeJobs, isPending: activeJobsLoading } =
+  const metadata = useMetadata();
+
+  const semesterId = metadata?.semester?.semesterId;
+  const { data: activeJobs, isLoading: activeJobsLoading } =
     useAssistantActiveJobs({
-      semesterId: "a7ff28f1-bd85-410b-b222-a29c619068fa",
+      semesterId,
     });
 
   useEffect(() => {
@@ -113,13 +117,12 @@ const CommandSearch = () => {
       onOpenChange={setOpen}
       label="Global Command Menu"
       filter={(value, search, keywords) => {
-        // Extend value with keywords (which include group name)
         const extendedValue = value + " " + keywords?.join(" ");
         return extendedValue.toLowerCase().includes(search.toLowerCase())
           ? 1
           : 0;
       }}
-      shouldFilter={true} // Enable custom filtering
+      shouldFilter={true}
     >
       <div className="flex justify-start items-center p-4 gap-2">
         <IoIosSearch size="1.25rem" color="#d1d5db" />

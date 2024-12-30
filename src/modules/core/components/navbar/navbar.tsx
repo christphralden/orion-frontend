@@ -33,21 +33,21 @@ const primaryMenuItems = [
       },
     ],
   },
-  {
-    label: "Case Making",
-    subMenu: [
-      {
-        title: "Case Making List",
-        description: "View a list of case making",
-        link: "/case-make/list",
-      },
-      {
-        title: "Case Making Groups",
-        description: "View assigend case making groups",
-        link: "/case-make/groups",
-      },
-    ],
-  },
+  // {
+  //   label: "Case Making",
+  //   subMenu: [
+  //     {
+  //       title: "Case Making List",
+  //       description: "View a list of case making",
+  //       link: "/case-make/list",
+  //     },
+  //     {
+  //       title: "Case Making Groups",
+  //       description: "View assigend case making groups",
+  //       link: "/case-make/groups",
+  //     },
+  //   ],
+  // },
 ];
 
 const NavBar = () => {
@@ -57,7 +57,7 @@ const NavBar = () => {
   return (
     <div className="cursor-pointer flex items-center w-full justify-between py-4 lg:py-8 ">
       <NavigationMenu>
-        <NavigationMenuList className="gap-8">
+        <NavigationMenuList className="gap-2 md:gap-8">
           {primaryMenuItems.map((item, index) => (
             <NavigationMenuItem key={index}>
               {item.subMenu ? (

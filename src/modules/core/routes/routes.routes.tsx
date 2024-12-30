@@ -70,7 +70,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "details/:id",
+        path: "groups/:id",
         element: (
           <Suspense fallback={<Loader />}>
             <CorrectionDetails />

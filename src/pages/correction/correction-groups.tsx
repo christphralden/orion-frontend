@@ -5,7 +5,6 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  CardContent,
 } from "@components/ui/card";
 import CorrectionGroupsGrid from "@job/components/correction-groups-grid";
 
@@ -16,7 +15,6 @@ import { useEffect } from "react";
 const CorrectionGroups = () => {
   const { assignOrSyncGroups } = useGroup();
 
-  console.log("correction master");
   const {
     mutate: handleAssignOrSyncGroups,
     isPending: assignPending,

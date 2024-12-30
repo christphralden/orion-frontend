@@ -13,8 +13,7 @@ async function getAssistantActiveJobs({
   semesterId,
   username,
 }: AssistantActiveJobsRequest) {
-  console.log("getassistanactivejobs");
-  const res = await apiClient.get<IResponse<IJob[]>>({
+  return apiClient.get<IResponse<IJob[]>>({
     url: API_ENDPOINTS.JOB.ASSISTANT.ACTIVE,
     params: {
       semesterId: semesterId,
@@ -24,8 +23,6 @@ async function getAssistantActiveJobs({
       credentials: "include",
     },
   });
-
-  return res;
 }
 
 export { getAssistantActiveJobs };

@@ -5,12 +5,13 @@ import { Input } from "@components/ui/input";
 import { Textarea } from "@components/ui/textarea";
 import { Button } from "@components/ui/button";
 import { Loader } from "lucide-react";
-import { ToastError } from "@components/toast/toast";
+import { ToastError, ToastSuccess } from "@components/toast/toast";
 import { useThread } from "@thread/hooks/use-thread";
 import { useGroup } from "@job/hooks/use-group";
 import { useUser } from "@authentication/store/auth-store";
 import { queryClient } from "@core/configs/react-query";
 import { QUERY_KEYS } from "@constants/query-keys.constant";
+import { MESSAGES } from "@constants/messages.constant";
 
 const NewThread = () => {
   const { id } = useParams();
@@ -66,7 +67,9 @@ const NewThread = () => {
           queryKey: [QUERY_KEYS.JOB.SUBCO.CORRECTION, id],
           refetchType: "all",
         });
-
+        ToastSuccess({
+          message: "Successfully created a new thread",
+        });
         navigate(-1);
       },
     });

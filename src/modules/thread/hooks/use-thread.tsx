@@ -1,11 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { ToastError, ToastSuccess } from "@components/toast/toast";
+import { ToastError } from "@components/toast/toast";
 import { createThread } from "@thread/apis/thread.api";
 import type { CreateThreadRequest } from "@thread/apis/thread.api";
 import HTTPError from "@models/errors/http-error";
 import { IResponse } from "@core/types/api.types";
-import { queryClient } from "@core/configs/react-query";
-import { QUERY_KEYS } from "@constants/query-keys.constant";
 
 function useThread() {
   const createNewThread = useMutation<

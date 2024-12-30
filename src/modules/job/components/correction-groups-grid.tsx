@@ -52,11 +52,14 @@ const CorrectionGroupsGrid = () => {
           </CardHeader>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 min-h-48 md:min-h-64">
           {correctionGroups?.data.map((group) => (
             <Link to={`/correction/groups/${group.id}`}>
-              <Card key={group.id} className="p-2">
-                <CardHeader>
+              <Card
+                key={group.id}
+                className="p-2  flex-col justify-between h-full"
+              >
+                <CardHeader className="h-[75%]">
                   <div className="rounded-md border-2 border-gray-300 px-2 flex gap-2 justify-start items-center w-fit mb-2">
                     <div
                       className="w-2 h-2 rounded-full"
@@ -72,7 +75,7 @@ const CorrectionGroupsGrid = () => {
                   </CardTitle>
                   <CardDescription>{group.assignmentType}</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="h-full h-[25%] flex items-end ">
                   <p>Subco: {group.subcoInitial}</p>
                 </CardContent>
               </Card>

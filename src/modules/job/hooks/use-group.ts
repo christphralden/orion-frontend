@@ -73,23 +73,18 @@ function useGroup() {
   const getDetails = (id: string) => {
     if (!user?.username) throw new UnauthorizedError();
 
-    const queryFn =
-      useCallback(async () => {
-        const res = await getGroupDetails(id);
-        const parseResult = await IResponseSchema(
-          GroupWithThreadsSchema,
-        ).safeParseAsync(res);
+    const queryFn = useCallback(async () => {
+      const res = await getGroupDetails(id);
+      const parseResult = await IResponseSchema(
+        GroupWithThreadsSchema,
+      ).safeParseAsync(res);
 
-        if (!parseResult.success) {
-          console.error(
-            "Validation Error: ",
-            JSON.stringify(parseResult.error.errors, null, 2),
-          );
-          throw new Error(MESSAGES.SCHEMA.ERROR);
-        }
+      if (!parseResult.success) {
+        throw new Error(MESSAGES.SCHEMA.ERROR);
+      }
 
-        return parseResult.data;
-      }, [id]);
+      return parseResult.data;
+    }, [id]);
 
     return useQuery<IResponse<GroupWithThreads>, HTTPError>({
       queryKey: [QUERY_KEYS.JOB.SUBCO.CORRECTION, id],

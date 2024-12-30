@@ -20,12 +20,24 @@ const API_ENDPOINTS = {
     ALL: "semester/all",
     ACTIVE: "semester/active",
   },
+  GROUP: {
+    THREAD: {
+      CREATE: "group/thread/create",
+    },
+  },
 } as const;
 
 type AuthEndpoints = typeof API_ENDPOINTS.AUTH;
 type JobEnpoints = typeof API_ENDPOINTS.JOB;
 type SemesterEndpoints = typeof API_ENDPOINTS.SEMESTER;
 type ApiEndpoints = typeof API_ENDPOINTS;
+type GroupEndpoints = typeof API_ENDPOINTS.GROUP;
 
 export { API_ENDPOINTS };
-export type { ApiEndpoints, AuthEndpoints, JobEnpoints, SemesterEndpoints };
+export type {
+  ApiEndpoints,
+  AuthEndpoints,
+  JobEnpoints,
+  GroupEndpoints,
+  SemesterEndpoints,
+};

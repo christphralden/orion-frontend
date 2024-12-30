@@ -31,7 +31,7 @@
 
       /*Modules*/
       "@authentication/*": ["src/modules/authentication/*"],
-      "@forum/*": ["src/modules/forum/*"],
+      "@thread/*": ["src/modules/thread/*"],
       "@search/*": ["src/modules/search/*"],
       "@job/*": ["src/modules/job/*"],
 

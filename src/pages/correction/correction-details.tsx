@@ -12,13 +12,16 @@ import AssistantListTable from "@job/components/assistant-list-table";
 import { useGroup } from "@job/hooks/use-group";
 import { Separator } from "@radix-ui/react-separator";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Loader } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Loader, PlusIcon } from "lucide-react";
 import { ToastError } from "@components/toast/toast";
+import { cn } from "@utils/utils";
+import { ThreadsList } from "@thread/components/thread-list";
 
 const CorrectionDetails = () => {
   const { id } = useParams();
   const { getDetails } = useGroup();
+  const navigate = useNavigate();
 
   const {
     data,
@@ -27,6 +30,9 @@ const CorrectionDetails = () => {
     error,
   } = getDetails(id as string);
 
+  const handleAddThread = () => {
+    navigate(`thread/new`);
+  };
   const user = useUser();
 
   const [link, setLink] = useState("");
@@ -55,28 +61,28 @@ const CorrectionDetails = () => {
 
   const groupDetail = data.data;
   return (
-    <div className="h-full flex flex-col space-y-4">
+    <div className="h-full flex flex-col gap-4">
       <div className="flex flex-col">
-        <p className="text-2xl font-semibold">
+        <p className="text-xl font-medium">
           {groupDetail.courseId} - {groupDetail.courseName}
         </p>
-        <p className="text-xl">{groupDetail.assignmentType}</p>
+        <p className="text-lg">{groupDetail.assignmentType}</p>
       </div>
 
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 w-full">
         <Button
           variant={"outline"}
           onClick={() => handleTabChange("List")}
-          className={selectedTab === "List" ? "font-bold " : ""}
+          className={cn(selectedTab === "List" ? "font-bold " : "", "w-1/2")}
         >
           List
         </Button>
         <Button
           variant={"outline"}
-          onClick={() => handleTabChange("Forum")}
-          className={selectedTab === "Forum" ? "font-bold " : ""}
+          onClick={() => handleTabChange("Threads")}
+          className={cn(selectedTab === "Threads" ? "font-bold " : "", "w-1/2")}
         >
-          Forum
+          Threads
         </Button>
       </div>
 
@@ -106,21 +112,33 @@ const CorrectionDetails = () => {
               </Card>
             )}
 
-            <Card className="h-full w-full flex flex-col flex-1">
+            <Card className="h-full w-full  flex flex-col flex-1">
               <CardHeader>
                 <CardTitle>Assistant List</CardTitle>
-                <CardDescription>
-                  Assistants that has the correction.
-                </CardDescription>
               </CardHeader>
               <Separator />
-              <CardContent className="p-0 w-full flex-grow overflow-y-auto h-1 min-h-[40vh]">
+              <CardContent className="p-0 w-full flex-grow overflow-y-auto min-h-[40vh]">
                 <AssistantListTable list={groupDetail.groupAssistants} />
               </CardContent>
             </Card>
           </>
         )}
-        {selectedTab === "Forum" && <>Forum</>}
+        {selectedTab === "Threads" && (
+          <Card className="h-full w-full  flex flex-col flex-1">
+            <CardHeader className="w-full flex flex-row justify-between items-center ">
+              <CardTitle>Threads</CardTitle>
+              <Button onClick={handleAddThread} className="flex gap-1">
+                Add thread
+                <PlusIcon className="w-4" />
+              </Button>
+            </CardHeader>
+            <Separator />
+
+            <CardContent className="p-0 w-full flex-grow overflow-y-auto min-h-[40vh]">
+              <ThreadsList threads={groupDetail.groupThreads} />
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   );

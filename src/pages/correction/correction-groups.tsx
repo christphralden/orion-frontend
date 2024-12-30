@@ -29,27 +29,24 @@ const CorrectionGroups = () => {
   }, [assignError, error]);
 
   return (
-    <div className="h-full">
-      <Card className="w-full h-fit flex flex-col flex-1">
-        <CardHeader className="flex flex-row justify-between items-center w-full">
-          <div className="flex flex-col gap-1">
-            <CardTitle>Correction Groups</CardTitle>
-            <CardDescription className="flex">
-              A list of correction groups assigned to you.
-            </CardDescription>
-          </div>
-          <div className="w-fit">
-            <Button
-              onClick={() => {
-                handleAssignOrSyncGroups();
-              }}
-              variant="default"
-            >
-              Sync Groups
-            </Button>
-          </div>
-        </CardHeader>
-      </Card>
+    <div className="h-full w-full flex flex-col gap-4">
+      <div className="flex justify-between w-full">
+        <div className="flex flex-col">
+          <p className="text-xl font-medium">Correction Groups</p>
+          <p className="text-lg">
+            A list of correction groups assigned to you.
+          </p>
+        </div>
+        <Button
+          onClick={() => {
+            handleAssignOrSyncGroups();
+          }}
+          variant="default"
+        >
+          Sync Groups
+        </Button>
+      </div>
+
       {assignPending ? (
         <div className="w-full h-fit p-20 flex justify-center items-center">
           <Loader className="animate-spin text-primary w-8 h-8" />

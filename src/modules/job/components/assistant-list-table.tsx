@@ -43,14 +43,14 @@ const AssistantListTable = ({
             className,
           )}
         >
-          <TableHeader className="sticky top-0 bg-white z-10">
-            <TableRow className="whitespace-nowrap">
-              <TableHead className="px-4 md:px-6 w-[10%]">Status</TableHead>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[10%] px-6">Status</TableHead>
               <TableHead className="w-[20%]">Assistant</TableHead>
 
               <TableHead className="w-[20%]">Class</TableHead>
               <TableHead className="w-[20%]">Start Date</TableHead>
-              <TableHead className="w-[20%] text-right px-4 md:px-10">
+              <TableHead className="w-[20%] text-right px-6">
                 End Date
               </TableHead>
             </TableRow>
@@ -62,7 +62,7 @@ const AssistantListTable = ({
                 className="cursor-pointer hover:bg-gray-50 whitespace-nowrap"
                 onClick={() => handleRowClick(li)}
               >
-                <TableCell className="px-4 md:px-8">
+                <TableCell className="px-6">
                   <div
                     className={cn(
                       "w-2 h-2 rounded-full",
@@ -74,7 +74,7 @@ const AssistantListTable = ({
                 <TableCell className="font-medium">{li.initial}</TableCell>
                 <TableCell>{li.class}</TableCell>
                 <TableCell>{li.startDate}</TableCell>
-                <TableCell className="text-right px-4 md:px-10 tabular-nums">
+                <TableCell className="text-right px-6 tabular-nums">
                   {li.endDate}
                 </TableCell>
               </TableRow>
@@ -141,11 +141,11 @@ const AssistantListTable = ({
                 )}
 
                 <div className="flex justify-center space-x-4 w-full">
-                  <Button variant="outline" className="w-full max-w-xs">
-                    Approve
-                  </Button>
                   <Button variant="destructive" className="w-full max-w-xs">
                     Decline
+                  </Button>
+                  <Button variant="outline" className="w-full max-w-xs">
+                    Approve
                   </Button>
                 </div>
               </div>

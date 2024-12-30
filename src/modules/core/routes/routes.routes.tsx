@@ -16,6 +16,7 @@ const CorrectionList = lazy(() => import("@pages/correction/correction-list"));
 const CorrectionGroups = lazy(
   () => import("@pages/correction/correction-groups"),
 );
+const NewThread = lazy(() => import("@pages/thread/new-thread"));
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loader />}>
             <CorrectionDetails />
+          </Suspense>
+        ),
+      },
+      {
+        path: "groups/:id/thread/new",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <NewThread />
           </Suspense>
         ),
       },

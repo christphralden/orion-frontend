@@ -20,7 +20,8 @@ class APIClient {
     url: string;
     options?: RequestInit;
   }): Promise<Response> {
-    const res = await fetch(`${this.#baseUrl}${url}`, options);
+    const fullUrl = `${this.#baseUrl}${url}`;
+    const res = await fetch(fullUrl, options);
 
     if (!res.ok) {
       const response = await res.json();

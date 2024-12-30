@@ -4,6 +4,11 @@ const QUERY_KEYS = {
       BASE: "job",
       ACTIVE: "job-assistant-active",
     },
+    SUBCO: {
+      CORRECTION: {
+        GROUP: "job-subco-correction-group",
+      },
+    },
   },
   SEMESTER: {
     BASE: "semester",

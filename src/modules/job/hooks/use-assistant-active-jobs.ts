@@ -64,7 +64,6 @@ function useAssistantActiveJobs(
     queryFn,
     enabled: Boolean(finalUsername && semesterId),
     retry: 1,
-    refetchOnMount: true,
   });
 }
 

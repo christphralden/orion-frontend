@@ -7,10 +7,14 @@ import {
   TableHeader,
   TableRow,
 } from "@components/ui/table";
+import { API_ENDPOINTS } from "@constants/api-endpoints.constant";
+import apiClient from "@core/apis/api-client";
+import { IResponse } from "@core/types/api.types";
 import { useAssistantActiveJobs } from "@job/hooks/use-assistant-active-jobs";
 import { IJob, JobFilters } from "@job/types/job.types";
 import { cn } from "@utils/utils";
 import { Loader } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ActiveJobsTable = ({
   className,
@@ -23,6 +27,8 @@ const ActiveJobsTable = ({
 
   const semesterId = metadata?.semester?.semesterId;
 
+  const navigate = useNavigate();
+
   const { data: activeJobs, isLoading: activeJobsLoading } =
     useAssistantActiveJobs(
       {
@@ -30,6 +36,27 @@ const ActiveJobsTable = ({
       },
       filters,
     );
+
+  const handleRowClick = async (job: IJob) => {
+    const getGroupByJobEndpoint = API_ENDPOINTS.JOB.ASSISTANT.GET_GROUP_BY_JOB;
+
+    const res = await  apiClient.get<IResponse<{groupId : string}>>({
+      url: getGroupByJobEndpoint,
+      params: {
+        courseCode: job.courseCode,
+        subco: job.subco,
+        assignmentType: job.type,
+        job: job.job
+      },
+      options: {
+        credentials: "include",
+      },
+    });
+
+    const groupId = res.data.groupId;
+
+    navigate(`/correction/groups/${groupId}`);
+  }
 
   if (activeJobsLoading)
     return (
@@ -55,7 +82,7 @@ const ActiveJobsTable = ({
       </TableHeader>
       <TableBody>
         {activeJobs?.data.map((job: IJob, index: number) => (
-          <TableRow className="whitespace-nowrap" key={index}>
+          <TableRow onClick={() => handleRowClick(job)} className="whitespace-nowrap cursor-pointer" key={index}>
             <TableCell className="font-medium px-6">{job.job}</TableCell>
             <TableCell>{job.type}</TableCell>
             <TableCell>

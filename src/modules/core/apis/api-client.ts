@@ -76,6 +76,28 @@ class APIClient {
       },
     });
   }
+  put<Response, Data>({
+    url,
+    data,
+    options,
+  }: {
+    url: string;
+    data: Data;
+    options?: RequestInit;
+  }) {
+    return this.request<Response>({
+      url,
+      options: {
+        method: "PUT",
+        body: data instanceof FormData ? data : JSON.stringify(data),
+        headers:
+          data instanceof FormData
+            ? undefined
+            : { "Content-Type": "application/json" },
+        ...options,
+      },
+    });
+  }
 }
 
 const apiClient = new APIClient(import.meta.env.VITE_API_URL);

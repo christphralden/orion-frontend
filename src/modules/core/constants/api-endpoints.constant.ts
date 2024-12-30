@@ -8,6 +8,8 @@ const API_ENDPOINTS = {
     ASSISTANT: {
       ACTIVE: "job/assistant/active",
       GROUP: "group",
+      GET_GROUP_BY_JOB: "group/get-group-from-job",
+      PUT_SUBMISSION_LINK: "group/submit-link"
     },
     SUBCO: {
       ASSIGN_OR_SYNC_GROUPS: "group/assign",

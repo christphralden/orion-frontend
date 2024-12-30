@@ -14,9 +14,13 @@ import { Separator } from "@radix-ui/react-separator";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Loader, PlusIcon } from "lucide-react";
-import { ToastError } from "@components/toast/toast";
+import { ToastError, ToastSuccess } from "@components/toast/toast";
 import { cn } from "@utils/utils";
 import { ThreadsList } from "@thread/components/thread-list";
+import { IResponse } from "@core/types/api.types";
+import { API_ENDPOINTS } from "@constants/api-endpoints.constant";
+import apiClient from "@core/apis/api-client";
+import { queryClient } from "@core/configs/react-query";
 
 const CorrectionDetails = () => {
   const { id } = useParams();
@@ -60,6 +64,35 @@ const CorrectionDetails = () => {
   if (!data?.data) return null;
 
   const groupDetail = data.data;
+
+  const handleLinkSubmission = async () => {
+    
+    if (!user || !link || !id) {
+      return ToastError({ message: "Unauthorized to submit correction link." });
+    }
+    const initial = user.username;
+
+    const res = await apiClient.put<IResponse<{initial: string, link: string, id : string}>, any>({
+      url: API_ENDPOINTS.JOB.ASSISTANT.PUT_SUBMISSION_LINK,
+      data: {
+        initial,
+        submissionLink: link,
+        groupId: id
+      },
+      options: {
+        credentials: "include",
+      },
+    });
+
+    console.log(res);
+
+    queryClient.invalidateQueries({
+      queryKey: [API_ENDPOINTS.JOB.ASSISTANT.GROUP],
+      refetchType: "all",
+    })
+    
+    return ToastSuccess({ message: "Successfully submitted correction link." });
+  }
   return (
     <div className="h-full flex flex-col gap-4">
       <div className="flex flex-col">
@@ -106,7 +139,7 @@ const CorrectionDetails = () => {
                       }}
                       className="bg-white"
                     />
-                    <Button variant="default">Submit Link</Button>
+                    <Button onClick={handleLinkSubmission} variant="default">Submit Link</Button>
                   </div>
                 </CardContent>
               </Card>

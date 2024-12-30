@@ -60,15 +60,18 @@ class APIClient {
     options,
   }: {
     url: string;
-    data?: Data;
+    data: FormData | Data;
     options?: RequestInit;
   }) {
     return this.request<Response>({
-      url: url,
+      url,
       options: {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: data instanceof FormData ? data : JSON.stringify(data),
+        headers:
+          data instanceof FormData
+            ? undefined
+            : { "Content-Type": "application/json" },
         ...options,
       },
     });

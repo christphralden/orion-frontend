@@ -6,12 +6,8 @@ import HTTPError from "@models/errors/http-error";
 import { IResponse } from "@core/types/api.types";
 
 function useThread() {
-  const createNewThread = useMutation<
-    IResponse<any>,
-    HTTPError,
-    CreateThreadRequest
-  >({
-    mutationFn: async (payload: CreateThreadRequest) => {
+  const createNewThread = useMutation<IResponse<any>, HTTPError, FormData>({
+    mutationFn: async (payload: FormData) => {
       return await createThread(payload);
     },
     onError: (error) => {

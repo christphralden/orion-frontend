@@ -43,24 +43,18 @@ const NewThread = () => {
     }
 
     const formData = new FormData(event.currentTarget);
+    formData.append("groupId", id as string);
+    formData.append("authorInitial", user.username);
+
     const title = formData.get("title");
     const content = formData.get("content");
-    const images = formData.getAll("images") as File[];
 
     if (!title || !content) {
       ToastError({ message: "All fields are required." });
       return;
     }
 
-    const payload = {
-      groupId: id as string,
-      title: title as string,
-      content: content as string,
-      authorInitial: user.username,
-      images: images,
-    };
-
-    handleCreateNewThread(payload, {
+    handleCreateNewThread(formData, {
       onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.JOB.SUBCO.CORRECTION, id],

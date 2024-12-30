@@ -48,6 +48,21 @@ const primaryMenuItems = [
       },
     ],
   },
+  {
+    label: "RIG",
+    subMenu: [
+      {
+        title: "RIG Groups",
+        description: "View listed RIG groups",
+        link: "/rig/groups",
+      },
+      {
+        title: "RIG Submission",
+        description: "Submit RIG case",
+        link: "/rig/submission",
+      },
+    ],
+  },
 ];
 
 const NavBar = () => {

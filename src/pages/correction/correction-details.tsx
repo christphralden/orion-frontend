@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@comp
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@components/ui/navigation-menu";
-import AssistantListTable from "@job/components/assistant-list-table";
+import AssistantListTable from "@job/components/rig-group-table";
 import { Separator } from "@radix-ui/react-separator";
 import { useState } from "react";
 import { useParams } from "react-router-dom";

@@ -7,6 +7,8 @@ import Error from "@components/fallbacks/error";
 import AuthLayout from "@authentication/layouts/auth-layout";
 import CaseMakeList from "@pages/case-make/case-make-list";
 import CorrectionDetails from "@pages/correction/correction-details";
+import RIGSubmission from "@pages/rig/rig-submission";
+import RIGGroup from "@pages/rig/rig-group";
 
 const Login = lazy(() => import("@pages/login"));
 const Home = lazy(() => import("@pages/home"));
@@ -74,6 +76,29 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loader />}>
             <CorrectionDetails />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/rig",
+    element: <MainLayout className="flex justify-center h-fit xl:h-[100vh] " />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "submission",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <RIGSubmission />
+          </Suspense>
+        ),
+      },
+      {
+        path: "groups",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <RIGGroup />
           </Suspense>
         ),
       },

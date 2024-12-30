@@ -4,8 +4,10 @@ import { API_ENDPOINTS } from "@constants/api-endpoints.constant";
 
 interface CreateThreadRequest {
   groupId: string;
-  authorInitial: string;
+  title: string;
   content: string;
+  authorInitial: string;
+  images: File[] | null;
 }
 
 async function createThread(

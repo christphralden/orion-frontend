@@ -11,7 +11,6 @@ import { useGroup } from "@job/hooks/use-group";
 import { useUser } from "@authentication/store/auth-store";
 import { queryClient } from "@core/configs/react-query";
 import { QUERY_KEYS } from "@constants/query-keys.constant";
-import { MESSAGES } from "@constants/messages.constant";
 
 const NewThread = () => {
   const { id } = useParams();
@@ -55,10 +54,10 @@ const NewThread = () => {
 
     const payload = {
       groupId: id as string,
-      title: title,
+      title: title as string,
       content: content as string,
       authorInitial: user.username,
-      images,
+      images: images,
     };
 
     handleCreateNewThread(payload, {

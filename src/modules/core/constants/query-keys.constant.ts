@@ -8,6 +8,9 @@ const QUERY_KEYS = {
       CORRECTION: {
         GROUP: "job-subco-correction-group",
       },
+      CASEMAKING: {
+        GROUP: "job-subco-casemaking-group",
+      },
     },
   },
   SEMESTER: {

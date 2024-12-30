@@ -15,6 +15,7 @@ import { z } from "zod";
 import { queryClient } from "@core/configs/react-query";
 import { useCallback } from "react";
 import { getGroupDetails } from "@job/apis/assistant/group.api";
+import { getCasemakingGroups } from "@job/apis/subco/case-making.api";
 
 function useGroup() {
   const user = getUser();
@@ -70,6 +71,30 @@ function useGroup() {
     });
   };
 
+  const getCasemaking = () => {
+    if (!user?.username) throw new UnauthorizedError();
+    if (!user?.roles.includes("Software Subject Coordinator"))
+      throw new UnauthorizedError(); // WARN
+
+    const queryFn = useCallback(async () => {
+      const res = await getCasemakingGroups(user.username);
+      const parseResult = await IResponseSchema(
+        z.array(GroupSchema),
+      ).safeParseAsync(res);
+
+      if (!parseResult.success) {
+        throw new Error(MESSAGES.SCHEMA.ERROR);
+      }
+      return parseResult.data;
+    }, [user.username]);
+
+    return useQuery<IResponse<Group[]>, HTTPError>({
+      queryKey: [QUERY_KEYS.JOB.SUBCO.CASEMAKING, user.username],
+      queryFn: queryFn,
+      enabled: Boolean(user.username),
+    });
+  };
+
   const getDetails = (id: string) => {
     if (!user?.username) throw new UnauthorizedError();
 
@@ -96,6 +121,7 @@ function useGroup() {
   return {
     assignOrSyncGroups,
     getCorrection,
+    getCasemaking,
     getDetails,
   };
 }

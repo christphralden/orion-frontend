@@ -1,4 +1,5 @@
 import { useMetadata } from "@authentication/store/auth-store";
+import { ToastError } from "@components/toast/toast";
 import {
   Table,
   TableBody,
@@ -40,22 +41,27 @@ const ActiveJobsTable = ({
   const handleRowClick = async (job: IJob) => {
     const getGroupByJobEndpoint = API_ENDPOINTS.JOB.ASSISTANT.GET_GROUP_BY_JOB;
 
-    const res = await  apiClient.get<IResponse<{groupId : string}>>({
-      url: getGroupByJobEndpoint,
-      params: {
-        courseCode: job.courseCode,
-        subco: job.subco,
-        assignmentType: job.type,
-        job: job.job
-      },
-      options: {
-        credentials: "include",
-      },
-    });
+    try {
+      const res = await  apiClient.get<IResponse<{groupId : string}>>({
+        url: getGroupByJobEndpoint,
+        params: {
+          courseCode: job.courseCode,
+          subco: job.subco,
+          assignmentType: job.type,
+          job: job.job
+        },
+        options: {
+          credentials: "include",
+        },
+      });
+      const groupId = res.data.groupId;
+  
+      navigate(`/correction/groups/${groupId}`);
+    } catch (error : any) {
+      console.log(error);
+      return ToastError({ message: error?.message });
+    }
 
-    const groupId = res.data.groupId;
-
-    navigate(`/correction/groups/${groupId}`);
   }
 
   if (activeJobsLoading)

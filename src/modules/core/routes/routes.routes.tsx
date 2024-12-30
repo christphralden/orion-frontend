@@ -7,6 +7,7 @@ import Error from "@components/fallbacks/error";
 import AuthLayout from "@authentication/layouts/auth-layout";
 import CaseMakeList from "@pages/case-make/case-make-list";
 import CorrectionDetails from "@pages/correction/correction-details";
+import CasemakingGroups from "@pages/case-make/case-making-groups";
 
 const Login = lazy(() => import("@pages/login"));
 const Home = lazy(() => import("@pages/home"));
@@ -101,14 +102,14 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      // {
-      //   path: "groups",
-      //   element: (
-      //     <Suspense fallback={<Loader />}>
-      //       <CorrectionGroups />
-      //     </Suspense>
-      //   ),
-      // },
+      {
+        path: "groups",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <CasemakingGroups />
+          </Suspense>
+        ),
+      },
     ],
   },
   // {

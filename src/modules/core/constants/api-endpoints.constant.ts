@@ -16,6 +16,9 @@ const API_ENDPOINTS = {
       CORRECTION: {
         GROUP: "group/corrections",
       },
+      CASEMAKING: {
+        GROUP: "group/case-makings",
+      }
     },
   },
   SEMESTER: {

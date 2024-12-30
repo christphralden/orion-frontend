@@ -72,7 +72,7 @@ const AssistantListTable = ({
                   ></div>
                 </TableCell>
                 <TableCell className="font-medium">{li.initial}</TableCell>
-                <TableCell>{li.class}</TableCell>
+                <TableCell>{li.class ? li.class : "-"}</TableCell>
                 <TableCell>{li.startDate}</TableCell>
                 <TableCell className="text-right px-6 tabular-nums">
                   {li.endDate}

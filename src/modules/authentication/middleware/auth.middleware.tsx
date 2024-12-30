@@ -21,9 +21,9 @@ const AuthMiddleware = ({ children }: { children: ReactNode }) => {
     return <Navigate to="/" replace />;
   }
 
-  // if (!isAuthenticated && !isLoginPath) {
-  //   return <Navigate to="/auth/login" replace />;
-  // }
+  if (!isAuthenticated && !isLoginPath) {
+    return <Navigate to="/auth/login" replace />;
+  }
 
   return children;
 };

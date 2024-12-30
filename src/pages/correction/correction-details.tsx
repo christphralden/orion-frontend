@@ -1,6 +1,8 @@
+import { useUser } from "@authentication/store/auth-store";
 import { Button } from "@components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@components/ui/card";
 import { Input } from "@components/ui/input";
+import { Label } from "@components/ui/label";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@components/ui/navigation-menu";
 import AssistantListTable from "@job/components/assistant-list-table";
 import { Separator } from "@radix-ui/react-separator";
@@ -9,11 +11,13 @@ import { useParams } from "react-router-dom";
 
 const CorrectionDetails = () => {
     const { id } = useParams();
+    const user = useUser();
 
     const [link, setLink] = useState('');
 
     const [selectedTab, setSelectedTab] = useState("List");
     const handleTabChange = (tab: string) => {
+        console.log(user);
         setSelectedTab(tab);
     };
 
@@ -45,6 +49,27 @@ const CorrectionDetails = () => {
             <div className="mt-4 space-y-2">
                 {selectedTab === "List" && 
                 <>
+                    {!user?.roles.includes("Software Subject Coordinator") &&
+                        <Card className="w-full flex flex-col flex-1">
+                            <CardHeader>
+                                <CardTitle>Correction Submission</CardTitle>
+                                <CardDescription>Submit correction's onedrive link</CardDescription>
+                            </CardHeader>
+                            <CardContent className="w-full flex-grow overflow-y-auto h-auto">
+                                <div className="flex space-x-2">
+                                    <Input 
+                                        value={link}
+                                        onChange={(e) => {setLink(e.target.value)}}
+                                        className="bg-white"
+                                    />
+                                    <Button variant="default">
+                                        Submit Link
+                                    </Button>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    }
+
                     <Card className="h-full w-full flex flex-col flex-1">
                         <CardHeader>
                             <CardTitle>Assistant List</CardTitle>
@@ -55,34 +80,6 @@ const CorrectionDetails = () => {
                             <AssistantListTable />
                         </CardContent>
                     </Card>
-
-                    {/* if role assistant */}
-                    <div className="flex space-x-2">
-                        <Input 
-                            value={link}
-                            onChange={(e) => {setLink(e.target.value)}}
-                            className="bg-white"
-                        />
-                        <Button variant="default" >
-                            Submit Link
-                        </Button>
-                    </div>
-
-                    {/* if role subco */}
-                    <div className="flex flex-col space-y-2">
-                        <div>
-                            <p className="flex font-semibold text-xl justify-center">Assistant's Initial</p>
-                            <a className="flex justify-center">Assistant's Link - Rev</a>
-                        </div>
-                        <div className="flex justify-center space-x-2">
-                            <Button variant="default" >
-                                Approve
-                            </Button>
-                            <Button variant="destructive" >
-                                Decline
-                            </Button>
-                        </div>
-                    </div>
                     
                 </>
                 }

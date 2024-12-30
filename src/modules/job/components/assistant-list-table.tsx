@@ -7,10 +7,19 @@ import {
   TableHeader,
   TableRow,
 } from "@components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@components/ui/dialog"
 import { useAssistantActiveJobs } from "@job/hooks/use-assistant-active-jobs";
-import { IJob, JobFilters } from "@job/types/job.types";
 import { cn } from "@utils/utils";
 import { Loader } from "lucide-react";
+import { Button } from "@components/ui/button";
 
 const AssistantListTable = ({
   className,
@@ -37,48 +46,62 @@ const AssistantListTable = ({
 
   return (
     <Table
-      className={cn("table-auto w-full h-fit overflow-y-auto ", className)}
+      className={cn("table-auto w-full h-fit overflow-y-auto", className)}
     >
       <TableHeader className="sticky top-0 bg-white z-10">
         <TableRow className="whitespace-nowrap">
           <TableHead className="px-8">Assistant</TableHead>
-          <TableHead className="">Class</TableHead>
+          <TableHead>Class</TableHead>
           <TableHead>Start Date</TableHead>
-          <TableHead>End Date</TableHead>
-          <TableHead className="text-right px-10">Revision</TableHead>
+          <TableHead className="text-right px-10">End Date</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow className="whitespace-nowrap">
-            <TableCell className="font-medium px-8">Initial</TableCell>
-            <TableCell>class</TableCell>
-            <TableCell>startDate</TableCell>
-            <TableCell>endDate</TableCell>
-            <TableCell className="text-right px-10 tabular-nums">
-              revisionCount
-            </TableCell>
-        </TableRow>
-        {/* {activeJobs?.data.map((job: IJob, index: number) => (
-          <TableRow className="whitespace-nowrap" key={index}>
-            <TableCell className="font-medium px-8">{job.job}</TableCell>
-            <TableCell>{job.type}</TableCell>
-            <TableCell>
-              {job.job == "Correction" ? (
-                <span>{job.class}</span>
-              ) : (
-                <span>-</span>
-              )}
-            </TableCell>
-            <TableCell>{job.courseName}</TableCell>
-            <TableCell>{job.startDate}</TableCell>
-            <TableCell>{job.endDate}</TableCell>
-            <TableCell className="text-right px-10 tabular-nums">
-              {job.revisionCount}
-            </TableCell>
+        {/* jadi yang di foreach dialog aja den */}
+        <Dialog>
+        <DialogTrigger asChild>
+          <TableRow className="whitespace-nowrap">
+              <TableCell className="font-medium px-8">Initial</TableCell>
+              <TableCell>class</TableCell>
+              <TableCell>startDate</TableCell>
+              <TableCell className="text-right px-10 tabular-nums">
+                endDate
+              </TableCell>
           </TableRow>
-        ))} */}
+        </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Correction Details</DialogTitle>
+              <DialogDescription>
+                Initial's Correction Submission
+              </DialogDescription>
+            </DialogHeader>
+              <div className="flex flex-col space-y-2">
+                <div>
+                    <p className="flex font-semibold text-xl justify-center">Assistant's Initial</p>
+                    <a className="flex justify-center">Assistant's Link - Rev</a>
+                </div>
+                <div className="flex justify-center space-x-2">
+                    <Button variant="default" >
+                        Approve
+                    </Button>
+                    <Button variant="destructive" >
+                        Decline
+                    </Button>
+                </div>
+              </div>
+            <DialogFooter>
+              {/* <Button type="submit">Save changes</Button> */}
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+        {/* smpe sini yang di foreach*/}
       </TableBody>
     </Table>
+
+    
   );
 };
 export default AssistantListTable;
+
+{/*  */}

@@ -10,6 +10,7 @@ import CorrectionDetails from "@pages/correction/correction-details";
 import CasemakingGroups from "@pages/case-make/case-making-groups";
 import RIGSubmission from "@pages/rig/rig-submission";
 import RIGGroup from "@pages/rig/rig-group";
+import TPASubmission from "@pages/tpa/tpa-submission";
 const Login = lazy(() => import("@pages/login"));
 const Home = lazy(() => import("@pages/home"));
 const CorrectionList = lazy(() => import("@pages/correction/correction-list"));
@@ -65,6 +66,29 @@ const router = createBrowserRouter([
       },
       {
         path: "groups",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <RIGGroup />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/tpa",
+    element: <MainLayout className="flex justify-center h-fit xl:h-[100vh] " />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "submission",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <TPASubmission />
+          </Suspense>
+        ),
+      },
+      {
+        path: "",
         element: (
           <Suspense fallback={<Loader />}>
             <RIGGroup />

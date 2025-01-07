@@ -54,6 +54,10 @@ const assistantMenuItems = [
       },
     ],
   },
+  {
+    label: "TPA",
+    link: "/tpa/submission",
+  },
 ];
 
 const subcoMenuItems = [
@@ -91,6 +95,10 @@ const subcoMenuItems = [
         link: "/case-make/groups",
       },
     ],
+  },
+  {
+    label: "TPA",
+    link: "/tpa/list",
   },
 ];
 
